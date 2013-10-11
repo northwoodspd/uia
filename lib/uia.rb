@@ -7,9 +7,14 @@ module Uia
   module ElementLayout
     def self.included(base)
       base.class_eval do
-        layout :runtime_id, :pointer,
+        layout :handle, :int,
+               :runtime_id, :pointer,
                :number_of_ids, :int,
                :name, :string
+
+        def handle
+          self[:handle]
+        end
 
         def runtime_id
           self[:runtime_id].read_array_of_int(number_of_ids)

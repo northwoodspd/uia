@@ -21,6 +21,7 @@ typedef enum {
 } FindMethod;
 
 typedef struct _ElementInformation {
+  int nativeWindowHandle;
   int* runtimeId;
   int runtimeIdLength;
   char* name;
