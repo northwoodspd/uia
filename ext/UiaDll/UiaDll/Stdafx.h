@@ -20,6 +20,8 @@ typedef enum {
 } FindMethod;
 
 typedef struct _ElementInformation {
+  int* runtimeId;
+  int runtimeIdLength;
   char* name;
 
   _ElementInformation() {
@@ -28,6 +30,13 @@ typedef struct _ElementInformation {
 
   _ElementInformation(Element^ element) {
     this->name = StringHelper::ToUnmanaged(element->Name);
+
+    runtimeId = new int[element->RuntimeId->Length];
+    auto index = 0;
+    for each(auto id in element->RuntimeId) {
+      runtimeId[index++] = id;
+    }
+    runtimeIdLength = element->RuntimeId->Length;
   }
 
   ~_ElementInformation() {

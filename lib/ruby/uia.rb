@@ -6,7 +6,17 @@ module Ruby
     extend FFI::Library
 
     class ElementStruct < FFI::ManagedStruct
-      layout :name, :string
+      layout  :runtime_id, :pointer,
+              :number_of_ids, :int,
+              :name, :string
+
+      def runtime_id
+        self[:runtime_id].read_array_of_int(number_of_ids)
+      end
+
+      def method_missing(meth, *args, &block)
+        self[meth.to_sym] || super(meth, *args, &block)
+      end
 
       def self.release(pointer)
         Uia.release_element(pointer)
