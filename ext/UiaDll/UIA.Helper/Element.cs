@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Automation;
 
 namespace UIA.Helper
@@ -28,6 +29,18 @@ namespace UIA.Helper
             if (null == foundElement)
             {
                 throw new ArgumentException(string.Format("An element with the id \"{0}\" was not found", automationId));
+            }
+
+            return new Element(foundElement);
+        }
+
+        public static Element ByRuntimeId(int[] runtimeId)
+        {
+            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
+            if (null == foundElement)
+            {
+                throw new ArgumentException(string.Format("An element with the runtime id \"{0}\" was not found",
+                                                          string.Join(", ", runtimeId.Select(x => x.ToString()))));
             }
 
             return new Element(foundElement);

@@ -35,9 +35,16 @@ module Ruby
 
     attach_function :release_element, :Element_Release, [:pointer], :void
     attach_function :Element_FindById, [:string, :pointer, :int], ElementStruct.by_ref
+    attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ElementStruct.by_ref
 
     def self.find_by_id(id)
       can_throw(:Element_FindById, id)
+    end
+
+    def self.find_by_runtime_id(id)
+      p = FFI::MemoryPointer.new :int, id.count
+      p.write_array_of_int(id)
+      can_throw(:Element_FindByRuntimeId, p, id.count)
     end
 
     def self.can_throw(method, *args)

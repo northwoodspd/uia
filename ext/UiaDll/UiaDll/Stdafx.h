@@ -41,8 +41,10 @@ typedef struct _ElementInformation {
 
   ~_ElementInformation() {
     if( NULL != name) {
-      Console::WriteLine("Woohoo! It's being free'd! ({0})", gcnew String(name));
       delete[] name;
+    }
+    if( NULL != runtimeId ) {
+      delete[] runtimeId;
     }
   }
 

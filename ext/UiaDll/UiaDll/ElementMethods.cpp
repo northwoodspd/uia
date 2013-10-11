@@ -16,4 +16,17 @@ extern "C" {
 
     return NULL;
   }
+
+  __declspec(dllexport) PElementInformation Element_FindByRuntimeId(const int runtimeIds[], const int numberOfIds, char* errorInfo, const int errorLength) {
+    try {
+      auto ids = gcnew array<int>(numberOfIds);
+      for(auto index = 0; index < numberOfIds; ++index) {
+        ids[index] = runtimeIds[index];
+      }
+
+      return new ElementInformation(Element::ByRuntimeId(ids));
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+  }
 }
