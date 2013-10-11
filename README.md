@@ -1,12 +1,12 @@
-# Ruby::Uia
+# Uia
 
-TODO: Write a gem description
+The `Uia` gem is a low-level driver for interacting with Microsoft UIA elements in a Windows environment.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'ruby-uia'
+    gem 'uia'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install ruby-uia
+    $ gem install uia
 
 ## Usage
 
