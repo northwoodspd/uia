@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'uia/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "Uia"
+  spec.name          = "uia"
   spec.version       = Uia::VERSION
   spec.authors       = ["Levi Wilson"]
   spec.email         = ["levi@leviwilson.com"]
