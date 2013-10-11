@@ -76,34 +76,30 @@ module Uia
   attach_function :init, :initialize, [:string], :void
   init(uia_directory)
 
+  def self.attach_throwable_function(name_alias, name, arg_types, return_type)
+    attach_function name, arg_types + [:pointer, :int], return_type
+    define_singleton_method(name_alias) do |*args|
+      can_throw(name, *args)
+    end
+  end
+
+  # cleanup
   attach_function :release_element, :Element_Release, [:pointer], :void
   attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
-  attach_function :Element_FindById, [:string, :pointer, :int], ElementStruct.by_ref
-  attach_function :Element_FindByHandle, [:int, :pointer, :int], ElementStruct.by_ref
-  attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], :pointer
-  attach_function :Element_Children, [:pointer, :pointer, :int], :pointer
-  attach_function :Element_Click, [:pointer, :pointer, :int], :void
 
-  def self.find_by_id(id)
-    can_throw(:Element_FindById, id)
-  end
+  # finding elements
+  attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref
+  attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ElementStruct.by_ref
+  attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ElementStruct.by_ref
 
-  def self.find_by_handle(handle)
-    can_throw(:Element_FindByHandle, handle)
-  end
+  # element methods
+  attach_throwable_function :children, :Element_Children, [:pointer], ElementChildrenStruct.by_ref
+  attach_throwable_function :click, :Element_Click, [:pointer], :void
 
   def self.find_by_runtime_id(id)
     p = FFI::MemoryPointer.new :int, id.count
     p.write_array_of_int(id)
-    ElementStruct.new(can_throw(:Element_FindByRuntimeId, p, id.count))
-  end
-
-  def self.children(parent)
-    ElementChildrenStruct.new(can_throw(:Element_Children, parent))
-  end
-
-  def self.click(element)
-    can_throw(:Element_Click, element)
+    can_throw(:Element_FindByRuntimeId, p, id.count)
   end
 
   def self.can_throw(method, *args)
