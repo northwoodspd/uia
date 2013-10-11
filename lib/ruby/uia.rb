@@ -20,6 +20,10 @@ module Ruby
             self[:number_of_ids]
           end
 
+          def children
+            Uia.children(self).children
+          end
+
           def name
             self[:name]
           end
@@ -68,7 +72,7 @@ module Ruby
     attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
     attach_function :Element_FindById, [:string, :pointer, :int], ElementStruct.by_ref
     attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], :pointer
-    attach_function :Element_Children, [ElementStruct.by_ref, :pointer, :int], :pointer
+    attach_function :Element_Children, [:pointer, :pointer, :int], :pointer
 
     def self.find_by_id(id)
       can_throw(:Element_FindById, id)
