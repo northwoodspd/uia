@@ -38,6 +38,13 @@ namespace UIA.Helper
             }
         }
 
+        public Element[] ChildrenOf(AutomationProperty.Id id)
+        {
+            return _element.FindAll(TreeScope.Children, AutomationProperty.From(id)).Cast<AutomationElement>()
+                           .Select(x => new Element(x))
+                           .ToArray();
+        }
+
         public void MouseClick()
         {
             Clicker.MouseClick(_element);

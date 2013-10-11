@@ -24,8 +24,9 @@ module Uia
           self[:number_of_ids]
         end
 
-        def children
-          Uia.children(self).children
+        def children(type=nil)
+          elements = (type && Uia.children_of_type(self, type)) || Uia.children(self)
+          elements.children
         end
 
         def name
@@ -76,6 +77,9 @@ module Uia
   attach_function :init, :initialize, [:string], :void
   init(uia_directory)
 
+  PropertyId = enum(:is_selection_item, 0)
+
+
   def self.attach_throwable_function(name_alias, name, arg_types, return_type)
     attach_function name, arg_types + [:pointer, :int], return_type
     define_singleton_method(name_alias) do |*args|
@@ -94,6 +98,7 @@ module Uia
 
   # element methods
   attach_throwable_function :children, :Element_Children, [:pointer], ElementChildrenStruct.by_ref
+  attach_throwable_function :children_of_type, :Element_ChildrenOfType, [:pointer, PropertyId], ElementChildrenStruct.by_ref
   attach_throwable_function :click, :Element_Click, [:pointer], :void
 
   def self.find_by_runtime_id(id)
