@@ -74,12 +74,17 @@ module Uia
   attach_function :release_element, :Element_Release, [:pointer], :void
   attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
   attach_function :Element_FindById, [:string, :pointer, :int], ElementStruct.by_ref
+  attach_function :Element_FindByHandle, [:int, :pointer, :int], ElementStruct.by_ref
   attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], :pointer
   attach_function :Element_Children, [:pointer, :pointer, :int], :pointer
   attach_function :Element_Click, [:pointer, :pointer, :int], :void
 
   def self.find_by_id(id)
     can_throw(:Element_FindById, id)
+  end
+
+  def self.find_by_handle(handle)
+    can_throw(:Element_FindByHandle, handle)
   end
 
   def self.find_by_runtime_id(id)

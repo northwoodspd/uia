@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
 
@@ -45,6 +44,17 @@ namespace UIA.Helper
             if (null == foundElement)
             {
                 throw new ArgumentException(string.Format("An element with the id \"{0}\" was not found", automationId));
+            }
+
+            return new Element(foundElement);
+        }
+
+        public static Element ByHandle(IntPtr windowHandle)
+        {
+            var foundElement = AutomationElement.FromHandle(windowHandle);
+            if (null == foundElement)
+            {
+                throw new ArgumentException(string.Format("An element with the handle 0x{0:x} was not found", windowHandle.ToInt32()));
             }
 
             return new Element(foundElement);
