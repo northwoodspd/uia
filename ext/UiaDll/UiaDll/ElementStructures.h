@@ -11,18 +11,11 @@ typedef struct _ElementInformation {
   _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0) {
     this->name = StringHelper::ToUnmanaged(element->Name);
     this->nativeWindowHandle = element->NativeWindowHandle;
-
-    runtimeId = new int[element->RuntimeId->Length];
-    auto index = 0;
-    for each(auto id in element->RuntimeId) {
-      runtimeId[index++] = id;
-    }
+    runtimeId = ArrayHelper::FromArray(element->RuntimeId);
     runtimeIdLength = element->RuntimeId->Length;
   }
 
   ~_ElementInformation() {
-    Console::WriteLine("Releasing {0}...", gcnew String(name));
-
     if( NULL != name) {
       delete[] name;
     }
@@ -52,7 +45,6 @@ typedef struct _Elements {
   }
 
   ~_Elements() {
-    Console::WriteLine("Releasing {0} elements...", length);
     for(auto index = 0; index < length; ++index) {
       elements[index].~_ElementInformation();
     }
