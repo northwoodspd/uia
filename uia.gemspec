@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ruby/uia/version'
+require 'uia/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ruby-uia"
-  spec.version       = Ruby::Uia::VERSION
+  spec.name          = "Uia"
+  spec.version       = Uia::VERSION
   spec.authors       = ["Levi Wilson"]
   spec.email         = ["levi@leviwilson.com"]
   spec.description   = %q{This wraps UIA stuff}
