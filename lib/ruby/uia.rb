@@ -23,6 +23,21 @@ module Ruby
       end
     end
 
+    class ElementChildrenStruct < FFI::ManagedStruct
+      layout :length, :int,
+             :items, :pointer
+
+      def children
+        @children ||= self[:length].times.collect do |i|
+          ElementStruct.new(self[:items] + i * ElementStruct.size)
+        end
+      end
+
+      def self.release(pointer)
+        Uia.release_elements(pointer)
+      end
+    end
+
     def self.uia_directory
       File.dirname(__FILE__) + '/../../ext/UiaDll/Release'
     end
@@ -34,8 +49,10 @@ module Ruby
     init(uia_directory)
 
     attach_function :release_element, :Element_Release, [:pointer], :void
+    attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
     attach_function :Element_FindById, [:string, :pointer, :int], ElementStruct.by_ref
-    attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ElementStruct.by_ref
+    attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], :pointer
+    attach_function :Element_Children, [ElementStruct.by_ref, :pointer, :int], :pointer
 
     def self.find_by_id(id)
       can_throw(:Element_FindById, id)
@@ -44,7 +61,11 @@ module Ruby
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
       p.write_array_of_int(id)
-      can_throw(:Element_FindByRuntimeId, p, id.count)
+      ElementStruct.new(can_throw(:Element_FindByRuntimeId, p, id.count))
+    end
+
+    def self.children(parent)
+      ElementChildrenStruct.new(can_throw(:Element_Children, parent))
     end
 
     def self.can_throw(method, *args)

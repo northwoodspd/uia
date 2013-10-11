@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
 
@@ -21,6 +22,16 @@ namespace UIA.Helper
         public string Name
         {
             get { return _element.Current.Name; }
+        }
+
+        public Element[] Children
+        {
+            get
+            {
+                return _element.FindAll(TreeScope.Children, Condition.TrueCondition).Cast<AutomationElement>()
+                               .Select(x => new Element(x))
+                               .ToArray();
+            }
         }
 
         public static Element ById(string automationId)

@@ -7,6 +7,10 @@ extern "C" {
     delete elementInformation;
   }
 
+  __declspec(dllexport) void Element_ReleaseMany(PElements elements) {
+    delete elements;
+  }
+
   __declspec(dllexport) PElementInformation Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
     try {
       return new ElementInformation(Element::ById(gcnew String(automationId)));
@@ -19,12 +23,16 @@ extern "C" {
 
   __declspec(dllexport) PElementInformation Element_FindByRuntimeId(const int runtimeIds[], const int numberOfIds, char* errorInfo, const int errorLength) {
     try {
-      auto ids = gcnew array<int>(numberOfIds);
-      for(auto index = 0; index < numberOfIds; ++index) {
-        ids[index] = runtimeIds[index];
-      }
+      return new ElementInformation(Element::ByRuntimeId(ArrayHelper::ToArray(runtimeIds, numberOfIds)));
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+  }
 
-      return new ElementInformation(Element::ByRuntimeId(ids));
+  __declspec(dllexport) PElements Element_Children(PElementInformation parentElement, char* errorInfo, const int errorLength) {
+    try {
+      auto foundChildren = Element::ByRuntimeId(ArrayHelper::ToArray(parentElement->runtimeId, parentElement->runtimeIdLength))->Children;
+      return new Elements(foundChildren);
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }

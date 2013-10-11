@@ -76,11 +76,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArrayHelper.h" />
     <ClInclude Include="DynamicAssemblyResolver.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="StringHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArrayHelper.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="DynamicAssemblyResolver.cpp" />
     <ClCompile Include="ElementMethods.cpp" />

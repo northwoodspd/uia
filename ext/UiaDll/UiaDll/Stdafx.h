@@ -10,6 +10,7 @@ using namespace System;
 using namespace UIA::Helper;
 
 #include "StringHelper.h"
+#include "ArrayHelper.h"
 
 typedef enum {
     Handle = 1,
@@ -40,6 +41,8 @@ typedef struct _ElementInformation {
   }
 
   ~_ElementInformation() {
+    Console::WriteLine("Releasing {0}...", gcnew String(name));
+
     if( NULL != name) {
       delete[] name;
     }
@@ -49,6 +52,32 @@ typedef struct _ElementInformation {
   }
 
 } ElementInformation, *PElementInformation;
+
+typedef struct _Elements {
+  int length;
+  ElementInformation* elements;
+
+  _Elements(array<Element^>^ elements) {
+    length = elements->Length;
+    this->elements = NULL;
+    if( length > 0 ) {
+      this->elements = new ElementInformation[length];
+
+      auto index = 0;
+      for each(Element^ child in elements) {
+        auto element = new ElementInformation(child);
+        memcpy(&this->elements[index++], element, sizeof(ElementInformation));
+      }
+    }
+  }
+
+  ~_Elements() {
+    Console::WriteLine("Releasing {0} elements...", length);
+    for(auto index = 0; index < length; ++index) {
+      elements[index].~_ElementInformation();
+    }
+  }
+} Elements, *PElements;
 
 typedef struct _FindInformation {
     HWND rootWindow;
