@@ -25,7 +25,7 @@ namespace UIA.Helper
 
         public static Element ById(string automationId)
         {
-            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
+            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
             if (null == foundElement)
             {
                 throw new ArgumentException(string.Format("An element with the id \"{0}\" was not found", automationId));
@@ -36,7 +36,7 @@ namespace UIA.Helper
 
         public static Element ByRuntimeId(int[] runtimeId)
         {
-            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
+            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
             if (null == foundElement)
             {
                 throw new ArgumentException(string.Format("An element with the runtime id \"{0}\" was not found",
