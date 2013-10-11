@@ -34,6 +34,11 @@ namespace UIA.Helper
             }
         }
 
+        public void MouseClick()
+        {
+            Clicker.MouseClick(_element);
+        }
+
         public static Element ById(string automationId)
         {
             var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));

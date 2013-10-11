@@ -27,6 +27,10 @@ module Ruby
           def name
             self[:name]
           end
+
+          def click
+            Uia.click(self)
+          end
         end
       end
     end
@@ -73,6 +77,7 @@ module Ruby
     attach_function :Element_FindById, [:string, :pointer, :int], ElementStruct.by_ref
     attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], :pointer
     attach_function :Element_Children, [:pointer, :pointer, :int], :pointer
+    attach_function :Element_Click, [:pointer, :pointer, :int], :void
 
     def self.find_by_id(id)
       can_throw(:Element_FindById, id)
@@ -86,6 +91,10 @@ module Ruby
 
     def self.children(parent)
       ElementChildrenStruct.new(can_throw(:Element_Children, parent))
+    end
+
+    def self.click(element)
+      can_throw(:Element_Click, element)
     end
 
     def self.can_throw(method, *args)

@@ -37,4 +37,12 @@ extern "C" {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
   }
+
+  __declspec(dllexport) void Element_Click(PElementInformation element, char* errorInfo, const int errorLength) {
+    try {
+      Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength))->MouseClick();
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+  }
 }
