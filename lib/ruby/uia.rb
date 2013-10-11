@@ -5,22 +5,38 @@ module Ruby
   module Uia
     extend FFI::Library
 
+    module ElementLayout
+      def self.included(base)
+        base.class_eval do
+          layout :runtime_id, :pointer,
+                 :number_of_ids, :int,
+                 :name, :string
+
+          def runtime_id
+            self[:runtime_id].read_array_of_int(number_of_ids)
+          end
+
+          def number_of_ids
+            self[:number_of_ids]
+          end
+
+          def name
+            self[:name]
+          end
+        end
+      end
+    end
+
     class ElementStruct < FFI::ManagedStruct
-      layout  :runtime_id, :pointer,
-              :number_of_ids, :int,
-              :name, :string
-
-      def runtime_id
-        self[:runtime_id].read_array_of_int(number_of_ids)
-      end
-
-      def method_missing(meth, *args, &block)
-        self[meth.to_sym] || super(meth, *args, &block)
-      end
+      include ElementLayout
 
       def self.release(pointer)
         Uia.release_element(pointer)
       end
+    end
+
+    class ElementCast < FFI::Struct
+      include ElementLayout
     end
 
     class ElementChildrenStruct < FFI::ManagedStruct
@@ -29,7 +45,7 @@ module Ruby
 
       def children
         @children ||= self[:length].times.collect do |i|
-          ElementStruct.new(self[:items] + i * ElementStruct.size)
+          ElementCast.new(self[:items] + i * ElementCast.size)
         end
       end
 
