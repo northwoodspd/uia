@@ -23,6 +23,11 @@ namespace UIA.Helper
             get { return _element.Current.Name; }
         }
 
+        public int NativeWindowHandle
+        {
+            get { return _element.Current.NativeWindowHandle; }
+        }
+
         public Element[] Children
         {
             get

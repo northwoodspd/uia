@@ -26,12 +26,11 @@ typedef struct _ElementInformation {
   int runtimeIdLength;
   char* name;
 
-  _ElementInformation() {
-    name = NULL;
-  }
+  _ElementInformation() : name(NULL), nativeWindowHandle(0) {}
 
-  _ElementInformation(Element^ element) {
+  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0) {
     this->name = StringHelper::ToUnmanaged(element->Name);
+    this->nativeWindowHandle = element->NativeWindowHandle;
 
     runtimeId = new int[element->RuntimeId->Length];
     auto index = 0;
