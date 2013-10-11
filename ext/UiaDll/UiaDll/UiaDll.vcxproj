@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="ArrayHelper.h" />
     <ClInclude Include="DynamicAssemblyResolver.h" />
+    <ClInclude Include="ElementStructures.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="StringHelper.h" />
   </ItemGroup>
