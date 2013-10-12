@@ -1,7 +1,6 @@
 require 'uia/version'
-require 'uia/library/structs'
 require 'uia/library'
-require 'ffi'
+require 'uia/element'
 
 module Uia
   class BadLocator < StandardError; end

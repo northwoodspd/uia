@@ -21,7 +21,7 @@ module Uia
           end
 
           def children(type=nil)
-            elements = (type && Uia.children_of_type(self, type)) || Uia.children(self)
+            elements = (type && Library.children_of_type(self, type)) || Library.children(self)
             elements.children
           end
 

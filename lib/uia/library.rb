@@ -1,3 +1,4 @@
+require 'uia/library/structs'
 require 'ffi'
 
 module Uia
