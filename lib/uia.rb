@@ -4,6 +4,13 @@ require 'ffi'
 module Uia
   extend FFI::Library
 
+  def find_element(how)
+    case
+      when how[:id]
+        Uia.find_by_id(how[:id])
+    end
+  end
+
   module ElementLayout
     def self.included(base)
       base.class_eval do
