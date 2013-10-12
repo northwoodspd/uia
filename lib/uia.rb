@@ -1,5 +1,5 @@
 require 'uia/version'
-require 'uia/element/elements'
+require 'uia/library/structs'
 require 'uia/library'
 require 'ffi'
 
