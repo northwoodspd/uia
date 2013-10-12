@@ -29,6 +29,16 @@ extern "C" {
     return NULL;
   }
 
+  __declspec(dllexport) PElementInformation Element_FindByProcessId(const int processId, char* errorInfo, const int errorLength) {
+    try {
+      return new ElementInformation(Element::ByProcessId(processId));
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+
+    return NULL;
+  }
+
   __declspec(dllexport) PElementInformation Element_FindByHandle(HWND windowHandle, char* errorInfo, const int errorLength) {
     try {
       return new ElementInformation(Element::ByHandle(IntPtr(windowHandle)));

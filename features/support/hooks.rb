@@ -1,7 +1,8 @@
-Before do
-  @app = ChildProcess.build('features/support/WindowsForms.exe').start
+AfterConfiguration do
+  $app = ChildProcess.build('features/support/WindowsForms.exe').start
+  sleep 0.5
 end
 
-After do
-  @app.stop unless @app.exited?
+at_exit do
+  $app.stop unless $app.exited?
 end

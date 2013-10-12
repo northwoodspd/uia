@@ -61,6 +61,17 @@ namespace UIA.Helper
             return new Element(foundElement);
         }
 
+        public static Element ByProcessId(int processId)
+        {
+            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ProcessIdProperty, processId));
+            if (null == foundElement)
+            {
+                throw new ArgumentException(string.Format("An element with the process id {0} was not found", processId));
+            }
+
+            return new Element(foundElement);
+        }
+
         public static Element ByHandle(IntPtr windowHandle)
         {
             var foundElement = AutomationElement.FromHandle(windowHandle);

@@ -8,6 +8,14 @@ module Uia
     case
       when how[:id]
         Uia.find_by_id(how[:id])
+      when how[:pid]
+        Uia.find_by_pid(how[:pid])
+      when how[:runtime_id]
+        Uia.find_by_runtime_id(how[:runtime_id])
+      when how[:handle]
+        Uia.find_by_handle(how[:handle])
+      else
+        raise "#{how} is not a valid locator"
     end
   end
 
@@ -100,6 +108,7 @@ module Uia
 
   # finding elements
   attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref
+  attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ElementStruct.by_ref
   attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ElementStruct.by_ref
   attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ElementStruct.by_ref
 
