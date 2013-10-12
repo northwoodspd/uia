@@ -16,10 +16,6 @@ module Uia
             self[:runtime_id].read_array_of_int(number_of_ids)
           end
 
-          def number_of_ids
-            self[:number_of_ids]
-          end
-
           def children(type=nil)
             elements = (type && Library.children_of_type(self, type)) || Library.children(self)
             elements.children
@@ -31,6 +27,11 @@ module Uia
 
           def click
             Uia.click(self)
+          end
+
+          private
+          def number_of_ids
+            self[:number_of_ids]
           end
         end
       end
