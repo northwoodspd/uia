@@ -8,6 +8,11 @@ module Uia
       @element.children.map { |c| Element.new c }
     end
 
+    def click
+      Library.click(@element)
+      true
+    end
+
     def method_missing(meth, *args, &block)
       if @element.respond_to? meth
         return @element.send(meth, *args, &block)

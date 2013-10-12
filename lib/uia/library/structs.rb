@@ -25,11 +25,6 @@ module Uia
             self[:name]
           end
 
-          def click
-            Library.click(self)
-            true
-          end
-
           private
           def number_of_ids
             self[:number_of_ids]
