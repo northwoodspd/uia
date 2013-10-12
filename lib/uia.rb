@@ -4,6 +4,8 @@ require 'uia/library'
 require 'ffi'
 
 module Uia
+  class BadLocator < StandardError; end
+
   def find_element(how)
     case
       when how[:id]
@@ -15,7 +17,7 @@ module Uia
       when how[:handle]
         Library.find_by_handle(how[:handle])
       else
-        raise "#{how} is not a valid locator"
+        raise BadLocator, "#{how} is not a valid locator"
     end
   end
 end

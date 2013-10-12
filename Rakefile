@@ -1,7 +1,4 @@
 require "bundler/gem_tasks"
-require 'cucumber'
-require 'cucumber/rake/task'
 
-Cucumber::Rake::Task.new(:features) do |t|
-    t.profile = 'default'
-end
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
