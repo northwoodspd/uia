@@ -10,10 +10,19 @@ describe Element do
   end
 
   context '#click' do
-    Given(:about) { element.children.find {|c| c.name == 'About'} }
-    When { about.click }
-    Then { about_box != nil }
-    And { about_box.children.find {|c| c.name == 'OK'}.click }
+    Given(:about) { element.children.find { |c| c.name == 'About' } }
+    Given(:disabled_checkbox) { element.children.find { |c| c.name == 'checkBoxDisabled' } }
+
+    context 'enabled elements' do
+      When { about.click }
+      Then { about_box != nil }
+      And { about_box.children.find { |c| c.name == 'OK' }.click }
+    end
+
+    context 'disabled elements' do
+      When(:click_disabled) { disabled_checkbox.click }
+      Then { click_disabled.should have_failed('Target element cannot receive focus.') }
+    end
   end
 
   context '#children' do
