@@ -8,9 +8,6 @@ require 'uia'
 
 include Uia
 
-Given.source_caching_disabled = true
-Given.use_natural_assertions
-
 RSpec.configure do |config|
   config.before(:all) do
     @app = ChildProcess.build('spec/app/WindowsForms.exe').start

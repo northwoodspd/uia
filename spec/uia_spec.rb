@@ -5,19 +5,19 @@ describe Uia do
     Given(:main_window) { find_element id: 'MainFormWindow' }
 
     context 'by id' do
-      Then { expect(find_element(id: 'MainFormWindow')).to_not be_nil }
+      Then { find_element(id: 'MainFormWindow') != nil}
     end
 
     context 'by process id' do
-      Then { expect(find_element(pid: @app.pid)).to_not be_nil }
+      Then { find_element(pid: @app.pid) != nil }
     end
 
     context 'by runtime id' do
-      Then { expect(find_element(runtime_id: main_window.runtime_id)).to_not be_nil }
+      Then { find_element(runtime_id: main_window.runtime_id) != nil }
     end
 
     context 'by window handle' do
-      Then { expect(find_element(handle: main_window.handle)).to_not be_nil }
+      Then { find_element(handle: main_window.handle) != nil }
     end
 
     context 'invalid locators' do
