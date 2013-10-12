@@ -8,6 +8,10 @@ module Uia
       @element.children.map { |c| Element.new c }
     end
 
+    def descendants
+      @element.descendants.map { |c| Element.new c }
+    end
+
     def click
       Library.click(@element)
       true

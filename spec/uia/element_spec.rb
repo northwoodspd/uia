@@ -29,4 +29,9 @@ describe Element do
     Then { element.children.count == 27 }
     Then { element.children.all? { |c| c.instance_of? Element } }
   end
+
+  context '#descendants' do
+    Then { element.descendants.count > element.children.count }
+    Then { element.descendants.all? { |c| c.instance_of? Element } }
+  end
 end

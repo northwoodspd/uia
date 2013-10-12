@@ -30,17 +30,22 @@ namespace UIA.Helper
 
         public Element[] Children
         {
-            get
-            {
-                return _element.FindAll(TreeScope.Children, Condition.TrueCondition).Cast<AutomationElement>()
-                               .Select(x => new Element(x))
-                               .ToArray();
-            }
+            get { return Find(TreeScope.Children, Condition.TrueCondition); }
         }
 
         public Element[] ChildrenOf(AutomationProperty.Id id)
         {
-            return _element.FindAll(TreeScope.Children, AutomationProperty.From(id)).Cast<AutomationElement>()
+            return Find(TreeScope.Children, AutomationProperty.From(id));
+        }
+
+        public Element[] Descendants
+        {
+            get { return Find(TreeScope.Descendants, Condition.TrueCondition); }
+        }
+
+        private Element[] Find(TreeScope scope, Condition condition)
+        {
+            return _element.FindAll(scope, condition).Cast<AutomationElement>()
                            .Select(x => new Element(x))
                            .ToArray();
         }

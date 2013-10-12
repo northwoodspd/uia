@@ -73,6 +73,14 @@ extern "C" {
     }
   }
 
+  __declspec(dllexport) PElements Element_Descendants(PElementInformation parentElement, char* errorInfo, const int errorLength) {
+    try {
+      return new Elements(Find(parentElement)->Descendants);
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+  }
+
   __declspec(dllexport) void Element_Click(PElementInformation element, char* errorInfo, const int errorLength) {
     try {
       Find(element)->MouseClick();

@@ -38,6 +38,7 @@ module Uia
     # element methods
     attach_throwable_function :children, :Element_Children, [:pointer], ElementChildrenStruct.by_ref
     attach_throwable_function :children_of_type, :Element_ChildrenOfType, [:pointer, PropertyId], ElementChildrenStruct.by_ref
+    attach_throwable_function :descendants, :Element_Descendants, [:pointer], ElementChildrenStruct.by_ref
     attach_throwable_function :click, :Element_Click, [:pointer], :void
 
     def self.find_by_runtime_id(id)

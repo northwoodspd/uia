@@ -1,3 +1,5 @@
+require 'ffi'
+
 module Uia
   module Library
     module ElementLayout
@@ -19,6 +21,10 @@ module Uia
           def children(type=nil)
             elements = (type && Library.children_of_type(self, type)) || Library.children(self)
             elements.children
+          end
+
+          def descendants
+            Library.descendants(self).children
           end
 
           def name
