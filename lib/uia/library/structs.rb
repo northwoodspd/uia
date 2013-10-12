@@ -26,7 +26,8 @@ module Uia
           end
 
           def click
-            Uia.click(self)
+            Library.click(self)
+            true
           end
 
           private
@@ -41,7 +42,7 @@ module Uia
       include ElementLayout
 
       def self.release(pointer)
-        Uia.release_element(pointer)
+        Library.release_element(pointer)
       end
     end
 
@@ -60,7 +61,7 @@ module Uia
       end
 
       def self.release(pointer)
-        Uia.release_elements(pointer)
+        Library.release_elements(pointer)
       end
     end
   end
