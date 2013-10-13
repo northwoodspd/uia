@@ -43,13 +43,6 @@ namespace UIA.Helper
             get { return Find(TreeScope.Descendants, Condition.TrueCondition); }
         }
 
-        private Element[] Find(TreeScope scope, Condition condition)
-        {
-            return _element.FindAll(scope, condition).Cast<AutomationElement>()
-                           .Select(x => new Element(x))
-                           .ToArray();
-        }
-
         public void MouseClick()
         {
             Clicker.MouseClick(_element);
@@ -57,12 +50,12 @@ namespace UIA.Helper
 
         public static Element ById(string automationId)
         {
-            return Find(new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
+            return FindFirst(new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
         }
 
         public static Element ByProcessId(int processId)
         {
-            return Find(new PropertyCondition(AutomationElement.ProcessIdProperty, processId));
+            return FindFirst(new PropertyCondition(AutomationElement.ProcessIdProperty, processId));
         }
 
         public static Element ByHandle(IntPtr windowHandle)
@@ -72,10 +65,17 @@ namespace UIA.Helper
 
         public static Element ByRuntimeId(int[] runtimeId)
         {
-            return Find(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
+            return FindFirst(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
         }
 
-        private static Element Find(Condition condition)
+        private Element[] Find(TreeScope scope, Condition condition)
+        {
+            return _element.FindAll(scope, condition).Cast<AutomationElement>()
+                           .Select(x => new Element(x))
+                           .ToArray();
+        }
+
+        private static Element FindFirst(Condition condition)
         {
             return NullOr(AutomationElement.RootElement.FindFirst(TreeScope.Descendants, condition));
         }
