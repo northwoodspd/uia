@@ -57,47 +57,32 @@ namespace UIA.Helper
 
         public static Element ById(string automationId)
         {
-            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
-            if (null == foundElement)
-            {
-                throw new ArgumentException(string.Format("An element with the id \"{0}\" was not found", automationId));
-            }
-
-            return new Element(foundElement);
+            return Find(new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
         }
 
         public static Element ByProcessId(int processId)
         {
-            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.ProcessIdProperty, processId));
-            if (null == foundElement)
-            {
-                throw new ArgumentException(string.Format("An element with the process id {0} was not found", processId));
-            }
-
-            return new Element(foundElement);
+            return Find(new PropertyCondition(AutomationElement.ProcessIdProperty, processId));
         }
 
         public static Element ByHandle(IntPtr windowHandle)
         {
-            var foundElement = AutomationElement.FromHandle(windowHandle);
-            if (null == foundElement)
-            {
-                throw new ArgumentException(string.Format("An element with the handle 0x{0:x} was not found", windowHandle.ToInt32()));
-            }
-
-            return new Element(foundElement);
+           return NullOr(AutomationElement.FromHandle(windowHandle));
         }
 
         public static Element ByRuntimeId(int[] runtimeId)
         {
-            var foundElement = AutomationElement.RootElement.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
-            if (null == foundElement)
-            {
-                throw new ArgumentException(string.Format("An element with the runtime id \"{0}\" was not found",
-                                                          string.Join(", ", runtimeId.Select(x => x.ToString()))));
-            }
+            return Find(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
+        }
 
-            return new Element(foundElement);
+        private static Element Find(Condition condition)
+        {
+            return NullOr(AutomationElement.RootElement.FindFirst(TreeScope.Descendants, condition));
+        }
+
+        private static Element NullOr(AutomationElement automationElement)
+        {
+            return null == automationElement ? null : new Element(automationElement);
         }
     }
 }
