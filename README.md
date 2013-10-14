@@ -18,7 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Getting started with `uia` is easy. Simply require `uia` and then include the `Uia` module wherever you would like to use it.
+
+```ruby
+require 'uia'
+
+include Uia
+
+main_window = find_element id: 'MainFormWindow'
+```
+
+### Finding Elements
+
+You can locate elements based on the following criteria:
+
+* `:id`         - find by their `AutomationId`
+* `:pid`        - find an element by their process id
+* `:handle`     - find an element by their native window handle
+* `:runtime_id` - find an element by their `RuntimeId` (i.e. `[42, 12345]`)
 
 ## Contributing
 
