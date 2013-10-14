@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['levi@leviwilson.com']
   spec.description   = %q{This wraps UIA stuff}
   spec.summary       = %q{This wraps UIA stuff}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/northwoodspd/uia'
   spec.license       = 'MIT'
 
   binaries = [
