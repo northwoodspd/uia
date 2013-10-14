@@ -28,6 +28,11 @@ namespace UIA.Helper
             get { return _element.Current.NativeWindowHandle; }
         }
 
+        public int ControlTypeId
+        {
+            get { return _element.Current.ControlType.Id; }
+        }
+
         public Element[] Children
         {
             get { return Find(TreeScope.Children, Condition.TrueCondition); }

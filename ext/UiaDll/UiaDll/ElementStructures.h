@@ -5,6 +5,7 @@ typedef struct _ElementInformation {
   int* runtimeId;
   int runtimeIdLength;
   char* name;
+  int controlTypeId;
 
   _ElementInformation() : name(NULL), nativeWindowHandle(0) {}
 
@@ -13,6 +14,7 @@ typedef struct _ElementInformation {
     this->nativeWindowHandle = element->NativeWindowHandle;
     runtimeId = ArrayHelper::FromArray(element->RuntimeId);
     runtimeIdLength = element->RuntimeId->Length;
+    controlTypeId = element->ControlTypeId;
   }
 
   ~_ElementInformation() {

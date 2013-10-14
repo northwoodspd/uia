@@ -4,6 +4,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rspec'
 require 'rspec/given'
 require 'childprocess'
+require 'ffi'
 require 'uia'
 
 include Uia

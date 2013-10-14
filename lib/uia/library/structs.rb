@@ -8,7 +8,8 @@ module Uia
           layout :handle, :int,
                  :runtime_id, :pointer,
                  :number_of_ids, :int,
-                 :name, :string
+                 :name, :string,
+                 :control_type_id, :int
 
           def handle
             self[:handle]
@@ -29,6 +30,10 @@ module Uia
 
           def name
             self[:name]
+          end
+
+          def control_type
+            (Library::Constants::ControlTypes.find {|_, v| v == self[:control_type_id]} || []).first
           end
 
           private
