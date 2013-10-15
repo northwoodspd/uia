@@ -8,27 +8,31 @@ namespace UIA.Helper
     {
         private readonly AutomationElement _element;
 
+        protected Element()
+        {
+        }
+
         private Element(AutomationElement element)
         {
             _element = element;
         }
 
-        public int[] RuntimeId
+        public virtual int[] RuntimeId
         {
             get { return _element.GetRuntimeId(); }
         }
 
-        public string Name
+        public virtual string Name
         {
             get { return _element.Current.Name; }
         }
 
-        public int NativeWindowHandle
+        public virtual int NativeWindowHandle
         {
             get { return _element.Current.NativeWindowHandle; }
         }
 
-        public int ControlTypeId
+        public virtual int ControlTypeId
         {
             get { return _element.Current.ControlType.Id; }
         }
