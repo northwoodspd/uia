@@ -6,6 +6,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIA.Helper", "UIA.Helper\UIA.Helper.csproj", "{C2D567A8-B059-41A8-B9F5-FF4F8F961C1F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UiaDll.Test", "UiaDll.Test\UiaDll.Test.vcxproj", "{E83CF3F7-74C6-4333-89E3-36C6297F0A06}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16531A20-39FB-4BDB-8F1C-E2D619BBCF58} = {16531A20-39FB-4BDB-8F1C-E2D619BBCF58}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

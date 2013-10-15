@@ -1,4 +1,6 @@
-#include "Stdafx.h"
+#pragma once
+#include "ArrayHelper.h"
+#include "StringHelper.h"
 
 typedef struct _ElementInformation {
   int nativeWindowHandle;
@@ -7,9 +9,9 @@ typedef struct _ElementInformation {
   char* name;
   int controlTypeId;
 
-  _ElementInformation() : name(NULL), nativeWindowHandle(0) {}
+  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL) {}
 
-  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0) {
+  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL) {
     this->name = StringHelper::ToUnmanaged(element->Name);
     this->nativeWindowHandle = element->NativeWindowHandle;
     runtimeId = ArrayHelper::FromArray(element->RuntimeId);
@@ -18,12 +20,8 @@ typedef struct _ElementInformation {
   }
 
   ~_ElementInformation() {
-    if( NULL != name) {
-      delete[] name;
-    }
-    if( NULL != runtimeId ) {
-      delete[] runtimeId;
-    }
+    delete[] name;
+    delete[] runtimeId;
   }
 
 } ElementInformation, *PElementInformation;
@@ -31,6 +29,8 @@ typedef struct _ElementInformation {
 typedef struct _Elements {
   int length;
   ElementInformation* elements;
+
+  _Elements() : length(0), elements(NULL) {}
 
   _Elements(array<Element^>^ elements) {
     length = elements->Length;
@@ -50,5 +50,7 @@ typedef struct _Elements {
     for(auto index = 0; index < length; ++index) {
       elements[index].~_ElementInformation();
     }
+
+    delete[] elements;
   }
 } Elements, *PElements;
