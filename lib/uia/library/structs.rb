@@ -21,6 +21,10 @@ module Uia
             self[:runtime_id].read_array_of_int(number_of_ids)
           end
 
+          def control_type_id
+            self[:control_type_id]
+          end
+
           def pattern_ids
             self[:patterns].read_array_of_int(self[:patterns_length])
           end
@@ -36,10 +40,6 @@ module Uia
 
           def name
             self[:name]
-          end
-
-          def control_type
-            (Library::Constants::ControlTypes.find {|_, v| v == self[:control_type_id]} || []).first
           end
 
           private

@@ -2,11 +2,16 @@ module Uia
   class Element
     def initialize(element)
       @element = element
+      @default = lambda { [:unknown] }
+    end
+
+    def control_type
+      Library::Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
     end
 
     def patterns
       pattern_ids.map do |id|
-        Library::Constants::Patterns.find(lambda {[:unknown]}) { |_, v| v == id }.first
+        Library::Constants::Patterns.find(@default) { |_, v| v == id }.first
       end
     end
 

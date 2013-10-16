@@ -7,9 +7,17 @@ describe Element do
   context 'properties' do
     Then { element.handle != 0 }
     Then { element.name == 'MainFormWindow' }
-    Then { element.control_type == :window }
 
-    context 'patterns' do
+    context '#control_type' do
+      Then { element.control_type == :window }
+
+      context 'unknown' do
+        Given { element.stub(:control_type_id).and_return(777) }
+        Then { element.control_type == :unknown }
+      end
+    end
+
+    context '#patterns' do
       Then { element.patterns.should =~ [:transform, :window] }
 
       context 'unknown' do
