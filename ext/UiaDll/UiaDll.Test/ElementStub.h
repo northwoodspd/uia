@@ -28,11 +28,13 @@ public:
 
   virtual property int ControlTypeId
   {
-    int get() override { return 0; }
+    int get() override { return _controlTypeId; }
+    void set(int value) override { _controlTypeId = value; }
   }
 
 private:
   String^ _name;
   array<int>^ _runtimeIds;
   int _nativeWindowHandle;
+  int _controlTypeId;
 };

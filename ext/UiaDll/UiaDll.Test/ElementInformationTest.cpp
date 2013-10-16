@@ -48,6 +48,14 @@ TEST_F(ElementInformationTest, ItKnowsTheWindowHandle)
   ASSERT_EQ(ElementInformation(element).nativeWindowHandle, 12345);
 }
 
+TEST_F(ElementInformationTest, ItKnowsTheControlType)
+{
+  auto element = gcnew ElementStub("");
+  element->ControlTypeId = 1234;
+
+  ASSERT_EQ(1234, ElementInformation(element).controlTypeId);
+}
+
 TEST_F(ElementInformationTest, ItCanBeUpdated)
 {
   auto elementInformation = ElementInformation(gcnew ElementStub("Initial", 0));
