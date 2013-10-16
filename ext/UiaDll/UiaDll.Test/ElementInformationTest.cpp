@@ -64,8 +64,8 @@ TEST_F(ElementInformationTest, ItCanBeUpdated)
   updatedElement->NativeWindowHandle = 123;
   elementInformation.Update(updatedElement);
 
+  const int expectedId[] = {46, 2};
+  ASSERT_THAT(expectedId, ::testing::ElementsAreArray(elementInformation.runtimeId, elementInformation.runtimeIdLength));
   ASSERT_STREQ("Updated", elementInformation.name);
-  ASSERT_EQ(46, elementInformation.runtimeId[0]);
-  ASSERT_EQ(2, elementInformation.runtimeId[1]);
   ASSERT_EQ(123, elementInformation.nativeWindowHandle);
 }
