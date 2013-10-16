@@ -49,7 +49,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ElementStructureTests.cpp">
+    <ClCompile Include="ElementInformationTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ElementsTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

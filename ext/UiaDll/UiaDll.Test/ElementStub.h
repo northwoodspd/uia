@@ -22,7 +22,8 @@ public:
 
   virtual property int NativeWindowHandle
   {
-    int get() override { return 0; }
+    int get() override { return _nativeWindowHandle; }
+    void set(int value) { _nativeWindowHandle = value; }
   }
 
   virtual property int ControlTypeId
@@ -33,4 +34,5 @@ public:
 private:
   String^ _name;
   array<int>^ _runtimeIds;
+  int _nativeWindowHandle;
 };
