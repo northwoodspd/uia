@@ -42,15 +42,13 @@ typedef struct _Elements {
 
   _Elements() : length(0), elements(NULL) {}
 
-  _Elements(array<Element^>^ elements) {
+  _Elements(array<Element^>^ elements) : elements(NULL) {
     length = elements->Length;
-    this->elements = NULL;
-    if( length > 0 ) {
-      this->elements = new ElementInformation[length];
-      auto index = 0;
-      for each(auto element in elements) {
-        this->elements[index++].Update(element);
-      }
+    if( length > 0 ) this->elements = new ElementInformation[length];
+
+    auto index = 0;
+    for each(auto element in elements) {
+      this->elements[index++].Update(element);
     }
   }
 
