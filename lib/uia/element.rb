@@ -4,6 +4,12 @@ module Uia
       @element = element
     end
 
+    def patterns
+      pattern_ids.map do |id|
+        Library::Constants::Patterns.find(lambda {[:unknown]}) { |_, v| v == id }.first
+      end
+    end
+
     def children
       @element.children.map { |c| Element.new c }
     end

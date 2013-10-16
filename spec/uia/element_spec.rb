@@ -8,6 +8,15 @@ describe Element do
     Then { element.handle != 0 }
     Then { element.name == 'MainFormWindow' }
     Then { element.control_type == :window }
+
+    context 'patterns' do
+      Then { element.patterns.should =~ [:transform, :window] }
+
+      context 'unknown' do
+        Given { element.stub(:pattern_ids).and_return([7777]) }
+        Then { element.patterns.should == [:unknown]}
+      end
+    end
   end
 
   context '#click' do

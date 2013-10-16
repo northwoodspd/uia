@@ -21,7 +21,7 @@ module Uia
             self[:runtime_id].read_array_of_int(number_of_ids)
           end
 
-          def patterns
+          def pattern_ids
             self[:patterns].read_array_of_int(self[:patterns_length])
           end
 
