@@ -9,7 +9,9 @@ module Uia
                  :runtime_id, :pointer,
                  :number_of_ids, :int,
                  :name, :string,
-                 :control_type_id, :int
+                 :control_type_id, :int,
+                 :patterns, :pointer,
+                 :patterns_length, :int
 
           def handle
             self[:handle]
@@ -17,6 +19,10 @@ module Uia
 
           def runtime_id
             self[:runtime_id].read_array_of_int(number_of_ids)
+          end
+
+          def patterns
+            self[:patterns].read_array_of_int(self[:patterns_length])
           end
 
           def children(type=nil)

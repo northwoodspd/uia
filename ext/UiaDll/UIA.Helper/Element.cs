@@ -37,6 +37,11 @@ namespace UIA.Helper
             get { return _element.Current.ControlType.Id; }
         }
 
+        public virtual int[] SupportedPatternIds
+        {
+            get { return _element.GetSupportedPatterns().Select(x => x.Id).ToArray(); }
+        }
+
         public Element[] Children
         {
             get { return Find(TreeScope.Children, Condition.TrueCondition); }

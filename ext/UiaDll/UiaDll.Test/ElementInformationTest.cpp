@@ -56,6 +56,17 @@ TEST_F(ElementInformationTest, ItKnowsTheControlType)
   ASSERT_EQ(1234, ElementInformation(element).controlTypeId);
 }
 
+TEST_F(ElementInformationTest, ItKnowsTheSupportedPatterns)
+{
+  auto element = gcnew ElementStub("");
+  element->SetPatterns(7, 5, 3);
+
+  auto elementInformation = ElementInformation(element);
+
+  const int expectedPatterns[] = {7, 5, 3};
+  ASSERT_THAT(expectedPatterns, ::testing::ElementsAreArray(elementInformation.patterns, elementInformation.patternsLength));
+}
+
 TEST_F(ElementInformationTest, ItCanBeUpdated)
 {
   auto elementInformation = ElementInformation(gcnew ElementStub("Initial", 0));

@@ -7,6 +7,7 @@ public:
   {
     _name = name;
     _runtimeIds = runtimeIds;
+    _patterns = gcnew array<int>(0);
   }
 
   virtual property String^ Name
@@ -32,9 +33,20 @@ public:
     void set(int value) override { _controlTypeId = value; }
   }
 
+  virtual property array<int>^ SupportedPatternIds
+  {
+    array<int>^ get() override { return _patterns; }
+  }
+
+  void SetPatterns(... array<int>^ patterns)
+  {
+    _patterns = patterns;
+  }
+
 private:
   String^ _name;
   array<int>^ _runtimeIds;
+  array<int>^ _patterns;
   int _nativeWindowHandle;
   int _controlTypeId;
 };
