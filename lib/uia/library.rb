@@ -17,7 +17,6 @@ module Uia
     attach_function :init, :initialize, [:string], :void
     init(uia_directory)
 
-
     def self.attach_throwable_function(name_alias, name, arg_types, return_type)
       attach_function name, arg_types + [:pointer, :int], return_type
       define_singleton_method(name_alias) do |*args|
@@ -54,5 +53,8 @@ module Uia
       raise error_info unless error_info.empty?
       result
     end
+
+  rescue LoadError => e
+    raise LoadError, 'You must install the Visual Studio 2012 C++ Runtime Environment to use the Uia gem (http://www.microsoft.com/en-us/download/details.aspx?id=30679)'
   end
 end
