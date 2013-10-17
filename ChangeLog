@@ -3,7 +3,7 @@
 *	Enhancements
 	*	Pushed #find_element into the Uia module
 	*	Can locate elements by :id, :handle, :runtime_pid and :pid
-	*	Element now knows about :control_type, :patterns, :handle and :runtime_id
+	*	Element now knows about :id,:control_type, :patterns, :handle and :runtime_id
 	*	Elements know about their :children and :descendants
 
 ===	Version 0.0.4 / 2013-10-11
