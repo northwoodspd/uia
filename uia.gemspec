@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Uia::VERSION
   spec.authors       = ['Levi Wilson']
   spec.email         = ['levi@leviwilson.com']
-  spec.description   = %q{This wraps UIA stuff}
-  spec.summary       = %q{This wraps UIA stuff}
+  spec.description   = %q{A low-level wrapper around Microsoft UI Automation for ruby}
+  spec.summary       = %q{A low-level wrapper around Microsoft UI Automation for ruby}
   spec.homepage      = 'https://github.com/northwoodspd/uia'
   spec.license       = 'MIT'
 
