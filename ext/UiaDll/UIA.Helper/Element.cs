@@ -27,6 +27,11 @@ namespace UIA.Helper
             get { return _element.Current.Name; }
         }
 
+        public virtual string Id
+        {
+            get { return _element.Current.AutomationId; }
+        }
+
         public virtual int NativeWindowHandle
         {
             get { return _element.Current.NativeWindowHandle; }

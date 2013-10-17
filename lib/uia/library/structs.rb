@@ -11,7 +11,16 @@ module Uia
                  :name, :string,
                  :control_type_id, :int,
                  :patterns, :pointer,
-                 :patterns_length, :int
+                 :patterns_length, :int,
+                 :id, :string
+
+          def id
+            self[:id]
+          end
+
+          def name
+            self[:name]
+          end
 
           def handle
             self[:handle]
@@ -36,10 +45,6 @@ module Uia
 
           def descendants
             Library.descendants(self).children
-          end
-
-          def name
-            self[:name]
           end
 
           private

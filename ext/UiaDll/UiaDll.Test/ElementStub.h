@@ -16,6 +16,12 @@ public:
     void set(String^ name) { _name = name; }
   }
 
+  virtual property String^ Id
+  {
+    String^ get() override { return _id; }
+    void set(String^ value) override { _id = value; }
+  }
+
   virtual property array<int>^ RuntimeId
   {
     array<int>^ get() override { return _runtimeIds; }
@@ -45,6 +51,7 @@ public:
 
 private:
   String^ _name;
+  String^ _id;
   array<int>^ _runtimeIds;
   array<int>^ _patterns;
   int _nativeWindowHandle;

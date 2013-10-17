@@ -7,6 +7,7 @@ describe Element do
   context 'properties' do
     Then { element.handle != 0 }
     Then { element.name == 'MainFormWindow' }
+    Then { element.id == 'MainFormWindow' }
 
     context '#control_type' do
       Then { element.control_type == :window }

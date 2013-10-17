@@ -10,15 +10,17 @@ typedef struct _ElementInformation {
   int controlTypeId;
   int* patterns;
   int patternsLength;
+  char* id;
 
-  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL) {}
+  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {}
 
-  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL) {
+  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {
     Update(element);
   }
 
   void Update(Element^ element) {
     Reset();
+    id = StringHelper::ToUnmanaged(element->Id);
     name = StringHelper::ToUnmanaged(element->Name);
     nativeWindowHandle = element->NativeWindowHandle;
     runtimeId = ArrayHelper::FromArray(element->RuntimeId);
@@ -34,8 +36,8 @@ typedef struct _ElementInformation {
 
 private:
   void Reset() {
-    delete[] name; delete[] runtimeId; delete[] patterns;
-    name = NULL; runtimeId = NULL; patterns = NULL;
+    delete[] name; delete[] runtimeId; delete[] patterns; delete[] id;
+    name = NULL; runtimeId = NULL; patterns = NULL; id = NULL;
   }
 
 } ElementInformation, *PElementInformation;

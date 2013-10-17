@@ -13,6 +13,13 @@ public:
   }
 };
 
+TEST_F(ElementInformationTest, ItHasAnId)
+{
+  auto element = gcnew ElementStub("");
+  element->Id = "Expected Id";
+  ASSERT_STREQ("Expected Id", ElementInformation(element).id);
+}
+
 TEST_F(ElementInformationTest, ItCleansUpTheName)
 {
   auto elementInformation = new ElementInformation(ElementWith("Some Name"));
