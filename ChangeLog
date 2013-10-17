@@ -1,4 +1,8 @@
-===	Verions 0.0.5 / 2012-10-16
+===	Version 0.0.5.1 / 2012-10-16
+*	Enhancements
+	*	reduced the size of the gem package by excluding gmock and gtest
+
+===	Version 0.0.5 / 2012-10-16
 
 *	Enhancements
 	*	Pushed #find_element into the Uia module
