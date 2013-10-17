@@ -14,6 +14,8 @@ public:
 
   static char* ToUnmanaged(String^ source)
   {
+    if( nullptr == source ) return NULL;
+
     const int numberOfBytes = source->Length + 1;
     auto unmanagedString = new char[numberOfBytes];
     CopyToUnmanagedString(source, unmanagedString, numberOfBytes);
