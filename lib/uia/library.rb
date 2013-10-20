@@ -30,6 +30,7 @@ module Uia
     attach_function :release_value_info, :Value_Release, [:pointer], :void
 
     # finding elements
+    attach_throwable_function :root, :Element_Root, [], ElementStruct.by_ref
     attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref
     attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ElementStruct.by_ref
     attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ElementStruct.by_ref
