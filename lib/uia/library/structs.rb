@@ -81,5 +81,22 @@ module Uia
         Library.release_elements(pointer)
       end
     end
+
+    class ValueInformation < FFI::ManagedStruct
+      layout :is_read_only, :bool,
+             :value, :string
+
+      def read_only?
+        self[:is_read_only]
+      end
+
+      def value
+        self[:value]
+      end
+
+      def self.release(pointer)
+        Library.release_value_info(pointer)
+      end
+    end
   end
 end

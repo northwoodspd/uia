@@ -27,6 +27,7 @@ module Uia
     # cleanup
     attach_function :release_element, :Element_Release, [:pointer], :void
     attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
+    attach_function :release_value_info, :Value_Release, [:pointer], :void
 
     # finding elements
     attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref
@@ -39,6 +40,10 @@ module Uia
     attach_throwable_function :children_of_type, :Element_ChildrenOfType, [:pointer, PropertyId], ElementChildrenStruct.by_ref
     attach_throwable_function :descendants, :Element_Descendants, [:pointer], ElementChildrenStruct.by_ref
     attach_throwable_function :click, :Element_Click, [:pointer], :void
+
+    # ValuePattern methods
+    attach_throwable_function :set_value, :Value_Set, [:pointer, :string], :void
+    attach_throwable_function :value_info, :Value_Information, [:pointer], ValueInformation.by_ref
 
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count

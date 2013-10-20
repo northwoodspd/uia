@@ -1,6 +1,8 @@
+require 'uia/patterns/value'
+
 module Uia
   class Element
-    include Library::Constants
+    include Library
 
     def initialize(element)
       @element = element
@@ -8,11 +10,18 @@ module Uia
     end
 
     def control_type
-      ControlTypes.find(@default) { |_, v| v == control_type_id }.first
+      Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
+    end
+
+    def as(pattern)
+      which =  "Uia::Patterns::#{pattern.to_s.capitalize}".split('::').reduce(Object) do |m, current|
+        m.const_get current
+      end
+      extend which
     end
 
     def patterns
-      pattern_ids.map {|id| Patterns.find(@default) { |_, v| v == id }.first }
+      pattern_ids.map {|id| Constants::Patterns.find(@default) { |_, v| v == id }.first }
     end
 
     def children
