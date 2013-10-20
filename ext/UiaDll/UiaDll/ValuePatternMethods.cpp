@@ -2,7 +2,6 @@
 
 extern "C" {
   __declspec(dllexport) void Value_Release(PValuePatternInformation valueInformation) {
-    Console::WriteLine("Cleaning up {0} ({1})", gcnew String(valueInformation->Value), valueInformation->IsReadOnly);
     delete valueInformation;
   }
 
