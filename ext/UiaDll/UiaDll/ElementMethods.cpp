@@ -74,6 +74,8 @@ extern "C" {
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
+
+    return NULL;
   }
 
   __declspec(dllexport) PElements Element_Children(PElementInformation parentElement, char* errorInfo, const int errorLength) {
@@ -82,6 +84,8 @@ extern "C" {
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
+
+    return NULL;
   }
 
   __declspec(dllexport) PElements Element_ChildrenOfType(PElementInformation parent, int propertyId, char* errorInfo, const int errorLength) {
@@ -90,6 +94,8 @@ extern "C" {
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
+
+    return NULL;
   }
 
   __declspec(dllexport) PElements Element_Descendants(PElementInformation parentElement, char* errorInfo, const int errorLength) {
@@ -98,6 +104,8 @@ extern "C" {
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
+
+    return NULL;
   }
 
   __declspec(dllexport) void Element_Click(PElementInformation element, char* errorInfo, const int errorLength) {
