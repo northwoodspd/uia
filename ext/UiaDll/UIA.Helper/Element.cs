@@ -82,6 +82,11 @@ namespace UIA.Helper
             return FindFirst(new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
         }
 
+        public static Element ByName(string name)
+        {
+            return FindFirst(new PropertyCondition(AutomationElement.NameProperty, name));
+        }
+
         public static Element ByProcessId(int processId)
         {
             return FindFirst(new PropertyCondition(AutomationElement.ProcessIdProperty, processId));

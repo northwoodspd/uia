@@ -14,6 +14,8 @@ module Uia
     case
       when how[:id]
         Element.new Library.find_by_id(how[:id])
+      when how[:name]
+        Element.new Library.find_by_name(how[:name])
       when how[:pid]
         Element.new Library.find_by_pid(how[:pid])
       when how[:runtime_id]

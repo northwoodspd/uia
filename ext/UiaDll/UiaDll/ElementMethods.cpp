@@ -38,6 +38,16 @@ extern "C" {
     return NULL;
   }
 
+  __declspec(dllexport) PElementInformation Element_FindByName(const char* name, char* errorInfo, const int errorLength) {
+    try {
+      return new ElementInformation(Element::ByName(gcnew String(name)));
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+
+    return NULL;
+  }
+
   __declspec(dllexport) PElementInformation Element_FindByProcessId(const int processId, char* errorInfo, const int errorLength) {
     try {
       return new ElementInformation(Element::ByProcessId(processId));

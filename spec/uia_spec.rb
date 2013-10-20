@@ -9,7 +9,11 @@ describe Uia do
     Given(:main_window) { find_element id: 'MainFormWindow' }
 
     context 'by id' do
-      Then { find_element(id: 'MainFormWindow') != nil}
+      Then { find_element(id: 'MainFormWindow') != nil }
+    end
+
+    context 'by name' do
+      Then { find_element(name: 'Assorted UI Elements') != nil }
     end
 
     context 'by process id' do
