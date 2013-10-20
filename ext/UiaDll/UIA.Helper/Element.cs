@@ -17,6 +17,11 @@ namespace UIA.Helper
             _element = element;
         }
 
+        public TPattern As<TPattern>(AutomationPattern pattern)
+        {
+            return (TPattern) _element.GetCurrentPattern(pattern);
+        }
+
         public virtual int[] RuntimeId
         {
             get { return _element.GetRuntimeId(); }
@@ -52,9 +57,9 @@ namespace UIA.Helper
             get { return Find(TreeScope.Children, Condition.TrueCondition); }
         }
 
-        public Element[] ChildrenOf(AutomationProperty.Id id)
+        public Element[] ChildrenOf(AutomationPropertyCondition.Id id)
         {
-            return Find(TreeScope.Children, AutomationProperty.From(id));
+            return Find(TreeScope.Children, AutomationPropertyCondition.From(id));
         }
 
         public Element[] Descendants

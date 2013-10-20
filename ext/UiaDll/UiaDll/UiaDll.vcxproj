@@ -74,11 +74,14 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayHelper.h" />
     <ClInclude Include="DynamicAssemblyResolver.h" />
     <ClInclude Include="ElementStructures.h" />
+    <ClInclude Include="PatternInformationStructures.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="StringHelper.h" />
   </ItemGroup>
@@ -91,6 +94,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="UiaDll.cpp" />
+    <ClCompile Include="ValuePatternMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UIA.Helper\UIA.Helper.csproj">

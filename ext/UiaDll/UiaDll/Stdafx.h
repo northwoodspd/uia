@@ -12,3 +12,6 @@ using namespace UIA::Helper;
 #include "StringHelper.h"
 #include "ArrayHelper.h"
 #include "ElementStructures.h"
+#include "PatternInformationStructures.h"
+
+extern "C" Element^ Find(PElementInformation element);

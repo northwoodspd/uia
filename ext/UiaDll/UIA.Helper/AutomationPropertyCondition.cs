@@ -3,7 +3,7 @@ using System.Windows.Automation;
 
 namespace UIA.Helper
 {
-    public class AutomationProperty
+    public class AutomationPropertyCondition
     {
         public enum Id
         {
