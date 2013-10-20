@@ -2,15 +2,13 @@ require 'uia/patterns/value'
 
 module Uia
   class Element
-    include Library
-
     def initialize(element)
       @element = element
       @default = lambda { [:unknown] }
     end
 
     def control_type
-      Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
+      Library::Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
     end
 
     def as(pattern)
@@ -21,7 +19,7 @@ module Uia
     end
 
     def patterns
-      pattern_ids.map {|id| Constants::Patterns.find(@default) { |_, v| v == id }.first }
+      pattern_ids.map {|id| Library::Constants::Patterns.find(@default) { |_, v| v == id }.first }
     end
 
     def children
