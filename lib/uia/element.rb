@@ -1,18 +1,18 @@
 module Uia
   class Element
+    include Library::Constants
+
     def initialize(element)
       @element = element
       @default = lambda { [:unknown] }
     end
 
     def control_type
-      Library::Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
+      ControlTypes.find(@default) { |_, v| v == control_type_id }.first
     end
 
     def patterns
-      pattern_ids.map do |id|
-        Library::Constants::Patterns.find(@default) { |_, v| v == id }.first
-      end
+      pattern_ids.map {|id| Patterns.find(@default) { |_, v| v == id }.first }
     end
 
     def children
