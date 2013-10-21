@@ -33,6 +33,7 @@ module Uia
     attach_function :release_element, :Element_Release, [:pointer], :void
     attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
     attach_function :release_value_info, :Value_Release, [:pointer], :void
+    attach_function :release_toggle_info, :Toggle_Release, [:pointer], :void
 
     # finding elements
     attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref, &element_or_nil
@@ -57,6 +58,7 @@ module Uia
     attach_throwable_function :invoke, :Invoke, [:pointer], :void
 
     # TogglePattern methods
+    attach_throwable_function :toggle_information, :Toggle_Information, [:pointer], ToggleInformation.by_ref
     attach_throwable_function :toggle, :Toggle, [:pointer], :void
 
     def self.find_by_runtime_id(id)

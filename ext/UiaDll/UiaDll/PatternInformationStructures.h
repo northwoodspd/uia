@@ -26,3 +26,16 @@ private:
   }
 
 } ValuePatternInformation, *PValuePatternInformation;
+
+typedef struct _ToggleInformation {
+  char* ToggleState;
+
+  _ToggleInformation(String^ toggleState) {
+    ToggleState = StringHelper::ToUnmanaged(toggleState);
+  }
+
+  ~_ToggleInformation() {
+    delete[] ToggleState;
+  }
+
+} ToggleInformation, *PToggleInformation;

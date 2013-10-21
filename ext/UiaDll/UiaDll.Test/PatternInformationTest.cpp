@@ -9,3 +9,10 @@ TEST(ValueInformation, ItCleansUpAfterItself)
   ASSERT_EQ(true, valueInfo->IsReadOnly);
   delete valueInfo;
 }
+
+TEST(ToggleInformation, ItCleansUpAfterItself)
+{
+  auto toggleInfo = new ToggleInformation("On");
+  ASSERT_STREQ("On", toggleInfo->ToggleState);
+  delete toggleInfo;
+}

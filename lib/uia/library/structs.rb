@@ -102,5 +102,17 @@ module Uia
         Library.release_value_info(pointer)
       end
     end
+
+    class ToggleInformation < FFI::ManagedStruct
+      layout :state, :string
+
+      def state
+        self[:state]
+      end
+
+      def self.release(pointer)
+        Library.release_toggle_info(pointer)
+      end
+    end
   end
 end
