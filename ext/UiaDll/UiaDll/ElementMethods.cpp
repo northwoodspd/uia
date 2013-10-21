@@ -41,7 +41,7 @@ extern "C" {
 
   __declspec(dllexport) PElementInformation Element_FindByProcessId(const int processId, char* errorInfo, const int errorLength) {
     try {
-      return new ElementInformation(Element::ByProcessId(processId));
+      return ElementInformation::From(Element::ByProcessId(processId));
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
@@ -61,7 +61,7 @@ extern "C" {
 
   __declspec(dllexport) PElementInformation Element_FindByRuntimeId(const int runtimeIds[], const int numberOfIds, char* errorInfo, const int errorLength) {
     try {
-      return new ElementInformation(Element::ByRuntimeId(ArrayHelper::ToArray(runtimeIds, numberOfIds)));
+      return ElementInformation::From(Element::ByRuntimeId(ArrayHelper::ToArray(runtimeIds, numberOfIds)));
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }

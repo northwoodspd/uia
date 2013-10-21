@@ -16,14 +16,17 @@ describe Uia do
 
     context 'by process id' do
       Then { find_element(pid: @app.pid) != nil }
+      Then { find_element(pid: -1) == nil }
     end
 
     context 'by runtime id' do
       Then { find_element(runtime_id: main_window.runtime_id) != nil }
+      Then { find_element(runtime_id: []) == nil }
     end
 
     context 'by window handle' do
       Then { find_element(handle: main_window.handle) != nil }
+      Then { expect { find_element(handle: 0x0) }.to raise_error }
     end
 
     context 'invalid locators' do

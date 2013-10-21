@@ -15,9 +15,11 @@ module Uia
         found = Library.find_by_name(how[:name])
         Element.new(found) unless found.empty?
       when how[:pid]
-        Element.new Library.find_by_pid(how[:pid])
+        found = Library.find_by_pid(how[:pid])
+        Element.new(found) unless found.empty?
       when how[:runtime_id]
-        Element.new Library.find_by_runtime_id(how[:runtime_id])
+        found = Library.find_by_runtime_id(how[:runtime_id])
+        Element.new(found) unless found.empty?
       when how[:handle]
         Element.new Library.find_by_handle(how[:handle])
       else
