@@ -19,7 +19,7 @@ public:
   virtual property String^ Id
   {
     String^ get() override { return _id; }
-    void set(String^ value) override { _id = value; }
+    void set(String^ value) { _id = value; }
   }
 
   virtual property array<int>^ RuntimeId
@@ -36,7 +36,7 @@ public:
   virtual property int ControlTypeId
   {
     int get() override { return _controlTypeId; }
-    void set(int value) override { _controlTypeId = value; }
+    void set(int value) { _controlTypeId = value; }
   }
 
   virtual property array<int>^ SupportedPatternIds
