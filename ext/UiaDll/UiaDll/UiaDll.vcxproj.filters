@@ -62,5 +62,8 @@
     <ClCompile Include="ToggleMethods.cpp">
       <Filter>Source Files\Patterns</Filter>
     </ClCompile>
+    <ClCompile Include="SelectionItemMethods.cpp">
+      <Filter>Source Files\Patterns</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

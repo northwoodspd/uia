@@ -1,6 +1,7 @@
-require 'uia/patterns/value'
 require 'uia/patterns/invoke'
+require 'uia/patterns/selection_item'
 require 'uia/patterns/toggle'
+require 'uia/patterns/value'
 
 module Uia
   class Element
@@ -24,7 +25,7 @@ module Uia
 
     def as(pattern)
       which =  "Uia::Patterns::#{pattern.to_s.capitalize}".split('::').reduce(Object) do |m, current|
-        m.const_get current
+        m.const_get current.split('_').map(&:capitalize).join
       end
       extend which
     end

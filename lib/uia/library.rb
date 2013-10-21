@@ -61,6 +61,9 @@ module Uia
     attach_throwable_function :toggle_information, :Toggle_Information, [:pointer], ToggleInformation.by_ref
     attach_throwable_function :toggle, :Toggle, [:pointer], :void
 
+    # SelectionItemPattern methods
+    attach_throwable_function :select, :SelectionItem_Select, [:pointer], :void
+
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
       p.write_array_of_int(id)
