@@ -104,7 +104,7 @@ namespace UIA.Helper
 
         public static Element ByRuntimeId(int[] runtimeId)
         {
-            return FindFirst(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId));
+            return FindFirst(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId), TreeScope.Descendants);
         }
 
         private Element[] Find(TreeScope scope, Condition condition)
@@ -119,9 +119,9 @@ namespace UIA.Helper
             return NullOr(_element.FindFirst(scope, condition));
         }
 
-        private static Element FindFirst(Condition condition)
+        private static Element FindFirst(Condition condition, TreeScope scope = TreeScope.Children)
         {
-            return NullOr(AutomationElement.RootElement.FindFirst(TreeScope.Children, condition));
+            return NullOr(AutomationElement.RootElement.FindFirst(scope, condition));
         }
 
         private static Element NullOr(AutomationElement automationElement)
