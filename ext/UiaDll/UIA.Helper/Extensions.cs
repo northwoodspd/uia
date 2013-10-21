@@ -15,6 +15,19 @@ namespace UIA.Helper
         }
     }
 
+    public static class PropertyExtensions
+    {
+        public static Condition IdCondition(this string automationId)
+        {
+            return new PropertyCondition(AutomationElement.AutomationIdProperty, automationId);
+        }
+
+        public static Condition NameCondition(this string name)
+        {
+            return new PropertyCondition(AutomationElement.NameProperty, name);
+        }
+    }
+
     public static class ElementExtensions
     {
 

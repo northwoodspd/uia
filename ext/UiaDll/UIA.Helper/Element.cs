@@ -74,12 +74,12 @@ namespace UIA.Helper
 
         public static Element ById(string automationId)
         {
-            return FindFirst(new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
+            return FindFirst(automationId.IdCondition());
         }
 
         public Element ChildById(string automationId)
         {
-            return FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
+            return FindFirst(TreeScope.Descendants, automationId.IdCondition());
         }
 
         public static Element ByName(string name)
