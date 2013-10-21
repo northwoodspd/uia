@@ -72,11 +72,6 @@ namespace UIA.Helper
             Clicker.MouseClick(_element);
         }
 
-        public static Element Root()
-        {
-            return new Element(AutomationElement.RootElement);
-        }
-
         public static Element ById(string automationId)
         {
             return FindFirst(new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));

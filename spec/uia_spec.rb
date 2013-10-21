@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Uia do
-  context '#root' do
-    Then { expect(root.children.count).to be > 0 }
-  end
-
   context '#find_element' do
     Given(:main_window) { find_element id: 'MainFormWindow' }
 

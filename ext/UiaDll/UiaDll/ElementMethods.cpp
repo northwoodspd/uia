@@ -11,15 +11,6 @@ extern "C" {
     return Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength));
   }
 
-  __declspec(dllexport) PElementInformation Element_Root(char* errorInfo, const int errorInfoLength) {
-    try {
-      return new ElementInformation(Element::Root());
-    } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorInfoLength);
-      return NULL;
-    }
-  }
-
   __declspec(dllexport) void Element_Release(PElementInformation elementInformation) {
     delete elementInformation;
   }
