@@ -59,5 +59,8 @@
     <ClCompile Include="InvokePatternMethods.cpp">
       <Filter>Source Files\Patterns</Filter>
     </ClCompile>
+    <ClCompile Include="ToggleMethods.cpp">
+      <Filter>Source Files\Patterns</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

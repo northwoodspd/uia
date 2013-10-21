@@ -1,5 +1,6 @@
 require 'uia/patterns/value'
 require 'uia/patterns/invoke'
+require 'uia/patterns/toggle'
 
 module Uia
   class Element

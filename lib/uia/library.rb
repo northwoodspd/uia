@@ -56,6 +56,9 @@ module Uia
     # InvokePattern methods
     attach_throwable_function :invoke, :Invoke, [:pointer], :void
 
+    # TogglePattern methods
+    attach_throwable_function :toggle, :Toggle, [:pointer], :void
+
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
       p.write_array_of_int(id)
