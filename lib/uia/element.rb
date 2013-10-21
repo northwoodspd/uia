@@ -1,4 +1,5 @@
 require 'uia/patterns/value'
+require 'uia/patterns/invoke'
 
 module Uia
   class Element

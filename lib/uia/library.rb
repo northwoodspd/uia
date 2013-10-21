@@ -53,6 +53,9 @@ module Uia
     attach_throwable_function :set_value, :Value_Set, [:pointer, :string], :void
     attach_throwable_function :value_info, :Value_Information, [:pointer], ValueInformation.by_ref
 
+    # InvokePattern methods
+    attach_throwable_function :invoke, :Invoke, [:pointer], :void
+
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
       p.write_array_of_int(id)

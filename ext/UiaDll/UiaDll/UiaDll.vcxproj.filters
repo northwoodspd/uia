@@ -56,5 +56,8 @@
     <ClCompile Include="ValuePatternMethods.cpp">
       <Filter>Source Files\Patterns</Filter>
     </ClCompile>
+    <ClCompile Include="InvokePatternMethods.cpp">
+      <Filter>Source Files\Patterns</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
