@@ -17,12 +17,17 @@ module Uia
     attach_function :init, :initialize, [:string], :void
     init(uia_directory)
 
-    def self.attach_throwable_function(name_alias, name, arg_types, return_type)
+    def self.attach_throwable_function(name_alias, name, arg_types, return_type, &block)
       attach_function name, arg_types + [:pointer, :int], return_type
       define_singleton_method(name_alias) do |*args|
-        can_throw(name, *args)
+        result = can_throw(name, *args)
+        return block.call(result) if block
+        result
       end
     end
+
+    # returns nil rather than empty FFI::Struct for Uia::Element
+    element_or_nil = lambda { |e| Uia::Element.new(e) unless e.empty? }
 
     # cleanup
     attach_function :release_element, :Element_Release, [:pointer], :void
@@ -30,9 +35,9 @@ module Uia
     attach_function :release_value_info, :Value_Release, [:pointer], :void
 
     # finding elements
-    attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref
-    attach_throwable_function :find_by_name, :Element_FindByName, [:string], ElementStruct.by_ref
-    attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ElementStruct.by_ref
+    attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_by_name, :Element_FindByName, [:string], ElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ElementStruct.by_ref, &element_or_nil
     attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ElementStruct.by_ref
     attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ElementStruct.by_ref
 
@@ -49,7 +54,8 @@ module Uia
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
       p.write_array_of_int(id)
-      can_throw(:Element_FindByRuntimeId, p, id.count)
+      result = can_throw(:Element_FindByRuntimeId, p, id.count)
+      Uia::Element.new(result) unless result.empty?
     end
 
     def self.can_throw(method, *args)
