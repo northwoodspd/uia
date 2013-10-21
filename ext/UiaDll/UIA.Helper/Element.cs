@@ -106,7 +106,7 @@ namespace UIA.Helper
 
         private static Element FindFirst(Condition condition)
         {
-            return NullOr(AutomationElement.RootElement.FindFirst(TreeScope.Descendants, condition));
+            return NullOr(AutomationElement.RootElement.FindFirst(TreeScope.Children, condition));
         }
 
         private static Element NullOr(AutomationElement automationElement)

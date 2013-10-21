@@ -9,7 +9,7 @@ describe Uia do
     end
 
     context 'by name' do
-      Then { find_element(name: 'Assorted UI Elements') != nil }
+      Then { find_element(name: 'MainFormWindow') != nil }
     end
 
     context 'by process id' do
