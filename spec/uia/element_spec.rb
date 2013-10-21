@@ -28,6 +28,18 @@ describe Element do
     end
   end
 
+  context '#find' do
+    context 'id' do
+      Then { element.find(id: 'textField') != nil }
+      Then { element.find(id: 'does not exist') == nil }
+    end
+
+    context 'name' do
+      Then { element.find(name: 'No option selected') != nil }
+      Then { element.find(name: 'does not exist') == nil }
+    end
+  end
+
   context '#click' do
     Given(:about) { element.children.find { |c| c.name == 'About' } }
     Given(:disabled_checkbox) { element.children.find { |c| c.name == 'checkBoxDisabled' } }

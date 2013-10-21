@@ -29,9 +29,29 @@ extern "C" {
     return NULL;
   }
 
+  __declspec(dllexport) PElementInformation Element_FindChildById(PElementInformation parent, const char* automationId, char* errorInfo, const int errorLength) {
+    try {
+      return ElementInformation::From(Find(parent)->ChildById(gcnew String(automationId)));
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+
+    return NULL;
+  }
+
   __declspec(dllexport) PElementInformation Element_FindByName(const char* name, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ByName(gcnew String(name)));
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+
+    return NULL;
+  }
+
+  __declspec(dllexport) PElementInformation Element_FindChildByName(PElementInformation parent, const char* name, char* errorInfo, const int errorLength) {
+    try {
+      return ElementInformation::From(Find(parent)->ChildByName(gcnew String(name)));
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }

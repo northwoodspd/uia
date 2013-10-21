@@ -11,6 +11,15 @@ module Uia
       Library::Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
     end
 
+    def find(locator)
+      case
+        when locator[:id]
+          Library::find_child_by_id(@element, locator[:id])
+        when locator[:name]
+          Library::find_child_by_name(@element, locator[:name])
+      end
+    end
+
     def as(pattern)
       which =  "Uia::Patterns::#{pattern.to_s.capitalize}".split('::').reduce(Object) do |m, current|
         m.const_get current

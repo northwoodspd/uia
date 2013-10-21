@@ -77,9 +77,19 @@ namespace UIA.Helper
             return FindFirst(new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
         }
 
+        public Element ChildById(string automationId)
+        {
+            return FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.AutomationIdProperty, automationId));
+        }
+
         public static Element ByName(string name)
         {
             return FindFirst(new PropertyCondition(AutomationElement.NameProperty, name));
+        }
+
+        public Element ChildByName(string name)
+        {
+            return FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, name));
         }
 
         public static Element ByProcessId(int processId)
@@ -102,6 +112,11 @@ namespace UIA.Helper
             return _element.FindAll(scope, condition).Cast<AutomationElement>()
                            .Select(x => new Element(x))
                            .ToArray();
+        }
+
+        private Element FindFirst(TreeScope scope, Condition condition)
+        {
+            return NullOr(_element.FindFirst(scope, condition));
         }
 
         private static Element FindFirst(Condition condition)
