@@ -9,9 +9,11 @@ module Uia
   def find_element(how)
     case
       when how[:id]
-        Element.new Library.find_by_id(how[:id])
+        found = Library.find_by_id(how[:id])
+        Element.new(found) unless found.empty?
       when how[:name]
-        Element.new Library.find_by_name(how[:name])
+        found = Library.find_by_name(how[:name])
+        Element.new(found) unless found.empty?
       when how[:pid]
         Element.new Library.find_by_pid(how[:pid])
       when how[:runtime_id]

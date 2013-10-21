@@ -47,6 +47,10 @@ module Uia
             Library.descendants(self).children
           end
 
+          def empty?
+            to_ptr.address == 0
+          end
+
           private
           def number_of_ids
             self[:number_of_ids]

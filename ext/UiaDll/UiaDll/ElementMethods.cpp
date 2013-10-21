@@ -21,7 +21,8 @@ extern "C" {
 
   __declspec(dllexport) PElementInformation Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
     try {
-      return new ElementInformation(Element::ById(gcnew String(automationId)));
+      auto foundElement = Element::ById(gcnew String(automationId));
+      return foundElement ? new ElementInformation(foundElement) : NULL;
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
@@ -31,7 +32,8 @@ extern "C" {
 
   __declspec(dllexport) PElementInformation Element_FindByName(const char* name, char* errorInfo, const int errorLength) {
     try {
-      return new ElementInformation(Element::ByName(gcnew String(name)));
+      auto foundElement = Element::ByName(gcnew String(name));
+      return foundElement ? new ElementInformation(foundElement) : NULL;
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }

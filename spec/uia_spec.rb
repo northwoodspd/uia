@@ -6,10 +6,12 @@ describe Uia do
 
     context 'by id' do
       Then { find_element(id: 'MainFormWindow') != nil }
+      Then { find_element(id: 'not there') == nil }
     end
 
     context 'by name' do
       Then { find_element(name: 'MainFormWindow') != nil }
+      Then { find_element(name: 'not there') == nil }
     end
 
     context 'by process id' do
