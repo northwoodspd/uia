@@ -18,6 +18,10 @@ typedef struct _ElementInformation {
     Update(element);
   }
 
+  static _ElementInformation* From(Element^ element) {
+    return nullptr != element ? new _ElementInformation(element) : NULL;
+  }
+
   void Update(Element^ element) {
     Reset();
     id = StringHelper::ToUnmanaged(element->Id);
