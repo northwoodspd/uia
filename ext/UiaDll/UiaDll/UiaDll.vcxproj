@@ -89,6 +89,7 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="DynamicAssemblyResolver.cpp" />
     <ClCompile Include="ElementMethods.cpp" />
+    <ClCompile Include="ExpandCollapseMethods.cpp" />
     <ClCompile Include="InvokePatternMethods.cpp" />
     <ClCompile Include="SelectionItemMethods.cpp" />
     <ClCompile Include="SelectionMethods.cpp" />

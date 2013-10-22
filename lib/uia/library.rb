@@ -36,6 +36,7 @@ module Uia
     attach_function :release_toggle_info, :Toggle_Release, [:pointer], :void
     attach_function :release_selection_info, :Selection_Release, [:pointer], :void
     attach_function :release_selection_item_info, :SelectionItem_Release, [:pointer], :void
+    attach_function :release_expand_collapse_info, :ExpandCollapse_Release, [:pointer], :void
 
     # finding elements
     attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref, &element_or_nil
@@ -55,6 +56,9 @@ module Uia
     # ValuePattern methods
     attach_throwable_function :set_value, :Value_Set, [:pointer, :string], :void
     attach_throwable_function :value_info, :Value_Information, [:pointer], ValueInformation.by_ref
+
+    # ExpandCollapsePattern methods
+    attach_throwable_function :expand_collapse_info, :ExpandCollapse_Information, [:pointer], ExpandCollapseInformation.by_ref
 
     # InvokePattern methods
     attach_throwable_function :invoke, :Invoke, [:pointer], :void

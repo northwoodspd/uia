@@ -75,3 +75,16 @@ private:
   }
 
 } SelectionItemInformation, *SelectionItemInformationPtr;
+
+
+typedef struct _ExpandCollapseInfo {
+  char* ExpandCollapseState;
+
+  _ExpandCollapseInfo(String^ expandCollapseState) {
+    ExpandCollapseState = StringHelper::ToUnmanaged(expandCollapseState);
+  }
+  
+  ~_ExpandCollapseInfo() {
+    delete[] ExpandCollapseState;
+  }
+} ExpandCollapseInfo, *ExpandCollapseInfoPtr;

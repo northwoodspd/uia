@@ -148,5 +148,17 @@ module Uia
         Library.release_selection_item_info(pointer)
       end
     end
+
+    class ExpandCollapseInformation < FFI::ManagedStruct
+      layout :expand_collapse_state, :string
+
+      def expand_collapse_state
+        self[:expand_collapse_state]
+      end
+
+      def self.release(pointer)
+        Library.release_expand_collapse_info(pointer)
+      end
+    end
   end
 end

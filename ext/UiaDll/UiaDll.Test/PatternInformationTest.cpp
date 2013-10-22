@@ -28,3 +28,8 @@ TEST(SelectionItemInformation, CanBeInitialized)
   ASSERT_STREQ("Expected container", selectionItemInfo.Container->name);
   ASSERT_EQ(true, selectionItemInfo.IsSelected);
 }
+
+TEST(ExpandCollapseInfo, CanBeInitialized) {
+  auto expandCollapseInfo = ExpandCollapseInfo("Collapsed");
+  ASSERT_STREQ("Collapsed", expandCollapseInfo.ExpandCollapseState);
+}

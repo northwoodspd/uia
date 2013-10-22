@@ -1,3 +1,4 @@
+require 'uia/patterns/expand_collapse'
 require 'uia/patterns/invoke'
 require 'uia/patterns/selection'
 require 'uia/patterns/selection_item'
