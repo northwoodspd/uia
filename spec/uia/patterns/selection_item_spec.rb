@@ -29,15 +29,27 @@ describe Uia::Patterns::SelectionItem do
   end
 
   context 'multi-select' do
+    let(:toggle) { main.find(name: 'Toggle Multi-Select').as :invoke }
+
+    def select_list
+      main.find(id: 'FruitListBox').as :selection
+    end
+
     Given(:multi_select) do
-      main.find(name: 'Toggle Multi-Select').as(:invoke).invoke
-      main.find id: 'FruitListBox'
+      toggle.invoke unless select_list.multi_select?
+      select_list
     end
     Given(:apple) { multi_select.find(name: 'Apple').as :selection_item }
 
     context '#add_to_selection' do
       When { apple.add_to_selection }
       Then { expect(apple).to be_selected }
+    end
+
+    context '#remove_from_selection' do
+      Given { multi_select.children.map {|e| e.as :selection_item}.each(&:add_to_selection) }
+      When { apple.remove_from_selection }
+      Then { expect(apple).to_not be_selected }
     end
   end
 end

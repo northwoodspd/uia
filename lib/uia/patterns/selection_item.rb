@@ -9,6 +9,10 @@ module Uia
         Library.add_to_selection @element
       end
 
+      def remove_from_selection
+        Library.remove_from_selection @element
+      end
+
       def selected?
         Library.selection_item_info(@element).selected?
       end

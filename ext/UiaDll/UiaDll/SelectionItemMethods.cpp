@@ -29,4 +29,12 @@ extern "C" {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
   }
+
+  __declspec(dllexport) void SelectionItem_RemoveFromSelection(PElementInformation element, char* errorInfo, const int errorInfoLength) {
+    try {
+      Find(element)->As<SelectionItemPattern^>(SelectionItemPattern::Pattern)->RemoveFromSelection();
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+    }
+  }
 }
