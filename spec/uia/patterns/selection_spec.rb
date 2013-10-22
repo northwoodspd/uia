@@ -12,5 +12,12 @@ describe Uia::Patterns::Selection do
     context '#selection_required?' do
       Then { expect(select_list).to_not be_selection_required }
     end
+
+    context '#selection_items' do
+      let(:respond_to_selections) { lambda { |e| e.respond_to? :add_to_selection } }
+
+      Then { select_list.selection_items.map(&:name) == ['Apple', 'Orange', 'Mango'] }
+      Then { select_list.selection_items.all?(&respond_to_selections) == true }
+    end
   end
 end
