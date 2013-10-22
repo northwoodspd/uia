@@ -5,6 +5,10 @@ module Uia
         Library.select @element
       end
 
+      def add_to_selection
+        Library.add_to_selection @element
+      end
+
       def selected?
         Library.selection_item_info(@element).selected?
       end

@@ -27,4 +27,17 @@ describe Uia::Patterns::SelectionItem do
     When { radio.as(:selection_item).select }
     Then { radio_label.name == 'Option 2 selected' }
   end
+
+  context 'multi-select' do
+    Given(:multi_select) do
+      main.find(name: 'Toggle Multi-Select').as(:invoke).invoke
+      main.find id: 'FruitListBox'
+    end
+    Given(:apple) { multi_select.find(name: 'Apple').as :selection_item }
+
+    context '#add_to_selection' do
+      When { apple.add_to_selection }
+      Then { expect(apple).to be_selected }
+    end
+  end
 end

@@ -65,6 +65,7 @@ module Uia
     # SelectionItemPattern methods
     attach_throwable_function :selection_item_info, :SelectionItem_Information, [:pointer], SelectionItemInformation.by_ref
     attach_throwable_function :select, :SelectionItem_Select, [:pointer], :void
+    attach_throwable_function :add_to_selection, :SelectionItem_AddToSelection, [:pointer], :void
 
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
