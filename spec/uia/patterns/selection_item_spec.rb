@@ -47,7 +47,7 @@ describe Uia::Patterns::SelectionItem do
     end
 
     context '#remove_from_selection' do
-      Given { multi_select.children.map {|e| e.as :selection_item}.each(&:add_to_selection) }
+      Given { multi_select.selection_items.each(&:add_to_selection) }
       When { apple.remove_from_selection }
       Then { expect(apple).to_not be_selected }
     end
