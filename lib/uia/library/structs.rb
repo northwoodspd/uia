@@ -115,6 +115,23 @@ module Uia
       end
     end
 
+    class SelectionInformation < FFI::ManagedStruct
+      layout :can_multi_select, :bool,
+             :is_selection_required, :bool
+
+      def multi_select?
+        self[:can_multi_select]
+      end
+
+      def selection_required?
+        self[:is_selection_required]
+      end
+
+      def self.release(pointer)
+        Library.release_selection_info(pointer)
+      end
+    end
+
     class SelectionItemInformation < FFI::ManagedStruct
       layout :is_selected, :bool,
              :container, ElementCast.ptr

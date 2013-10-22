@@ -91,6 +91,7 @@
     <ClCompile Include="ElementMethods.cpp" />
     <ClCompile Include="InvokePatternMethods.cpp" />
     <ClCompile Include="SelectionItemMethods.cpp" />
+    <ClCompile Include="SelectionMethods.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

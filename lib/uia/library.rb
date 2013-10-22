@@ -34,6 +34,7 @@ module Uia
     attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
     attach_function :release_value_info, :Value_Release, [:pointer], :void
     attach_function :release_toggle_info, :Toggle_Release, [:pointer], :void
+    attach_function :release_selection_info, :Selection_Release, [:pointer], :void
     attach_function :release_selection_item_info, :SelectionItem_Release, [:pointer], :void
 
     # finding elements
@@ -61,6 +62,9 @@ module Uia
     # TogglePattern methods
     attach_throwable_function :toggle_information, :Toggle_Information, [:pointer], ToggleInformation.by_ref
     attach_throwable_function :toggle, :Toggle, [:pointer], :void
+
+    # SelectionPattern methods
+    attach_throwable_function :selection_info, :Selection_Information, [:pointer], SelectionInformation.by_ref
 
     # SelectionItemPattern methods
     attach_throwable_function :selection_item_info, :SelectionItem_Information, [:pointer], SelectionItemInformation.by_ref

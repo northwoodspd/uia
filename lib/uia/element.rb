@@ -1,4 +1,5 @@
 require 'uia/patterns/invoke'
+require 'uia/patterns/selection'
 require 'uia/patterns/selection_item'
 require 'uia/patterns/toggle'
 require 'uia/patterns/value'

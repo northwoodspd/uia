@@ -42,6 +42,16 @@ typedef struct _ToggleInformation {
 
 } ToggleInformation, *PToggleInformation;
 
+typedef struct _SelectionInformation {
+  bool CanSelectMultiple;
+  bool IsSelectionRequired;
+
+  _SelectionInformation(SelectionPattern::SelectionPatternInformation^ info) {
+    CanSelectMultiple = info->CanSelectMultiple;
+    IsSelectionRequired = info->IsSelectionRequired;
+  }
+} SelectionInformation, *PSelectionInformation;
+
 typedef struct _SelectionItemInformation {
   bool IsSelected;
   PElementInformation Container;
