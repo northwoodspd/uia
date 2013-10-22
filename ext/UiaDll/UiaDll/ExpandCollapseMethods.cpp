@@ -22,4 +22,12 @@ extern "C" {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
   }
+
+  __declspec(dllexport) void ExpandCollapse_Collapse(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
+    try {
+      Find(element)->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern)->Collapse();
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+    }
+  }
 }
