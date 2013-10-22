@@ -1,6 +1,8 @@
 #pragma once
 
 #include "StringHelper.h"
+#include "ElementStructures.h"
+
 using namespace System::Windows::Automation;
 
 typedef struct _ValuePatternInformation {
@@ -42,9 +44,24 @@ typedef struct _ToggleInformation {
 
 typedef struct _SelectionItemInformation {
   bool IsSelected;
+  PElementInformation Container;
 
   _SelectionItemInformation(SelectionItemPattern::SelectionItemPatternInformation^ info) {
-    IsSelected = info->IsSelected;
+    init(info->IsSelected, Element::From(info->SelectionContainer));
+  }
+
+  _SelectionItemInformation(bool isSelected, Element^ selectionContainer) { // for testing
+    init(isSelected, selectionContainer);
+  }
+
+  ~_SelectionItemInformation() {
+    delete Container;
+  }
+
+private:
+  void init(bool isSelected, Element^ selectionContainer) {
+    IsSelected = isSelected;
+    Container = new ElementInformation(selectionContainer);
   }
 
 } SelectionItemInformation, *PSelectionItemInformation;

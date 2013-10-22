@@ -116,10 +116,15 @@ module Uia
     end
 
     class SelectionItemInformation < FFI::ManagedStruct
-      layout :is_selected, :bool
+      layout :is_selected, :bool,
+             :container, ElementCast.ptr
 
       def selected?
         self[:is_selected]
+      end
+
+      def container
+        self[:container] unless self[:container].empty?
       end
 
       def self.release(pointer)

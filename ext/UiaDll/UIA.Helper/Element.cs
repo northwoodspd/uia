@@ -72,6 +72,11 @@ namespace UIA.Helper
             Clicker.MouseClick(_element);
         }
 
+        public static Element From(AutomationElement element)
+        {
+            return new Element(element);
+        }
+
         public static Element ById(string automationId)
         {
             return FindFirst(automationId.IdCondition());

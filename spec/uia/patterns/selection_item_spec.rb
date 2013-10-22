@@ -15,11 +15,15 @@ describe Uia::Patterns::SelectionItem do
       When { radio.select }
       Then { expect(radio).to be_selected }
     end
+
+    context '#container' do
+      Given(:parent_two) { main.find(name: 'Parent Two').as :selection_item }
+      Then { parent_two.container.id == 'treeView' }
+    end
   end
 
   context '#select' do
     Given(:radio) { main.find id: 'radioButton2' }
-
     When { radio.as(:selection_item).select }
     Then { radio_label.name == 'Option 2 selected' }
   end
