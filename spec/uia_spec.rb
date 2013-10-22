@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Uia do
+  context '#children' do
+    Then { children.find { |e| e.name =~ /MainFormWindow/ } != nil }
+  end
+
   context '#find_element' do
     Given(:main_window) { find_element id: 'MainFormWindow' }
 

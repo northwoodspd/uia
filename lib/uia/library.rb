@@ -38,6 +38,9 @@ module Uia
     attach_function :release_selection_item_info, :SelectionItem_Release, [:pointer], :void
     attach_function :release_expand_collapse_info, :ExpandCollapse_Release, [:pointer], :void
 
+    # root methods
+    attach_throwable_function :root_children, :Root_Children, [], ElementChildrenStruct.by_ref
+
     # finding elements
     attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref, &element_or_nil
     attach_throwable_function :find_by_name, :Element_FindByName, [:string], ElementStruct.by_ref, &element_or_nil

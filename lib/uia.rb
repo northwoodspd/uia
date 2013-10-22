@@ -6,6 +6,10 @@ require 'uia/element'
 module Uia
   class BadLocator < StandardError; end
 
+  def children
+    Library.root_children.children
+  end
+
   def find_element(how)
     case
       when how[:id]

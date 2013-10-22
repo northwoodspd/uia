@@ -89,6 +89,15 @@ extern "C" {
     return NULL;
   }
 
+  __declspec(dllexport) ElementsPtr Root_Children(char* errorInfo, const int errorInfoLength) {
+    try {
+      return new Elements(Element::From(AutomationElement::RootElement)->Children);
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      return NULL;
+    }
+  }
+
   __declspec(dllexport) ElementsPtr Element_Children(ElementInformationPtr parentElement, char* errorInfo, const int errorLength) {
     try {
       return new Elements(Find(parentElement)->Children);
