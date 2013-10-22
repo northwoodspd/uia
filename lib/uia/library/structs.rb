@@ -114,5 +114,17 @@ module Uia
         Library.release_toggle_info(pointer)
       end
     end
+
+    class SelectionItemInformation < FFI::ManagedStruct
+      layout :is_selected, :bool
+
+      def selected?
+        self[:is_selected]
+      end
+
+      def self.release(pointer)
+        Library.release_selection_item_info(pointer)
+      end
+    end
   end
 end

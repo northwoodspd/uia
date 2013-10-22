@@ -39,3 +39,12 @@ typedef struct _ToggleInformation {
   }
 
 } ToggleInformation, *PToggleInformation;
+
+typedef struct _SelectionItemInformation {
+  bool IsSelected;
+
+  _SelectionItemInformation(SelectionItemPattern::SelectionItemPatternInformation^ info) {
+    IsSelected = info->IsSelected;
+  }
+
+} SelectionItemInformation, *PSelectionItemInformation;
