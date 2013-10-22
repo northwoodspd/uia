@@ -2,7 +2,7 @@ module Uia
   module Patterns
     module Selection
       def selection_items
-        children.map {|e| e.as :selection_item }
+        descendants.map {|e| e.as :selection_item }
       end
 
       def multi_select?

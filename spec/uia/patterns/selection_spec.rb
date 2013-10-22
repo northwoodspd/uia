@@ -18,6 +18,13 @@ describe Uia::Patterns::Selection do
 
       Then { select_list.selection_items.map(&:name) == ['Apple', 'Orange', 'Mango'] }
       Then { select_list.selection_items.all?(&respond_to_selections) == true }
+
+      context 'multiple levels of #selection_items' do
+        Given(:tree_view) { main.find(id: 'treeView').as :selection }
+
+        When { tree_view.selection_items.first.as(:expand_collapse).expand }
+        Then { tree_view.selection_items.count == 4 }
+      end
     end
   end
 end
