@@ -25,7 +25,6 @@ describe Uia do
 
     context 'by runtime id' do
       Then { find_element(runtime_id: main_window.runtime_id) != nil }
-      Then { find_element(runtime_id: []) == nil }
 
       context 'can search descendants' do
         Given(:element_with_no_handle) { find_element(id: 'MainFormWindow').find(name: 'Parent Two') }
