@@ -23,7 +23,7 @@ describe Uia::Patterns::Selection do
         Given(:tree_view) { main.find(id: 'treeView').as :selection }
 
         When { tree_view.selection_items.first.as(:expand_collapse).expand }
-        Then { tree_view.selection_items.count == 4 }
+        Then { tree_view.selection_items.map(&:name) == ['Parent One', 'Child 1', 'Child 2', 'Parent Two'] }
       end
     end
   end
