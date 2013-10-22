@@ -10,4 +10,9 @@ describe Uia::Patterns::ExpandCollapse do
       Then { parent_one.expand_collapse_state == :collapsed }
     end
   end
+
+  context '#expand' do
+    When { parent_one.expand }
+    Then { parent_one.expand_collapse_state == :expanded }
+  end
 end

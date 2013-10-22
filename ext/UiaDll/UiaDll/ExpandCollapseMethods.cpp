@@ -14,4 +14,12 @@ extern "C" {
       return NULL;
     }
   }
+
+  __declspec(dllexport) void ExpandCollapse_Expand(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
+    try {
+      Find(element)->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern)->Expand();
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+    }
+  }
 }

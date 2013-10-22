@@ -59,6 +59,7 @@ module Uia
 
     # ExpandCollapsePattern methods
     attach_throwable_function :expand_collapse_info, :ExpandCollapse_Information, [:pointer], ExpandCollapseInformation.by_ref
+    attach_throwable_function :expand, :ExpandCollapse_Expand, [:pointer], :void
 
     # InvokePattern methods
     attach_throwable_function :invoke, :Invoke, [:pointer], :void
