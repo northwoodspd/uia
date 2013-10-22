@@ -38,9 +38,8 @@ module Uia
             self[:patterns].read_array_of_int(self[:patterns_length])
           end
 
-          def children(type=nil)
-            elements = (type && Library.children_of_type(self, type)) || Library.children(self)
-            elements.children
+          def children
+            Library.children(self).children
           end
 
           def descendants

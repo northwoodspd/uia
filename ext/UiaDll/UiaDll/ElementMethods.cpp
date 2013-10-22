@@ -108,16 +108,6 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) ElementsPtr Element_ChildrenOfType(ElementInformationPtr parent, int propertyId, char* errorInfo, const int errorLength) {
-    try {
-      return new Elements(Find(parent)->ChildrenOf((AutomationPropertyCondition::Id)propertyId));
-    } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
-    }
-
-    return NULL;
-  }
-
   __declspec(dllexport) ElementsPtr Element_Descendants(ElementInformationPtr parentElement, char* errorInfo, const int errorLength) {
     try {
       return new Elements(Find(parentElement)->Descendants);

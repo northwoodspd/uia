@@ -52,7 +52,6 @@ module Uia
     attach_throwable_function :find_child_by_id, :Element_FindChildById, [:pointer, :string], ElementStruct.by_ref, &element_or_nil
     attach_throwable_function :find_child_by_name, :Element_FindChildByName, [:pointer, :string], ElementStruct.by_ref, &element_or_nil
     attach_throwable_function :children, :Element_Children, [:pointer], ElementChildrenStruct.by_ref
-    attach_throwable_function :children_of_type, :Element_ChildrenOfType, [:pointer, PropertyId], ElementChildrenStruct.by_ref
     attach_throwable_function :descendants, :Element_Descendants, [:pointer], ElementChildrenStruct.by_ref
     attach_throwable_function :click, :Element_Click, [:pointer], :void
 
