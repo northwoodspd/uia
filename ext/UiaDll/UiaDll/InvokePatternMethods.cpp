@@ -1,7 +1,7 @@
 #include "Stdafx.h"
 
 extern "C" {
-  __declspec(dllexport) void Invoke(PElementInformation element, char* errorInfo, const int errorInfoLength) {
+  __declspec(dllexport) void Invoke(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
     try {
       Find(element)->As<InvokePattern^>(InvokePattern::Pattern)->Invoke();
     } catch(Exception^ e) {

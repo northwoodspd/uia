@@ -44,7 +44,7 @@ private:
     name = NULL; runtimeId = NULL; patterns = NULL; id = NULL;
   }
 
-} ElementInformation, *PElementInformation;
+} ElementInformation, *ElementInformationPtr;
 
 typedef struct _Elements {
   int length;
@@ -65,4 +65,4 @@ typedef struct _Elements {
   ~_Elements() {
     delete[] elements;
   }
-} Elements, *PElements;
+} Elements, *ElementsPtr;

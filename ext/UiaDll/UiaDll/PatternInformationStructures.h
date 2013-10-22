@@ -27,7 +27,7 @@ private:
     Value = StringHelper::ToUnmanaged(value);
   }
 
-} ValuePatternInformation, *PValuePatternInformation;
+} ValuePatternInformation, *ValuePatternInformationPtr;
 
 typedef struct _ToggleInformation {
   char* ToggleState;
@@ -40,7 +40,7 @@ typedef struct _ToggleInformation {
     delete[] ToggleState;
   }
 
-} ToggleInformation, *PToggleInformation;
+} ToggleInformation, *ToggleInformationPtr;
 
 typedef struct _SelectionInformation {
   bool CanSelectMultiple;
@@ -50,11 +50,11 @@ typedef struct _SelectionInformation {
     CanSelectMultiple = info->CanSelectMultiple;
     IsSelectionRequired = info->IsSelectionRequired;
   }
-} SelectionInformation, *PSelectionInformation;
+} SelectionInformation, *SelectionInformationPtr;
 
 typedef struct _SelectionItemInformation {
   bool IsSelected;
-  PElementInformation Container;
+  ElementInformationPtr Container;
 
   _SelectionItemInformation(SelectionItemPattern::SelectionItemPatternInformation^ info) {
     init(info->IsSelected, Element::From(info->SelectionContainer));
@@ -74,4 +74,4 @@ private:
     Container = new ElementInformation(selectionContainer);
   }
 
-} SelectionItemInformation, *PSelectionItemInformation;
+} SelectionItemInformation, *SelectionItemInformationPtr;

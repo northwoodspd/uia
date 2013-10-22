@@ -14,4 +14,4 @@ using namespace UIA::Helper;
 #include "ElementStructures.h"
 #include "PatternInformationStructures.h"
 
-extern "C" Element^ Find(PElementInformation element);
+extern "C" Element^ Find(ElementInformationPtr element);

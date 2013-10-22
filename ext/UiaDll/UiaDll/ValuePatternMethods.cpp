@@ -1,11 +1,11 @@
 #include "Stdafx.h"
 
 extern "C" {
-  __declspec(dllexport) void Value_Release(PValuePatternInformation valueInformation) {
+  __declspec(dllexport) void Value_Release(ValuePatternInformationPtr valueInformation) {
     delete valueInformation;
   }
 
-  __declspec(dllexport) void Value_Set(PElementInformation element, const char* value, char* errorInfo, const int errorInfoLength) {
+  __declspec(dllexport) void Value_Set(ElementInformationPtr element, const char* value, char* errorInfo, const int errorInfoLength) {
     try {
       Find(element)->As<ValuePattern^>(ValuePattern::Pattern)->SetValue(gcnew String(value));
     } catch(Exception^ e) {
@@ -13,7 +13,7 @@ extern "C" {
     }
   }
 
-  __declspec(dllexport) PValuePatternInformation Value_Information(PElementInformation element, char* errorInfo, const int errorInfoLength) {
+  __declspec(dllexport) ValuePatternInformationPtr Value_Information(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
     try {
       auto valuePattern = Find(element)->As<ValuePattern^>(ValuePattern::Pattern);
       return new ValuePatternInformation(valuePattern->Current);

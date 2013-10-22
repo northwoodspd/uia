@@ -3,7 +3,7 @@
 using namespace UIA::Helper;
 
 extern "C" {
-  Element^ Find(PElementInformation element) {
+  Element^ Find(ElementInformationPtr element) {
     if( element->nativeWindowHandle > 0 ) {
       return Element::ByHandle(IntPtr(element->nativeWindowHandle));
     }
@@ -11,15 +11,15 @@ extern "C" {
     return Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength));
   }
 
-  __declspec(dllexport) void Element_Release(PElementInformation elementInformation) {
+  __declspec(dllexport) void Element_Release(ElementInformationPtr elementInformation) {
     delete elementInformation;
   }
 
-  __declspec(dllexport) void Element_ReleaseMany(PElements elements) {
+  __declspec(dllexport) void Element_ReleaseMany(ElementsPtr elements) {
     delete elements;
   }
 
-  __declspec(dllexport) PElementInformation Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementInformationPtr Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ById(gcnew String(automationId)));
     } catch(Exception^ error) {
@@ -29,7 +29,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElementInformation Element_FindChildById(PElementInformation parent, const char* automationId, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementInformationPtr Element_FindChildById(ElementInformationPtr parent, const char* automationId, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Find(parent)->ChildById(gcnew String(automationId)));
     } catch(Exception^ error) {
@@ -39,7 +39,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElementInformation Element_FindByName(const char* name, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementInformationPtr Element_FindByName(const char* name, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ByName(gcnew String(name)));
     } catch(Exception^ error) {
@@ -49,7 +49,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElementInformation Element_FindChildByName(PElementInformation parent, const char* name, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementInformationPtr Element_FindChildByName(ElementInformationPtr parent, const char* name, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Find(parent)->ChildByName(gcnew String(name)));
     } catch(Exception^ error) {
@@ -59,7 +59,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElementInformation Element_FindByProcessId(const int processId, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementInformationPtr Element_FindByProcessId(const int processId, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ByProcessId(processId));
     } catch(Exception^ error) {
@@ -69,7 +69,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElementInformation Element_FindByHandle(HWND windowHandle, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementInformationPtr Element_FindByHandle(HWND windowHandle, char* errorInfo, const int errorLength) {
     try {
       return new ElementInformation(Element::ByHandle(IntPtr(windowHandle)));
     } catch(Exception^ error) {
@@ -79,7 +79,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElementInformation Element_FindByRuntimeId(const int runtimeIds[], const int numberOfIds, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementInformationPtr Element_FindByRuntimeId(const int runtimeIds[], const int numberOfIds, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ByRuntimeId(ArrayHelper::ToArray(runtimeIds, numberOfIds)));
     } catch(Exception^ error) {
@@ -89,7 +89,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElements Element_Children(PElementInformation parentElement, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementsPtr Element_Children(ElementInformationPtr parentElement, char* errorInfo, const int errorLength) {
     try {
       return new Elements(Find(parentElement)->Children);
     } catch(Exception^ error) {
@@ -99,7 +99,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElements Element_ChildrenOfType(PElementInformation parent, int propertyId, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementsPtr Element_ChildrenOfType(ElementInformationPtr parent, int propertyId, char* errorInfo, const int errorLength) {
     try {
       return new Elements(Find(parent)->ChildrenOf((AutomationPropertyCondition::Id)propertyId));
     } catch(Exception^ error) {
@@ -109,7 +109,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) PElements Element_Descendants(PElementInformation parentElement, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) ElementsPtr Element_Descendants(ElementInformationPtr parentElement, char* errorInfo, const int errorLength) {
     try {
       return new Elements(Find(parentElement)->Descendants);
     } catch(Exception^ error) {
@@ -119,7 +119,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) void Element_Click(PElementInformation element, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) void Element_Click(ElementInformationPtr element, char* errorInfo, const int errorLength) {
     try {
       Find(element)->MouseClick();
     } catch(Exception^ error) {
