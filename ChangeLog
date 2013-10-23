@@ -1,3 +1,18 @@
+=== Version 0.0.6
+*	Enhancements
+	* Have implemented the following patterns:
+		*	ExpandCollapse
+		*	Invoke
+		*	Selection
+		*	SelectionItem
+		*	Toggle
+		*	Value
+	*	Element can find their descendants by :id or :name
+	*	Can search for top-level elements with Regex
+	*	Elements can be refreshed
+	*	Moved Uia methods to be class-level (i.e. Uia.find_element rather than
+	including Uia)
+
 ===	Version 0.0.5.1 / 2012-10-16
 *	Enhancements
 	*	reduced the size of the gem package by excluding gmock and gtest
