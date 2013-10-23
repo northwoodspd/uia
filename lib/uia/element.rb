@@ -4,16 +4,21 @@ require 'uia/patterns/selection'
 require 'uia/patterns/selection_item'
 require 'uia/patterns/toggle'
 require 'uia/patterns/value'
+require 'uia/library/element_attributes'
 
 module Uia
   class Element
+    extend ElementAttributes
+
     def initialize(element)
       @element = element
       @default = lambda { [:unknown] }
     end
 
+    element_attr :id, :name, :handle, :runtime_id
+
     def control_type
-      Library::Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
+      Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first
     end
 
     def refresh
@@ -38,7 +43,7 @@ module Uia
     end
 
     def patterns
-      pattern_ids.map {|id| Library::Constants::Patterns.find(@default) { |_, v| v == id }.first }
+      @element.pattern_ids.map {|id| Library::Constants::Patterns.find(@default) { |_, v| v == id }.first }
     end
 
     def children
@@ -52,13 +57,6 @@ module Uia
     def click
       Library.click(@element)
       true
-    end
-
-    def method_missing(meth, *args, &block)
-      if @element.respond_to? meth
-        return @element.send(meth, *args, &block)
-      end
-      super
     end
   end
 end

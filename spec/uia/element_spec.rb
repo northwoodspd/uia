@@ -5,6 +5,7 @@ describe Uia::Element do
   Given(:about_box) { Uia.find_element(id: 'AboutBox') }
 
   context 'properties' do
+    let(:raw_element) { element.instance_variable_get(:@element) }
     Then { element.handle != 0 }
     Then { element.name == 'MainFormWindow' }
     Then { element.id == 'MainFormWindow' }
@@ -13,7 +14,7 @@ describe Uia::Element do
       Then { element.control_type == :window }
 
       context 'unknown' do
-        Given { element.stub(:control_type_id).and_return(777) }
+        Given { raw_element.stub(:control_type_id).and_return(777) }
         Then { element.control_type == :unknown }
       end
     end
@@ -22,7 +23,7 @@ describe Uia::Element do
       Then { element.patterns.should =~ [:transform, :window] }
 
       context 'unknown' do
-        Given { element.stub(:pattern_ids).and_return([7777]) }
+        Given { raw_element.stub(:pattern_ids).and_return([7777]) }
         Then { element.patterns.should == [:unknown] }
       end
     end
