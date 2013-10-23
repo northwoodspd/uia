@@ -1,4 +1,4 @@
-=== Version 0.0.6
+=== Version 0.0.6 / 2013-10-22
 *	Enhancements
 	* Have implemented the following patterns:
 		*	ExpandCollapse
@@ -13,11 +13,11 @@
 	*	Moved Uia methods to be class-level (i.e. Uia.find_element rather than
 	including Uia)
 
-===	Version 0.0.5.1 / 2012-10-16
+===	Version 0.0.5.1 / 2013-10-16
 *	Enhancements
 	*	reduced the size of the gem package by excluding gmock and gtest
 
-===	Version 0.0.5 / 2012-10-16
+===	Version 0.0.5 / 2013-10-16
 
 *	Enhancements
 	*	Pushed #find_element into the Uia module
