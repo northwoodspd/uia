@@ -22,6 +22,12 @@ public:
     void set(String^ value) { _id = value; }
   }
 
+  virtual property bool IsEnabled
+  {
+    bool get() override { return _isEnabled; }
+    void set(bool value) { _isEnabled = value; }
+  }
+
   virtual property array<int>^ RuntimeId
   {
     array<int>^ get() override { return _runtimeIds; }
@@ -56,4 +62,5 @@ private:
   array<int>^ _patterns;
   int _nativeWindowHandle;
   int _controlTypeId;
+  bool _isEnabled;
 };

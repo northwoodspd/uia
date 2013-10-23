@@ -12,6 +12,8 @@ typedef struct _ElementInformation {
   int patternsLength;
   char* id;
 
+  bool isEnabled;
+
   _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {}
 
   _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {
@@ -32,6 +34,8 @@ typedef struct _ElementInformation {
     controlTypeId = element->ControlTypeId;
     patterns = ArrayHelper::FromArray(element->SupportedPatternIds);
     patternsLength = element->SupportedPatternIds->Length;
+
+    isEnabled = element->IsEnabled;
   }
 
   ~_ElementInformation() {

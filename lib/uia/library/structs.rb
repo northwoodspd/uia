@@ -12,7 +12,8 @@ module Uia
                  :control_type_id, :int,
                  :patterns, :pointer,
                  :patterns_length, :int,
-                 :id, :string
+                 :id, :string,
+                 :is_enabled, :bool
 
           def id
             self[:id]
@@ -48,6 +49,10 @@ module Uia
 
           def empty?
             to_ptr.address == 0
+          end
+
+          def enabled?
+            self[:is_enabled]
           end
 
           private

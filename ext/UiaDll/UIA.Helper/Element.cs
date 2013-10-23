@@ -37,6 +37,11 @@ namespace UIA.Helper
             get { return _element.Current.AutomationId; }
         }
 
+        public virtual bool IsEnabled
+        {
+            get { return _element.Current.IsEnabled; }
+        }
+
         public virtual int NativeWindowHandle
         {
             get { return _element.Current.NativeWindowHandle; }

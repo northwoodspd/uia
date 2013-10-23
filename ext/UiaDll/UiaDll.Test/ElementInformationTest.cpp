@@ -74,6 +74,14 @@ TEST_F(ElementInformationTest, ItKnowsTheSupportedPatterns)
   ASSERT_THAT(expectedPatterns, ::testing::ElementsAreArray(elementInformation.patterns, elementInformation.patternsLength));
 }
 
+TEST_F(ElementInformationTest, ItKnowIfItIsEnabled)
+{
+  auto element = gcnew ElementStub("");
+  element->IsEnabled = true;
+
+  ASSERT_EQ(true, ElementInformation(element).isEnabled);
+}
+
 TEST_F(ElementInformationTest, ItCanBeRefreshed)
 {
   auto elementInformation = ElementInformation(gcnew ElementStub("Initial", 0));
