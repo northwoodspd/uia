@@ -6,13 +6,13 @@ require 'uia/finder'
 
 module Uia
   class BadLocator < StandardError; end
-  include Finder
+  extend Finder
 
-  def children
+  def self.children
     Library.root_children.children
   end
 
-  def find_element(how)
+  def self.find_element(how)
     case
       when how[:id]
         find_by_id how[:id]

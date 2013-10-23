@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Element do
-  Given(:element) { find_element(id: 'MainFormWindow') }
-  Given(:about_box) { find_element(id: 'AboutBox') }
+describe Uia::Element do
+  Given(:element) { Uia.find_element(id: 'MainFormWindow') }
+  Given(:about_box) { Uia.find_element(id: 'AboutBox') }
 
   context 'properties' do
     Then { element.handle != 0 }
@@ -58,11 +58,11 @@ describe Element do
 
   context '#children' do
     Then { element.children.count == 27 }
-    Then { element.children.all? { |c| c.instance_of? Element } }
+    Then { element.children.all? { |c| c.instance_of? Uia::Element } }
   end
 
   context '#descendants' do
     Then { element.descendants.count > element.children.count }
-    Then { element.descendants.all? { |c| c.instance_of? Element } }
+    Then { element.descendants.all? { |c| c.instance_of? Uia::Element } }
   end
 end

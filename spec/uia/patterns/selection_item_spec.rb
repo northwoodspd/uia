@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Uia::Patterns::SelectionItem do
-  let(:main) { find_element id: 'MainFormWindow' }
+  let(:main) { Uia.find_element id: 'MainFormWindow' }
   let(:reset) { main.find(name: 'Reset').as :invoke }
   let(:radio_label) { main.find id: 'radioButtonLabel' }
 

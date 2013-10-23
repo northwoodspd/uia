@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Uia::Patterns::Value do
   Given(:text_field) do
-    find_element(id: 'MainFormWindow').children.find { |e| e.id == 'textField' }
+    Uia.find_element(id: 'MainFormWindow').children.find { |e| e.id == 'textField' }
   end
 
   context 'properties' do

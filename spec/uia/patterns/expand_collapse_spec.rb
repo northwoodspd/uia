@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Uia::Patterns::ExpandCollapse do
-  let(:main) { find_element id: 'MainFormWindow' }
+  let(:main) { Uia.find_element id: 'MainFormWindow' }
 
   Given(:parent_one) { main.find(name: 'Parent One').as :expand_collapse }
 

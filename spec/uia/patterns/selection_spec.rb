@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Uia::Patterns::Selection do
-  let(:main) { find_element id: 'MainFormWindow' }
+  let(:main) { Uia.find_element id: 'MainFormWindow' }
   Given(:select_list) { main.find(id: 'FruitListBox').as :selection }
 
   context 'properties' do
