@@ -9,6 +9,7 @@ module Uia
                  :runtime_id, :pointer,
                  :number_of_ids, :int,
                  :name, :string,
+                 :class_name, :string,
                  :control_type_id, :int,
                  :patterns, :pointer,
                  :patterns_length, :int,
@@ -53,6 +54,10 @@ module Uia
 
           def enabled?
             self[:is_enabled]
+          end
+
+          def class_name
+            self[:class_name]
           end
 
           private

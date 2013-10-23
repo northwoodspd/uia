@@ -32,6 +32,11 @@ namespace UIA.Helper
             get { return _element.Current.Name; }
         }
 
+        public virtual string ClassName
+        {
+            get { return _element.Current.ClassName; }
+        }
+
         public virtual string Id
         {
             get { return _element.Current.AutomationId; }

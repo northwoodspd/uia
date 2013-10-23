@@ -9,6 +9,7 @@ describe Uia::Element do
     Then { element.handle != 0 }
     Then { element.name == 'MainFormWindow' }
     Then { element.id == 'MainFormWindow' }
+    Then { element.class_name =~ /Forms.*app/i }
     Then { expect(element.find(id: 'textField')).to be_enabled }
 
     context '#control_type' do

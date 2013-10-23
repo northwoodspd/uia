@@ -7,6 +7,7 @@ typedef struct _ElementInformation {
   int* runtimeId;
   int runtimeIdLength;
   char* name;
+  char* className;
   int controlTypeId;
   int* patterns;
   int patternsLength;
@@ -14,9 +15,9 @@ typedef struct _ElementInformation {
 
   bool isEnabled;
 
-  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {}
+  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL) {}
 
-  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {
+  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL) {
     Refresh(element);
   }
 
@@ -28,6 +29,7 @@ typedef struct _ElementInformation {
     Reset();
     id = StringHelper::ToUnmanaged(element->Id);
     name = StringHelper::ToUnmanaged(element->Name);
+    className = StringHelper::ToUnmanaged(element->ClassName);
     nativeWindowHandle = element->NativeWindowHandle;
     runtimeId = ArrayHelper::FromArray(element->RuntimeId);
     runtimeIdLength = element->RuntimeId->Length;
@@ -44,8 +46,8 @@ typedef struct _ElementInformation {
 
 private:
   void Reset() {
-    delete[] name; delete[] runtimeId; delete[] patterns; delete[] id;
-    name = NULL; runtimeId = NULL; patterns = NULL; id = NULL;
+    delete[] name; delete[] runtimeId; delete[] patterns; delete[] id; delete[] className;
+    name = NULL; runtimeId = NULL; patterns = NULL; id = NULL; className = NULL;
   }
 
 } ElementInformation, *ElementInformationPtr;

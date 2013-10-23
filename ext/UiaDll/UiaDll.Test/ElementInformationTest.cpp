@@ -63,6 +63,14 @@ TEST_F(ElementInformationTest, ItKnowsTheControlType)
   ASSERT_EQ(1234, ElementInformation(element).controlTypeId);
 }
 
+TEST_F(ElementInformationTest, ItKnowsTheClassName)
+{
+  auto element = gcnew ElementStub("");
+  element->ClassName = "Expected class name";
+
+  ASSERT_STREQ("Expected class name", ElementInformation(element).className);
+}
+
 TEST_F(ElementInformationTest, ItKnowsTheSupportedPatterns)
 {
   auto element = gcnew ElementStub("");
