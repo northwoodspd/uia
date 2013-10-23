@@ -5,6 +5,10 @@ module Uia
         Library.toggle_information(@element).state.downcase.to_sym
       end
 
+      def toggle_state=(state)
+        toggle unless state == toggle_state
+      end
+
       def toggle
         Library.toggle @element
       end
