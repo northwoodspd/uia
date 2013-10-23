@@ -54,6 +54,7 @@ module Uia
     attach_throwable_function :children, :Element_Children, [:pointer], ElementChildrenStruct.by_ref
     attach_throwable_function :descendants, :Element_Descendants, [:pointer], ElementChildrenStruct.by_ref
     attach_throwable_function :click, :Element_Click, [:pointer], :void
+    attach_throwable_function :refresh, :Element_Refresh, [:pointer], :void
 
     # ValuePattern methods
     attach_throwable_function :set_value, :Value_Set, [:pointer, :string], :void

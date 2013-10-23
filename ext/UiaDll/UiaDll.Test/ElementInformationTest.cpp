@@ -74,16 +74,16 @@ TEST_F(ElementInformationTest, ItKnowsTheSupportedPatterns)
   ASSERT_THAT(expectedPatterns, ::testing::ElementsAreArray(elementInformation.patterns, elementInformation.patternsLength));
 }
 
-TEST_F(ElementInformationTest, ItCanBeUpdated)
+TEST_F(ElementInformationTest, ItCanBeRefreshed)
 {
   auto elementInformation = ElementInformation(gcnew ElementStub("Initial", 0));
 
-  auto updatedElement = gcnew ElementStub("Updated", 46, 2);
+  auto updatedElement = gcnew ElementStub("Refreshed", 46, 2);
   updatedElement->NativeWindowHandle = 123;
-  elementInformation.Update(updatedElement);
+  elementInformation.Refresh(updatedElement);
 
   const int expectedId[] = {46, 2};
   ASSERT_THAT(expectedId, ::testing::ElementsAreArray(elementInformation.runtimeId, elementInformation.runtimeIdLength));
-  ASSERT_STREQ("Updated", elementInformation.name);
+  ASSERT_STREQ("Refreshed", elementInformation.name);
   ASSERT_EQ(123, elementInformation.nativeWindowHandle);
 }

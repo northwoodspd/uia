@@ -23,8 +23,20 @@ describe Uia::Element do
 
       context 'unknown' do
         Given { element.stub(:pattern_ids).and_return([7777]) }
-        Then { element.patterns.should == [:unknown]}
+        Then { element.patterns.should == [:unknown] }
       end
+    end
+
+    context '#refresh' do
+      Given!(:check_box) do
+        check_box = element.find(id: 'checkBox').as :toggle
+        check_box.toggle_state = :off
+        check_box
+      end
+
+      Given!(:label) { element.find(id: 'checkBoxLabel') }
+      When { check_box.toggle_state = :on; label.refresh }
+      Then { label.name == 'checkBox is on' }
     end
   end
 

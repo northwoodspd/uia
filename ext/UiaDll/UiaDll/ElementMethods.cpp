@@ -19,6 +19,14 @@ extern "C" {
     delete elements;
   }
 
+  __declspec(dllexport) void Element_Refresh(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
+    try {
+      element->Refresh(Find(element));
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+    }
+  }
+
   __declspec(dllexport) ElementInformationPtr Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ById(gcnew String(automationId)));

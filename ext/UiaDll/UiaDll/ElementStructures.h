@@ -15,14 +15,14 @@ typedef struct _ElementInformation {
   _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {}
 
   _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL) {
-    Update(element);
+    Refresh(element);
   }
 
   static _ElementInformation* From(Element^ element) {
     return nullptr != element ? new _ElementInformation(element) : NULL;
   }
 
-  void Update(Element^ element) {
+  void Refresh(Element^ element) {
     Reset();
     id = StringHelper::ToUnmanaged(element->Id);
     name = StringHelper::ToUnmanaged(element->Name);
@@ -58,7 +58,7 @@ typedef struct _Elements {
 
     auto index = 0;
     for each(auto element in elements) {
-      this->elements[index++].Update(element);
+      this->elements[index++].Refresh(element);
     }
   }
 

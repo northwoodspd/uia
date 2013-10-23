@@ -16,6 +16,11 @@ module Uia
       Library::Constants::ControlTypes.find(@default) { |_, v| v == control_type_id }.first
     end
 
+    def refresh
+      Library.refresh @element
+      self
+    end
+
     def find(locator)
       case
         when locator[:id]
