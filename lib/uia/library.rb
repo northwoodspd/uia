@@ -5,8 +5,6 @@ module Uia
   module Library
     extend FFI::Library
 
-    PropertyId = enum(:is_selection_item, 0)
-
     def self.uia_directory
       File.dirname(__FILE__) + '/../../ext/UiaDll/Release'
     end
