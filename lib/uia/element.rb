@@ -47,11 +47,11 @@ module Uia
     end
 
     def children
-      @element.children.map { |c| Element.new c }
+      @element.children
     end
 
     def descendants
-      @element.descendants.map { |c| Element.new c }
+      @element.descendants
     end
 
     def click

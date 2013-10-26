@@ -86,7 +86,8 @@ module Uia
 
       def children
         self[:length].times.collect do |i|
-          ElementCast.new(self[:items] + i * ElementCast.size)
+          pointer = self[:items] + i * ElementCast.size
+          Uia::Element.new(ElementCast.new(pointer))
         end
       end
 

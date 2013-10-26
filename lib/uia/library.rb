@@ -45,7 +45,7 @@ module Uia
     attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref, &element_or_nil
     attach_throwable_function :find_by_name, :Element_FindByName, [:string], ElementStruct.by_ref, &element_or_nil
     attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ElementStruct.by_ref, &element_or_nil
-    attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ElementStruct.by_ref
+    attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ElementStruct.by_ref, &element_or_nil
     attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ElementStruct.by_ref
 
     # element methods

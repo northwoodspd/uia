@@ -7,6 +7,8 @@ require 'childprocess'
 require 'ffi'
 require 'uia'
 
+include Uia
+
 RSpec.configure do |config|
   config.before(:all) do
     @app = ChildProcess.build('spec/app/WindowsForms.exe').start
