@@ -1,3 +1,8 @@
+=== Version 0.0.6.1 / 2013-10-30
+* Bug Fixes
+	*	Fixed issue when finding root children by RegEx initially
+	*	all Find methods consistently return Element classes
+
 === Version 0.0.6 / 2013-10-22
 *	Enhancements
 	* Have implemented the following patterns:
