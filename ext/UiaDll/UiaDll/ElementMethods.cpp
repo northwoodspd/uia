@@ -99,7 +99,7 @@ extern "C" {
 
   __declspec(dllexport) ElementsPtr Root_Children(char* errorInfo, const int errorInfoLength) {
     try {
-      return new Elements(Element::From(AutomationElement::RootElement)->Children);
+      return new Elements(Element::Windows);
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
       return NULL;

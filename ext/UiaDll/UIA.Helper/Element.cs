@@ -62,6 +62,11 @@ namespace UIA.Helper
             get { return _element.GetSupportedPatterns().Select(x => x.Id).ToArray(); }
         }
 
+        public static Element[] Windows
+        {
+            get { return Find(AutomationElement.RootElement, TreeScope.Children, Condition.TrueCondition); }
+        }
+
         public Element[] Children
         {
             get { return Find(TreeScope.Children, Condition.TrueCondition); }
@@ -124,7 +129,12 @@ namespace UIA.Helper
 
         private Element[] Find(TreeScope scope, Condition condition)
         {
-            return _element.FindAll(scope, condition).Cast<AutomationElement>()
+            return Find(_element, scope, condition);
+        }
+
+        private static Element[] Find(AutomationElement element, TreeScope scope, Condition condition)
+        {
+            return element.FindAll(scope, condition).Cast<AutomationElement>()
                            .Select(x => new Element(x))
                            .ToArray();
         }
