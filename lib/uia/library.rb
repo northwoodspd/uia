@@ -35,6 +35,7 @@ module Uia
     attach_function :release_toggle_info, :Toggle_Release, [:pointer], :void
     attach_function :release_selection_info, :Selection_Release, [:pointer], :void
     attach_function :release_selection_item_info, :SelectionItem_Release, [:pointer], :void
+    attach_function :release_table_info, :Table_Release, [:pointer], :void
     attach_function :release_expand_collapse_info, :ExpandCollapse_Release, [:pointer], :void
 
     # root methods
@@ -83,6 +84,9 @@ module Uia
     attach_throwable_function :select, :SelectionItem_Select, [:pointer], :void
     attach_throwable_function :add_to_selection, :SelectionItem_AddToSelection, [:pointer], :void
     attach_throwable_function :remove_from_selection, :SelectionItem_RemoveFromSelection, [:pointer], :void
+
+    # TablePattern methods
+    attach_throwable_function :table_info, :Table_Information, [:pointer], TableInformation.by_ref
 
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count

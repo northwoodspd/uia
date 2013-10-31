@@ -199,16 +199,29 @@ module Uia
         self[:is_topmost]
       end
 
-      def can_minimize?
-        self[:can_minimize]
-      end
-
       def interaction_state
         self[:interaction_state]
       end
 
       def self.release(pointer)
         Library.release_window_info(pointer)
+      end
+    end
+
+    class TableInformation < FFI::ManagedStruct
+      layout :row_count, :int,
+             :column_count, :int
+
+      def row_count
+        self[:row_count]
+      end
+
+      def column_count
+        self[:column_count]
+      end
+
+      def self.release(pointer)
+        Library.release_table_info(pointer)
       end
     end
   end

@@ -122,3 +122,14 @@ private:
   }
 
 } WindowInformation, *WindowInformationPtr;
+
+typedef struct _TableInformation {
+  int RowCount;
+  int ColumnCount;
+
+  _TableInformation(TablePattern::TablePatternInformation^ tableInfo) {
+    RowCount = tableInfo->RowCount;
+    ColumnCount = tableInfo->ColumnCount;
+  }
+
+} TableInformation, *TableInformationPtr;
