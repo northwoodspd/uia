@@ -1,5 +1,6 @@
-require 'uia/library/structs'
 require 'ffi'
+require 'uia/library/element_structs'
+require 'uia/library/pattern_structs'
 
 module Uia
   module Library
