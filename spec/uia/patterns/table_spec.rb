@@ -14,4 +14,9 @@ describe Uia::Patterns::Table do
     Then { data_grid.row_count == 52 }
     Then { data_grid.column_count == 3 }
   end
+
+  context '#headers' do
+    Then { data_grid.headers.map(&:control_type) == [:header_item] * 3 }
+    Then { data_grid.headers.map(&:name) == ['Name', 'Date of birth', 'State'] }
+  end
 end

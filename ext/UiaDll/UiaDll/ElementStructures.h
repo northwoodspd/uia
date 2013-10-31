@@ -58,7 +58,9 @@ typedef struct _Elements {
 
   _Elements() : length(0), elements(NULL) {}
 
-  _Elements(array<Element^>^ elements) : elements(NULL) {
+  _Elements(array<Element^>^ elements) : length(0), elements(NULL) {
+    if( nullptr == elements ) return;
+
     length = elements->Length;
     if( length > 0 ) this->elements = new ElementInformation[length];
 

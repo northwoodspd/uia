@@ -210,7 +210,8 @@ module Uia
 
     class TableInformation < FFI::ManagedStruct
       layout :row_count, :int,
-             :column_count, :int
+             :column_count, :int,
+             :headers, ElementChildrenStruct.ptr
 
       def row_count
         self[:row_count]
@@ -218,6 +219,10 @@ module Uia
 
       def column_count
         self[:column_count]
+      end
+
+      def headers
+        self[:headers].children
       end
 
       def self.release(pointer)
