@@ -10,7 +10,7 @@ module Uia
       end
 
       def expand_collapse_state
-        Library.expand_collapse_info(@element).expand_collapse_state.downcase.to_sym
+        Library.expand_collapse_info(@element).expand_collapse_state.to_snake_case_sym
       end
     end
   end

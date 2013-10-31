@@ -2,7 +2,7 @@ module Uia
   module Patterns
     module Toggle
       def toggle_state
-        Library.toggle_information(@element).state.downcase.to_sym
+        Library.toggle_information(@element).state.to_snake_case_sym
       end
 
       def toggle_state=(state)
