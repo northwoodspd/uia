@@ -3,6 +3,8 @@
 #include <PatternInformationStructures.h>
 #include "ElementStub.h"
 
+using namespace System::Windows::Automation;
+
 TEST(ValueInformation, CanBeInitialized)
 {
   auto valueInfo = new ValuePatternInformation("Whatever", true);
@@ -32,4 +34,10 @@ TEST(SelectionItemInformation, CanBeInitialized)
 TEST(ExpandCollapseInfo, CanBeInitialized) {
   auto expandCollapseInfo = ExpandCollapseInfo("Collapsed");
   ASSERT_STREQ("Collapsed", expandCollapseInfo.ExpandCollapseState);
+}
+
+TEST(WindowInformation, CanBeInitialized) {
+  auto windowInformation = WindowInformation(WindowVisualState::Minimized, WindowInteractionState::Closing);
+  ASSERT_STREQ("Minimized", windowInformation.VisualState);
+  ASSERT_STREQ("Closing", windowInformation.InteractionState);
 }

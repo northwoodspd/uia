@@ -30,6 +30,7 @@ module Uia
     # cleanup
     attach_function :release_element, :Element_Release, [:pointer], :void
     attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
+    attach_function :release_window_info, :Window_Release, [:pointer], :void
     attach_function :release_value_info, :Value_Release, [:pointer], :void
     attach_function :release_toggle_info, :Toggle_Release, [:pointer], :void
     attach_function :release_selection_info, :Selection_Release, [:pointer], :void
@@ -53,6 +54,9 @@ module Uia
     attach_throwable_function :descendants, :Element_Descendants, [:pointer], ElementChildrenStruct.by_ref
     attach_throwable_function :click, :Element_Click, [:pointer], :void
     attach_throwable_function :refresh, :Element_Refresh, [:pointer], :void
+
+    # WindowPattern methods
+    attach_throwable_function :window_information, :Window_Information, [:pointer], WindowInformation.by_ref
 
     # ValuePattern methods
     attach_throwable_function :set_value, :Value_Set, [:pointer, :string], :void

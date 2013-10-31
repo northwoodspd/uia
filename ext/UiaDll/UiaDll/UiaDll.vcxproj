@@ -100,6 +100,7 @@
     <ClCompile Include="ToggleMethods.cpp" />
     <ClCompile Include="UiaDll.cpp" />
     <ClCompile Include="ValuePatternMethods.cpp" />
+    <ClCompile Include="WindowMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UIA.Helper\UIA.Helper.csproj">

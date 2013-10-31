@@ -3,6 +3,7 @@
 #include "StringHelper.h"
 #include "ElementStructures.h"
 
+using namespace System;
 using namespace System::Windows::Automation;
 
 typedef struct _ValuePatternInformation {
@@ -88,3 +89,28 @@ typedef struct _ExpandCollapseInfo {
     delete[] ExpandCollapseState;
   }
 } ExpandCollapseInfo, *ExpandCollapseInfoPtr;
+
+typedef struct _WindowInformation {
+  char* VisualState;
+  char* InteractionState;
+
+  _WindowInformation(WindowVisualState visualState, WindowInteractionState interactionState) {
+    init(visualState, interactionState);
+  }
+
+  _WindowInformation(WindowPattern::WindowPatternInformation^ windowInformation) {
+    init(windowInformation->WindowVisualState, windowInformation->WindowInteractionState);
+  }
+
+  ~_WindowInformation() {
+    delete[] VisualState;
+    delete[] InteractionState;
+  }
+
+private:
+  void init(WindowVisualState visualState, WindowInteractionState interactionState) {
+    VisualState = StringHelper::ToUnmanaged(visualState.ToString());
+    InteractionState = StringHelper::ToUnmanaged(interactionState.ToString());
+  }
+
+} WindowInformation, *WindowInformationPtr;

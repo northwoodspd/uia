@@ -71,5 +71,8 @@
     <ClCompile Include="ExpandCollapseMethods.cpp">
       <Filter>Source Files\Patterns</Filter>
     </ClCompile>
+    <ClCompile Include="WindowMethods.cpp">
+      <Filter>Source Files\Patterns</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

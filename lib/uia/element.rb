@@ -4,6 +4,7 @@ require 'uia/patterns/selection'
 require 'uia/patterns/selection_item'
 require 'uia/patterns/toggle'
 require 'uia/patterns/value'
+require 'uia/patterns/window'
 require 'uia/library/element_attributes'
 
 module Uia

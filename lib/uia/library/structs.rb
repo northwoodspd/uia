@@ -170,5 +170,17 @@ module Uia
         Library.release_expand_collapse_info(pointer)
       end
     end
+
+    class WindowInformation < FFI::ManagedStruct
+      layout :visual_state, :string
+
+      def visual_state
+        self[:visual_state]
+      end
+
+      def self.release(pointer)
+        Library.release_window_info(pointer)
+      end
+    end
   end
 end
