@@ -13,4 +13,12 @@ extern "C" {
       return NULL;
     }
   }
+
+  __declspec(dllexport) void Window_SetVisualState(ElementInformationPtr element, const char* visualState, char* errorInfo, const int errorInfoLength) {
+    try {
+      Find(element)->As<WindowPattern^>(WindowPattern::Pattern)->SetWindowVisualState((WindowVisualState) Enum::Parse(WindowVisualState::typeid, gcnew String(visualState), false));
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+    }
+  }
 }

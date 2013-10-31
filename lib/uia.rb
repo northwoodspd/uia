@@ -1,9 +1,11 @@
+require 'require_all'
 require 'uia/version'
 require 'uia/library'
 require 'uia/library/constants'
 require 'uia/element'
 require 'uia/finder'
-require 'core_ext/string'
+
+require_rel 'core_ext'
 
 module Uia
   class BadLocator < StandardError; end
