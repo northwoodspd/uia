@@ -6,6 +6,10 @@ describe Uia::Patterns::Window do
   context 'properties' do
     Then { window.visual_state == :normal }
     Then { window.interaction_state == :ready_for_user_interaction }
+    Then { window.can_minimize? == true }
+    Then { window.can_maximize? == true }
+    Then { window.modal? == false }
+    Then { window.topmost? == false }
   end
 
   context '#visual_state=' do

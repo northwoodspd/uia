@@ -173,10 +173,34 @@ module Uia
 
     class WindowInformation < FFI::ManagedStruct
       layout :visual_state, :string,
-             :interaction_state, :string
+             :interaction_state, :string,
+             :can_minimize, :bool,
+             :can_maximize, :bool,
+             :is_modal, :bool,
+             :is_topmost, :bool
 
       def visual_state
         self[:visual_state]
+      end
+
+      def can_minimize?
+        self[:can_minimize]
+      end
+
+      def can_maximize?
+        self[:can_maximize]
+      end
+
+      def modal?
+        self[:is_modal]
+      end
+
+      def topmost?
+        self[:is_topmost]
+      end
+
+      def can_minimize?
+        self[:can_minimize]
       end
 
       def interaction_state

@@ -93,6 +93,10 @@ typedef struct _ExpandCollapseInfo {
 typedef struct _WindowInformation {
   char* VisualState;
   char* InteractionState;
+  bool CanMinimize;
+  bool CanMaximize;
+  bool IsModal;
+  bool IsTopmost;
 
   _WindowInformation(WindowVisualState visualState, WindowInteractionState interactionState) {
     init(visualState, interactionState);
@@ -100,6 +104,10 @@ typedef struct _WindowInformation {
 
   _WindowInformation(WindowPattern::WindowPatternInformation^ windowInformation) {
     init(windowInformation->WindowVisualState, windowInformation->WindowInteractionState);
+    CanMinimize = windowInformation->CanMinimize;
+    CanMaximize = windowInformation->CanMaximize;
+    IsModal = windowInformation->IsModal;
+    IsTopmost = windowInformation->IsTopmost;
   }
 
   ~_WindowInformation() {
