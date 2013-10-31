@@ -3,6 +3,7 @@ require 'uia/library'
 require 'uia/library/constants'
 require 'uia/element'
 require 'uia/finder'
+require 'core_ext/string'
 
 module Uia
   class BadLocator < StandardError; end

@@ -172,10 +172,15 @@ module Uia
     end
 
     class WindowInformation < FFI::ManagedStruct
-      layout :visual_state, :string
+      layout :visual_state, :string,
+             :interaction_state, :string
 
       def visual_state
         self[:visual_state]
+      end
+
+      def interaction_state
+        self[:interaction_state]
       end
 
       def self.release(pointer)
