@@ -28,6 +28,11 @@ describe Uia::Element do
         Given { raw_element.stub(:pattern_ids).and_return([7777]) }
         Then { element.patterns.should == [:unknown] }
       end
+
+      context '#as' do
+        When(:cast) { element.as :toggle }
+        Then { cast.should have_failed UnsupportedPattern, "Pattern toggle not found in [:window, :transform]" }
+      end
     end
 
     context '#refresh' do

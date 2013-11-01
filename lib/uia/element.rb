@@ -1,6 +1,12 @@
 require 'uia/library/element_attributes'
 
 module Uia
+  class UnsupportedPattern < StandardError
+    def initialize(expected, actual)
+      super "Pattern #{expected} not found in #{actual}"
+    end
+  end
+
   class Element
     extend ElementAttributes
 
@@ -41,18 +47,20 @@ module Uia
     end
 
     def select(locator)
-      descendants.select {|e| e.locators_match? locator }
+      descendants.select { |e| e.locators_match? locator }
     end
 
     def as(pattern)
-      which =  "Uia::Patterns::#{pattern.to_s.capitalize}".split('::').reduce(Object) do |m, current|
+      raise UnsupportedPattern.new(pattern, patterns) unless patterns.include? pattern
+
+      which = "Uia::Patterns::#{pattern.to_s.capitalize}".split('::').reduce(Object) do |m, current|
         m.const_get current.split('_').map(&:capitalize).join
       end
       extend which
     end
 
     def patterns
-      @element.pattern_ids.map {|id| Library::Constants::Patterns.find(@default) { |_, v| v == id }.first }
+      @element.pattern_ids.map { |id| Library::Constants::Patterns.find(@default) { |_, v| v == id }.first }
     end
 
     def click
