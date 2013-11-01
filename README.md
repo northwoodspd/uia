@@ -87,6 +87,37 @@ Decorates your `Element` with the following methods:
 *  `collapse` - collapses the element
 *  `expand_collapse_state` - `:collapsed, :expanded, :leaf_node, :partially_expanded`
 
+#### Toggle
+*  `toggle` - toggles the element
+*  `toggle_state` - `:on, :off, :indeterminate`
+*  `toggle_state=` - sets the toggle state
+
+#### Table
+*  `row_count`
+*  `column_count`
+*  `headers` - returns the `Element` objects that make up the headers
+*  `rows` - returns all `Element` objects that are of control type `data_item`
+  *  extends each `Element` with `Table::Row`
+
+#### Table::Row
+*  `items` - returns all descendants of the row that implement the `:table_item` pattern
+
+#### TableItem
+*   `column`
+*   `row`
+
+#### Selection
+*  `selection_items` - return all descendants of the `Selection` that implement the `:selection_item` pattern
+*  `multi_select?`
+*  `selection_required?`
+
+#### SelectionItem
+*  `select` - selects the item
+*  `add_to_selection` - adds the element to the selection
+*  `remove_from_selection` - removes the element from the selection
+*  `selected?` - whether or not it is selected
+*  `container` - the `Selection` container
+
 ## Contributing
 
 1. Fork it
