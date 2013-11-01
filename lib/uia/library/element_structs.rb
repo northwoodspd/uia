@@ -41,11 +41,11 @@ module Uia
           end
 
           def children
-            Library.children(self).children
+            Library.children(self)
           end
 
           def descendants
-            Library.descendants(self).children
+            Library.descendants(self)
           end
 
           def empty?

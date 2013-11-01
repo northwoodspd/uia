@@ -108,24 +108,26 @@ extern "C" {
     }
   }
 
-  __declspec(dllexport) ElementsPtr Element_Children(ElementInformationPtr parentElement, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) int Element_Children(ElementInformationPtr parentElement, ElementInformation** children, char* errorInfo, const int errorLength) {
     try {
-      return new Elements(Find(parentElement)->Children);
+      auto elements = Find(parentElement)->Children;
+      *children = ElementInformation::From(elements);
+      return elements->Length;
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      return 0;
     }
-
-    return NULL;
   }
 
-  __declspec(dllexport) ElementsPtr Element_Descendants(ElementInformationPtr parentElement, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) int Element_Descendants(ElementInformationPtr parentElement, ElementInformation** descendants, char* errorInfo, const int errorLength) {
     try {
-      return new Elements(Find(parentElement)->Descendants);
+      auto elements = Find(parentElement)->Descendants;
+      *descendants = ElementInformation::From(elements);
+      return elements->Length;
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      return 0;
     }
-
-    return NULL;
   }
 
   __declspec(dllexport) void Element_Click(ElementInformationPtr element, char* errorInfo, const int errorLength) {
