@@ -11,6 +11,7 @@ extern "C" {
       return new SelectionItemInformation(info);
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      return NULL;
     }
   }
 
