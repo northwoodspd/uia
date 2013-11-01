@@ -97,12 +97,14 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) ElementsPtr Root_Children(char* errorInfo, const int errorInfoLength) {
+  __declspec(dllexport) int Root_Children(ElementInformation** children, char* errorInfo, const int errorInfoLength) {
     try {
-      return new Elements(Element::Windows);
+      auto windows = Element::Windows;
+      *children = ElementInformation::From(windows);
+      return windows->Length;
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
-      return NULL;
+      return 0;
     }
   }
 

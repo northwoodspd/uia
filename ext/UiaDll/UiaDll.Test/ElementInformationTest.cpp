@@ -103,3 +103,18 @@ TEST_F(ElementInformationTest, ItCanBeRefreshed)
   ASSERT_STREQ("Refreshed", elementInformation.name);
   ASSERT_EQ(123, elementInformation.nativeWindowHandle);
 }
+
+TEST_F(ElementInformationTest, ItCanBeInitializedFromManyElements) {
+  auto elementInformation = ElementInformation::From(gcnew ElementStub("First Element", 123), gcnew ElementStub("Second Element", 456));
+
+  ASSERT_STREQ("First Element", elementInformation[0].name);
+  ASSERT_STREQ("Second Element", elementInformation[1].name);
+  delete[] elementInformation;
+}
+
+TEST_F(ElementInformationTest, ItIsNullIfThereAreNoElements) {
+  ASSERT_EQ(NULL, ElementInformation::From(gcnew array<Element^>(0)));
+
+  array<Element^>^ nullElements = nullptr;
+  ASSERT_EQ(NULL, ElementInformation::From(nullElements));
+}

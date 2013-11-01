@@ -25,6 +25,18 @@ typedef struct _ElementInformation {
     return nullptr != element ? new _ElementInformation(element) : NULL;
   }
 
+  static _ElementInformation* From(...array<Element^>^ elements) {
+    if( nullptr == elements || elements->Length == 0 ) return NULL;
+
+    auto elementInformation = new _ElementInformation[elements->Length];
+    auto index = 0;
+    for each(auto element in elements) {
+      elementInformation[index++].Refresh(element);
+    }
+
+    return elementInformation;
+  }
+
   void Refresh(Element^ element) {
     Reset();
     id = StringHelper::ToUnmanaged(element->Id);

@@ -13,7 +13,7 @@ module Uia
   extend Finder
 
   def self.children
-    Library.root_children.children
+    Library.root_children
   end
 
   def self.find_element(how)

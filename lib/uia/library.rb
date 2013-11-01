@@ -25,6 +25,17 @@ module Uia
       end
     end
 
+    def self.elements_from(name_alias, name, arg_types, &block)
+      attach_function name, arg_types + [:pointer, :pointer, :int], :int
+      define_singleton_method(name_alias) do |*args|
+        elements_pointer = FFI::MemoryPointer.new :pointer
+        can_throw(name, *(args << elements_pointer)).times.collect do |which_element|
+          pointer = elements_pointer.read_pointer + which_element * ElementStruct.size
+          Uia::Element.new(ElementStruct.new(pointer))
+        end
+      end
+    end
+
     # returns nil rather than empty FFI::Struct for Uia::Element
     element_or_nil = lambda { |e| Uia::Element.new(e) unless e.empty? }
 
@@ -40,7 +51,7 @@ module Uia
     attach_function :release_expand_collapse_info, :ExpandCollapse_Release, [:pointer], :void
 
     # root methods
-    attach_throwable_function :root_children, :Root_Children, [], ElementChildrenStruct.by_ref
+    elements_from :root_children, :Root_Children, []
 
     # finding elements
     attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref, &element_or_nil
