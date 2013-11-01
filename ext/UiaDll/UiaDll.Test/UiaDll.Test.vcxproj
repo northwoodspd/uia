@@ -53,13 +53,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_VARIADIC_MAX=10;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gmock\include;C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll;C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)UiaDll.Test\vendor\gmock\include;$(SolutionDir)UiaDll;$(SolutionDir)UiaDll.Test\vendor\gtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>gtestd.lib;gmockd.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gmock\lib;C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gtest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)UiaDll.Test\vendor\gmock\lib;$(SolutionDir)UiaDll.Test\vendor\gtest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>$(TargetPath)</Command>
@@ -70,13 +70,13 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_VARIADIC_MAX=10;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gmock\include;C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll;C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)UiaDll.Test\vendor\gmock\include;$(SolutionDir)UiaDll;$(SolutionDir)UiaDll.Test\vendor\gtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>gtest.lib;gmock.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gmock\lib;C:\Users\Levi\git\northwoods\uia\ext\UiaDll\UiaDll.Test\vendor\gtest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)UiaDll.Test\vendor\gmock\lib;$(SolutionDir)UiaDll.Test\vendor\gtest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>$(TargetPath)</Command>
