@@ -1,6 +1,16 @@
-=== Version 0.0.7
+=== Version 0.0.7 / 2013-11-01
 *	Enhancements
 	*	added a base implementation for the Window pattern
+	*	added support for WindowPattern, TablePattern and TableItemPattern
+	*	Element#as raises UnsupportedPattern if the element does not implement it
+	*	added an Element#select method to filter descendants by:
+		-	pattern
+		-	name 
+		-	id
+
+*	Bug Fixes
+	*	modified ffi calls that return Element arrays to be individually GC'd.
+	This prevents FFI::ManagedStruct from being taken out from underneath you
 
 === Version 0.0.6.1 / 2013-10-30
 * Bug Fixes
