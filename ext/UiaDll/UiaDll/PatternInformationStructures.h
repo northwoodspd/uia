@@ -153,3 +153,14 @@ private:
   }
 
 } TableInformation, *TableInformationPtr;
+
+typedef struct _TableItemInformation {
+  int Column;
+  int Row;
+
+  _TableItemInformation(TableItemPattern::TableItemPatternInformation^ tableItemInfo) {
+    Column = tableItemInfo->Column;
+    Row = tableItemInfo->Row;
+  }
+
+} TableItemInformation, *TableItemInformationPtr;

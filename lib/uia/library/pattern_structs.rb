@@ -134,5 +134,22 @@ module Uia
       end
     end
 
+    class TableItemInformation < FFI::ManagedStruct
+      layout :column, :int,
+             :row, :int
+
+      def column
+        self[:column]
+      end
+
+      def row
+        self[:row]
+      end
+
+      def self.release(pointer)
+        Library.release_table_item_info(pointer)
+      end
+    end
+
   end
 end

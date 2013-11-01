@@ -21,7 +21,7 @@ describe Uia::Patterns::Table do
   end
 
   context '#rows' do
-    Then { data_grid.rows.count == 52 }
+    Then { data_grid.rows.count == data_grid.row_count }
 
     context 'row' do
       Given(:row) { data_grid.rows[0] }

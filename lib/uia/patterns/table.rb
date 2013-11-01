@@ -3,7 +3,7 @@ module Uia
     module Table
       module Row
         def items
-          select pattern: :table_item
+          select(pattern: :table_item).each { |e| e.as :table_item }
         end
       end
 
@@ -20,7 +20,7 @@ module Uia
       end
 
       def rows
-        select(control_type: :data_item).each {|e| e.extend Row }
+        select(control_type: :data_item).each { |e| e.extend Row }
       end
 
       private
