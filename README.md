@@ -66,8 +66,26 @@ button.invoke
 
 ### Patterns
 #### Window
-```ruby
-```
+Decorates your `Element` with the following methods:
+*  `visual_state` - `:minimized, :maximized, :normal`
+*  `visual_state=` - sets the visual state
+*  `can_minimize?` / `can_maximize?`
+*  `modal?`
+*  `topmost?`
+*  `interaction_state` - `:blocked_by_modalwindow, :closing, :not_responding, :ready_for_user_interaction, :running`
+
+#### Value
+*  `value` - returns the value
+*  `value=` - sets the value
+*  `read_only?`
+
+#### Invoke
+*  `invoke` - invokes the control
+
+#### ExpandCollapse
+*  `expand` - expands the element
+*  `collapse` - collapses the element
+*  `expand_collapse_state` - `:collapsed, :expanded, :leaf_node, :partially_expanded`
 
 ## Contributing
 
