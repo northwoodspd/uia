@@ -48,7 +48,7 @@ module Uia
 
     class SelectionItemInformation < FFI::ManagedStruct
       layout :is_selected, :bool,
-             :container, ElementCast.ptr
+             :container, ElementStruct.ptr
 
       def selected?
         self[:is_selected]

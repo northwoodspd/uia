@@ -68,7 +68,7 @@ module Uia
       end
     end
 
-    class ElementStruct < FFI::ManagedStruct
+    class ManagedElementStruct < FFI::ManagedStruct
       include ElementLayout
 
       def self.release(pointer)
@@ -76,7 +76,7 @@ module Uia
       end
     end
 
-    class ElementCast < FFI::Struct
+    class ElementStruct < FFI::Struct
       include ElementLayout
     end
 
@@ -86,8 +86,8 @@ module Uia
 
       def children
         self[:length].times.collect do |i|
-          pointer = self[:items] + i * ElementCast.size
-          Uia::Element.new(ElementCast.new(pointer))
+          pointer = self[:items] + i * ElementStruct.size
+          Uia::Element.new(ElementStruct.new(pointer))
         end
       end
     end

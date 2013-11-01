@@ -30,8 +30,8 @@ module Uia
       define_singleton_method(name_alias) do |*args|
         elements_pointer = FFI::MemoryPointer.new :pointer
         can_throw(name, *(args << elements_pointer)).times.collect do |which_element|
-          pointer = elements_pointer.read_pointer + which_element * ElementStruct.size
-          Uia::Element.new(ElementStruct.new(pointer))
+          pointer = elements_pointer.read_pointer + which_element * ManagedElementStruct.size
+          Uia::Element.new(ManagedElementStruct.new(pointer))
         end
       end
     end
@@ -53,15 +53,15 @@ module Uia
     elements_from :root_children, :Root_Children, []
 
     # finding elements
-    attach_throwable_function :find_by_id, :Element_FindById, [:string], ElementStruct.by_ref, &element_or_nil
-    attach_throwable_function :find_by_name, :Element_FindByName, [:string], ElementStruct.by_ref, &element_or_nil
-    attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ElementStruct.by_ref, &element_or_nil
-    attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ElementStruct.by_ref, &element_or_nil
-    attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ElementStruct.by_ref
+    attach_throwable_function :find_by_id, :Element_FindById, [:string], ManagedElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_by_name, :Element_FindByName, [:string], ManagedElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ManagedElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ManagedElementStruct.by_ref, &element_or_nil
+    attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ManagedElementStruct.by_ref
 
     # element methods
-    attach_throwable_function :find_child_by_id, :Element_FindChildById, [:pointer, :string], ElementStruct.by_ref, &element_or_nil
-    attach_throwable_function :find_child_by_name, :Element_FindChildByName, [:pointer, :string], ElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_child_by_id, :Element_FindChildById, [:pointer, :string], ManagedElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_child_by_name, :Element_FindChildByName, [:pointer, :string], ManagedElementStruct.by_ref, &element_or_nil
     elements_from :children, :Element_Children, [:pointer]
     elements_from :descendants, :Element_Descendants, [:pointer]
     attach_throwable_function :click, :Element_Click, [:pointer], :void
