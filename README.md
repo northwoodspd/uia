@@ -32,10 +32,32 @@ main_window = find_element id: 'MainFormWindow'
 
 You can locate elements based on the following criteria:
 
-* `:id`         - find by their `AutomationId`
-* `:pid`        - find an element by their process id
-* `:handle`     - find an element by their native window handle
+* `:id`         - find by their `AutomationId` (`String` and `Regexp`)
+* `:pid`        - find an element by their process id  (`String` and `Regexp`)
+* `:handle`     - find an element by their native window handle (`Fixnum`)
 * `:runtime_id` - find an element by their `RuntimeId` (i.e. `[42, 12345]`)
+
+### `Element`
+The `Element` class is a representation of the [`AutomationElement`](http://msdn.microsoft.com/en-us/library/system.windows.automation.automationelement.aspx) class in Microsoft UIA. It is the object that is returned from the root `Uia#find_element` as well as the `Element#find` and `Element#select` methods.
+
+#### Properties
+
+*  `id` - returns the automation id of th element
+*  `name` - returns the name of the element
+*  `handle` - returns the native window handle of the element
+*  `class_name` - returns the class name of the element
+*  `patterns` - returns the patterns that element implements (i.e. `[:window, :transform]`)
+
+#### Methods
+
+##### #as
+The `#as` method will decorate the `Element` with the specific pattern that you would like to interact with.
+
+```ruby
+button = Uia.find_element(id: /MainForm/).find(id: 'aboutButton').as :invoke
+button.invoke
+```
+
 
 ## Contributing
 
