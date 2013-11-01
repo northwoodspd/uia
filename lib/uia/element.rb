@@ -9,7 +9,7 @@ module Uia
       @default = lambda { [:unknown] }
     end
 
-    element_attr :id, :name, :handle, :runtime_id, :enabled?, :class_name
+    element_attr :id, :name, :handle, :runtime_id, :enabled?, :class_name, :children, :descendants
 
     def control_type
       Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first
@@ -38,14 +38,6 @@ module Uia
 
     def patterns
       @element.pattern_ids.map {|id| Library::Constants::Patterns.find(@default) { |_, v| v == id }.first }
-    end
-
-    def children
-      @element.children
-    end
-
-    def descendants
-      @element.descendants
     end
 
     def click
