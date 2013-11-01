@@ -23,9 +23,7 @@ Getting started with `uia` is easy. Simply require `uia` and then include the `U
 ```ruby
 require 'uia'
 
-include Uia
-
-main_window = find_element id: 'MainFormWindow'
+main_window = Uia.find_element id: 'MainFormWindow'
 
 # returns all elements under main_window that are of control type button
 main_window.select(control_type: :button)
