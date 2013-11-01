@@ -55,6 +55,21 @@ describe Uia::Element do
     end
   end
 
+  context '#select' do
+    context 'control_type' do
+      When(:buttons) { element.select(control_type: :radio_button) }
+      Then { buttons.map(&:control_type) == [:radio_button] * 3 }
+    end
+
+    context 'pattern' do
+      Then { element.select(pattern: :value).count == 4 }
+    end
+
+    context 'combinations' do
+      Then { element.select(control_type: :button, name: 'About')[0].id == 'aboutButton' }
+    end
+  end
+
   context '#click' do
     Given(:about) { element.children.find { |c| c.name == 'About' } }
     Given(:disabled_checkbox) { element.children.find { |c| c.name == 'checkBoxDisabled' } }

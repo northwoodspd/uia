@@ -29,6 +29,21 @@ module Uia
       end
     end
 
+    def locators_match?(locator)
+      locator.all? do |locator, value|
+        case locator
+          when :pattern
+            patterns.include? value
+          else
+            send(locator) == value
+        end
+      end
+    end
+
+    def select(locator)
+      descendants.select {|e| e.locators_match? locator }
+    end
+
     def as(pattern)
       which =  "Uia::Patterns::#{pattern.to_s.capitalize}".split('::').reduce(Object) do |m, current|
         m.const_get current.split('_').map(&:capitalize).join
