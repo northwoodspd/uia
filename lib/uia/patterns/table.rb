@@ -13,6 +13,10 @@ module Uia
         table_info.headers
       end
 
+      def rows
+        select control_type: :data_item
+      end
+
       private
       def table_info
         Library.table_info(@element)
