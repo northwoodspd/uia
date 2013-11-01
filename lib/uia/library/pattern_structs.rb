@@ -115,7 +115,7 @@ module Uia
     class TableInformation < FFI::ManagedStruct
       layout :row_count, :int,
              :column_count, :int,
-             :headers, ElementChildrenCast.ptr
+             :headers, Elements.ptr
 
       def row_count
         self[:row_count]

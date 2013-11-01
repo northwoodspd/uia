@@ -41,7 +41,6 @@ module Uia
 
     # cleanup
     attach_function :release_element, :Element_Release, [:pointer], :void
-    attach_function :release_elements, :Element_ReleaseMany, [:pointer], :void
     attach_function :release_window_info, :Window_Release, [:pointer], :void
     attach_function :release_value_info, :Value_Release, [:pointer], :void
     attach_function :release_toggle_info, :Toggle_Release, [:pointer], :void

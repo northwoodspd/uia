@@ -68,23 +68,6 @@ module Uia
       end
     end
 
-    module ElementChildrenLayout
-      def self.included(base)
-        base.class_eval do
-          layout :length, :int,
-                 :items, :pointer
-
-          def children
-            self[:length].times.collect do |i|
-              pointer = self[:items] + i * ElementCast.size
-              Uia::Element.new(ElementCast.new(pointer))
-            end
-          end
-        end
-      end
-    end
-
-
     class ElementStruct < FFI::ManagedStruct
       include ElementLayout
 
@@ -97,16 +80,16 @@ module Uia
       include ElementLayout
     end
 
-    class ElementChildrenStruct < FFI::ManagedStruct
-      include ElementChildrenLayout
+    class Elements < FFI::Struct
+      layout :length, :int,
+             :items, :pointer
 
-      def self.release(pointer)
-        Library.release_elements(pointer)
+      def children
+        self[:length].times.collect do |i|
+          pointer = self[:items] + i * ElementCast.size
+          Uia::Element.new(ElementCast.new(pointer))
+        end
       end
-    end
-
-    class ElementChildrenCast < FFI::Struct
-      include ElementChildrenLayout
     end
   end
 end
