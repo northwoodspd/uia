@@ -22,5 +22,13 @@ describe Uia::Patterns::Table do
 
   context '#rows' do
     Then { data_grid.rows.count == 52 }
+
+    context 'row' do
+      Given(:row) { data_grid.rows[0] }
+
+      context '#items' do
+        Then { row.items.map(&:name) == ['John Doe', '12/15/1967', 'FL'] }
+      end
+    end
   end
 end

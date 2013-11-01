@@ -1,6 +1,12 @@
 module Uia
   module Patterns
     module Table
+      module Row
+        def items
+          select pattern: :table_item
+        end
+      end
+
       def row_count
         table_info.row_count
       end
@@ -14,7 +20,7 @@ module Uia
       end
 
       def rows
-        select control_type: :data_item
+        select(control_type: :data_item).each {|e| e.extend Row }
       end
 
       private
