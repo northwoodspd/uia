@@ -14,7 +14,7 @@ describe Uia::Element do
     Then { expect(element.find(id: 'textField')).to be_enabled }
 
     context 'visibility' do
-      When { element.as(:window).visual_state = :minimized; element.refresh }
+      When { element.as(:window).visual_state = :minimized }
       Then { element.visible? == false }
     end
 

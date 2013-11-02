@@ -15,8 +15,9 @@ module Uia
       @default = lambda { [:unknown] }
     end
 
-    element_attr :id, :name, :handle, :runtime_id, :enabled?, :visible?,
+    element_attr :id, :name, :handle, :runtime_id,
                  :class_name, :children, :descendants
+    refreshed_element_attr :enabled?, :visible?
 
     def control_type
       Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first
