@@ -9,6 +9,7 @@ describe Uia::Patterns::RangeValue do
     Then { range_value.maximum == 100.0 }
     Then { range_value.small_change == 1.0 }
     Then { range_value.large_change == 0.0 }
+    Then { range_value.read_only? == false }
   end
 
   context '#value=' do

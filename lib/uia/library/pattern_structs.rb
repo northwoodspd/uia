@@ -1,3 +1,5 @@
+require 'uia/library/struct_attributes'
+
 module Uia
   module Library
     class ValueInformation < FFI::ManagedStruct
@@ -152,6 +154,8 @@ module Uia
     end
 
     class RangeValueInformation < FFI::ManagedStruct
+      extend StructAttributes
+
       layout :value, :double,
              :minimum, :double,
              :maximum, :double,
@@ -159,29 +163,7 @@ module Uia
              :large_change, :double,
              :is_read_only, :bool
 
-      def value
-        self[:value]
-      end
-
-      def minimum
-        self[:minimum]
-      end
-
-      def maximum
-        self[:maximum]
-      end
-
-      def small_change
-        self[:small_change]
-      end
-
-      def large_change
-        self[:large_change]
-      end
-
-      def read_only?
-        self[:is_read_only]
-      end
+      struct_attr :value, :minimum, :maximum, :small_change, :large_change, [:read_only?, :is_read_only]
 
       def self.release(pointer)
         Library.release_range_value_info(pointer)

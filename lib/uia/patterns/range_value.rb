@@ -2,8 +2,9 @@ module Uia
   module Patterns
     module RangeValue
       extend PatternInfoAttributes
+
       pattern_attr :value, :minimum, :maximum,
-                   :small_change, :large_change
+                   :small_change, :large_change, :read_only?
 
       def value=(num)
         Library.set_range_value @element, num
