@@ -3,16 +3,12 @@ require 'uia/library/struct_attributes'
 module Uia
   module Library
     class ValueInformation < FFI::ManagedStruct
+      extend StructAttributes
+
       layout :is_read_only, :bool,
              :value, :string
 
-      def read_only?
-        self[:is_read_only]
-      end
-
-      def value
-        self[:value]
-      end
+      struct_attr [:read_only?, :is_read_only], :value
 
       def self.release(pointer)
         Library.release_value_info(pointer)
@@ -78,6 +74,8 @@ module Uia
     end
 
     class WindowInformation < FFI::ManagedStruct
+      extend StructAttributes
+
       layout :visual_state, :string,
              :interaction_state, :string,
              :can_minimize, :bool,
@@ -85,29 +83,8 @@ module Uia
              :is_modal, :bool,
              :is_topmost, :bool
 
-      def visual_state
-        self[:visual_state]
-      end
-
-      def can_minimize?
-        self[:can_minimize]
-      end
-
-      def can_maximize?
-        self[:can_maximize]
-      end
-
-      def modal?
-        self[:is_modal]
-      end
-
-      def topmost?
-        self[:is_topmost]
-      end
-
-      def interaction_state
-        self[:interaction_state]
-      end
+      struct_attr :visual_state, [:can_minimize?, :can_minimize], [:can_maximize?, :can_maximize],
+                  [:modal?, :is_modal], [:topmost?, :is_topmost], :interaction_state
 
       def self.release(pointer)
         Library.release_window_info(pointer)
@@ -115,17 +92,13 @@ module Uia
     end
 
     class TableInformation < FFI::ManagedStruct
+      extend StructAttributes
+
       layout :row_count, :int,
              :column_count, :int,
              :headers, Elements.ptr
 
-      def row_count
-        self[:row_count]
-      end
-
-      def column_count
-        self[:column_count]
-      end
+      struct_attr :row_count, :column_count
 
       def headers
         self[:headers].children
@@ -137,16 +110,12 @@ module Uia
     end
 
     class TableItemInformation < FFI::ManagedStruct
+      extend StructAttributes
+
       layout :column, :int,
              :row, :int
 
-      def column
-        self[:column]
-      end
-
-      def row
-        self[:row]
-      end
+      struct_attr :column, :row
 
       def self.release(pointer)
         Library.release_table_item_info(pointer)
@@ -169,6 +138,5 @@ module Uia
         Library.release_range_value_info(pointer)
       end
     end
-
   end
 end

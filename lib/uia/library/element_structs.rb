@@ -1,10 +1,14 @@
 require 'ffi'
 
+require 'uia/library/struct_attributes'
+
 module Uia
   module Library
     module ElementLayout
       def self.included(base)
         base.class_eval do
+          extend StructAttributes
+
           layout :handle, :int,
                  :runtime_id, :pointer,
                  :number_of_ids, :int,
@@ -17,24 +21,11 @@ module Uia
                  :is_enabled, :bool,
                  :is_visible, :bool
 
-          def id
-            self[:id]
-          end
-
-          def name
-            self[:name]
-          end
-
-          def handle
-            self[:handle]
-          end
+          struct_attr :id, :name, :handle, :control_type_id, :class_name,
+                      [:enabled?, :is_enabled], [:visible?, :is_visible]
 
           def runtime_id
             self[:runtime_id].read_array_of_int(number_of_ids)
-          end
-
-          def control_type_id
-            self[:control_type_id]
           end
 
           def pattern_ids
@@ -51,18 +42,6 @@ module Uia
 
           def empty?
             to_ptr.address == 0
-          end
-
-          def enabled?
-            self[:is_enabled]
-          end
-
-          def visible?
-            self[:is_visible]
-          end
-
-          def class_name
-            self[:class_name]
           end
 
           private
