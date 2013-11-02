@@ -1,3 +1,7 @@
+=== Version 0.0.7.2 / 2013-11-02
+*	Enhancements
+	*	Element#find can specify the scope of the search
+
 === Version 0.0.7.1 / 2013-11-01
 *	Bug Fixes
 	*	Fixes issue with ComboBox controls for Selection#selection_items
