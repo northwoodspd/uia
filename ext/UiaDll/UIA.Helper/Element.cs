@@ -97,9 +97,9 @@ namespace UIA.Helper
             return FindFirst(automationId.IdCondition());
         }
 
-        public Element ChildById(string automationId)
+        public Element ChildById(string automationId, TreeScope scope)
         {
-            return FindFirst(TreeScope.Descendants, automationId.IdCondition());
+            return FindFirst(scope, automationId.IdCondition());
         }
 
         public static Element ByName(string name)
@@ -107,9 +107,9 @@ namespace UIA.Helper
             return FindFirst(new PropertyCondition(AutomationElement.NameProperty, name));
         }
 
-        public Element ChildByName(string name)
+        public Element ChildByName(string name, TreeScope scope)
         {
-            return FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, name));
+            return FindFirst(scope, new PropertyCondition(AutomationElement.NameProperty, name));
         }
 
         public static Element ByProcessId(int processId)

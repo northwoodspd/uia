@@ -61,8 +61,8 @@ module Uia
     attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ManagedElementStruct.by_ref
 
     # element methods
-    attach_throwable_function :find_child_by_id, :Element_FindChildById, [:pointer, :string], ManagedElementStruct.by_ref, &element_or_nil
-    attach_throwable_function :find_child_by_name, :Element_FindChildByName, [:pointer, :string], ManagedElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_child_by_id, :Element_FindChildById, [:pointer, :string, :string], ManagedElementStruct.by_ref, &element_or_nil
+    attach_throwable_function :find_child_by_name, :Element_FindChildByName, [:pointer, :string, :string], ManagedElementStruct.by_ref, &element_or_nil
     elements_from :children, :Element_Children, [:pointer]
     elements_from :descendants, :Element_Descendants, [:pointer]
     attach_throwable_function :click, :Element_Click, [:pointer], :void

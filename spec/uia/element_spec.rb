@@ -58,6 +58,10 @@ describe Uia::Element do
       Then { element.find(name: 'No option selected') != nil }
       Then { element.find(name: 'does not exist') == nil }
     end
+
+    context 'limiting scope' do
+      Then { element.find(name: 'label2', scope: :children) == nil }
+    end
   end
 
   context '#select' do
