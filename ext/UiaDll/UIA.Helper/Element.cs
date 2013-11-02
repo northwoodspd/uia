@@ -47,6 +47,11 @@ namespace UIA.Helper
             get { return _element.Current.IsEnabled; }
         }
 
+        public virtual bool IsVisible
+        {
+            get { return _element.Current.IsOffscreen == false; }
+        }
+
         public virtual int NativeWindowHandle
         {
             get { return _element.Current.NativeWindowHandle; }

@@ -34,6 +34,12 @@ public:
     void set(bool value) { _isEnabled = value; }
   }
 
+  virtual property bool IsVisible
+  {
+    bool get() override { return _isVisible; }
+    void set(bool value) { _isVisible = value; }
+  }
+
   virtual property array<int>^ RuntimeId
   {
     array<int>^ get() override { return _runtimeIds; }
@@ -70,4 +76,5 @@ private:
   int _nativeWindowHandle;
   int _controlTypeId;
   bool _isEnabled;
+  bool _isVisible;
 };

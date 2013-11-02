@@ -14,7 +14,8 @@ module Uia
                  :patterns, :pointer,
                  :patterns_length, :int,
                  :id, :string,
-                 :is_enabled, :bool
+                 :is_enabled, :bool,
+                 :is_visible, :bool
 
           def id
             self[:id]
@@ -54,6 +55,10 @@ module Uia
 
           def enabled?
             self[:is_enabled]
+          end
+
+          def visible?
+            self[:is_visible]
           end
 
           def class_name

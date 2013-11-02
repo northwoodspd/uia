@@ -14,6 +14,7 @@ typedef struct _ElementInformation {
   char* id;
 
   bool isEnabled;
+  bool isVisible;
 
   _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL) {}
 
@@ -50,6 +51,7 @@ typedef struct _ElementInformation {
     patternsLength = element->SupportedPatternIds->Length;
 
     isEnabled = element->IsEnabled;
+    isVisible = element->IsVisible;
   }
 
   ~_ElementInformation() {

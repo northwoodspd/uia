@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Uia::Element do
   Given(:element) { Uia.find_element(id: 'MainFormWindow') }
   Given(:about_box) { Uia.find_element(id: 'AboutBox') }
+  Given { element.as(:window).visual_state = :normal }
 
   context 'properties' do
     let(:raw_element) { element.instance_variable_get(:@element) }
@@ -11,6 +12,11 @@ describe Uia::Element do
     Then { element.id == 'MainFormWindow' }
     Then { element.class_name =~ /Forms.*app/i }
     Then { expect(element.find(id: 'textField')).to be_enabled }
+
+    context 'visibility' do
+      When { element.as(:window).visual_state = :minimized; element.refresh }
+      Then { element.visible? == false }
+    end
 
     context '#control_type' do
       Then { element.control_type == :window }
