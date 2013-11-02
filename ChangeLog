@@ -1,3 +1,8 @@
+=== Version 0.0.7.3 / 2013-11-02
+*	Enhancements
+	*	Element#visible?
+	*	added support for RangeValuePattern
+
 === Version 0.0.7.2 / 2013-11-02
 *	Enhancements
 	*	Element#find can specify the scope of the search
