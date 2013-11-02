@@ -164,3 +164,21 @@ typedef struct _TableItemInformation {
   }
 
 } TableItemInformation, *TableItemInformationPtr;
+
+typedef struct _RangeValueInformation {
+  double Value;
+  double Minimum;
+  double Maximum;
+  double SmallChange;
+  double LargeChange;
+  bool IsReadOnly;
+
+  _RangeValueInformation(RangeValuePattern::RangeValuePatternInformation^ rangeValueInfo) {
+    Value = rangeValueInfo->Value;
+    Minimum = rangeValueInfo->Minimum;
+    Maximum = rangeValueInfo->Maximum;
+    SmallChange =  rangeValueInfo->SmallChange;
+    LargeChange = rangeValueInfo->LargeChange;
+    IsReadOnly = rangeValueInfo->IsReadOnly;
+  }
+} RangeValueInformation, *RangeValueInformationPtr;

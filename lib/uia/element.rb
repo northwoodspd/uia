@@ -1,4 +1,5 @@
 require 'uia/library/element_attributes'
+require 'uia/library/pattern_info_attributes'
 
 module Uia
   class UnsupportedPattern < StandardError

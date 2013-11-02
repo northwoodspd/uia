@@ -49,6 +49,7 @@ module Uia
     attach_function :release_table_info, :Table_Release, [:pointer], :void
     attach_function :release_table_item_info, :TableItem_Release, [:pointer], :void
     attach_function :release_expand_collapse_info, :ExpandCollapse_Release, [:pointer], :void
+    attach_function :release_range_value_info, :RangeValue_Release, [:pointer], :void
 
     # root methods
     elements_from :root_children, :Root_Children, []
@@ -102,6 +103,10 @@ module Uia
 
     # TableItemPattern methods
     attach_throwable_function :table_item_info, :TableItem_Information, [:pointer], TableItemInformation.by_ref
+
+    # RangeValuePattern methods
+    attach_throwable_function :range_value_info, :RangeValue_Information, [:pointer], RangeValueInformation.by_ref
+    attach_throwable_function :set_range_value, :RangeValue_SetValue, [:pointer, :double], :void
 
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count

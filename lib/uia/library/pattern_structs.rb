@@ -151,5 +151,42 @@ module Uia
       end
     end
 
+    class RangeValueInformation < FFI::ManagedStruct
+      layout :value, :double,
+             :minimum, :double,
+             :maximum, :double,
+             :small_change, :double,
+             :large_change, :double,
+             :is_read_only, :bool
+
+      def value
+        self[:value]
+      end
+
+      def minimum
+        self[:minimum]
+      end
+
+      def maximum
+        self[:maximum]
+      end
+
+      def small_change
+        self[:small_change]
+      end
+
+      def large_change
+        self[:large_change]
+      end
+
+      def read_only?
+        self[:is_read_only]
+      end
+
+      def self.release(pointer)
+        Library.release_range_value_info(pointer)
+      end
+    end
+
   end
 end
