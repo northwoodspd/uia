@@ -1,5 +1,6 @@
 require 'uia/library/element_attributes'
 require 'uia/library/pattern_info_attributes'
+require 'uia/keys'
 
 module Uia
   class UnsupportedPattern < StandardError
@@ -24,8 +25,8 @@ module Uia
       Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first
     end
 
-    def send_keys(keys_to_send)
-      Library.send_keys @element, keys_to_send
+    def send_keys(*keys)
+      Library.send_keys @element, Keys.encode(keys)
     end
 
     def refresh

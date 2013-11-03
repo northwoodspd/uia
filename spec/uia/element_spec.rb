@@ -56,7 +56,7 @@ describe Uia::Element do
 
   context '#send_keys' do
     Given(:text_field) { element.find(id: 'textField').as :value }
-    When { text_field.send_keys 'abcde{LEFT 3} fgh ' }
+    When { text_field.send_keys 'abcde', [:left] * 3, ' fgh ' }
     Then { text_field.value == 'ab fgh cde'}
   end
 
