@@ -1,4 +1,5 @@
 module Uia
+  class InvalidKey < StandardError; end
   class Keys
     # http://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys(v=vs.110).aspx
     KEYS = {
@@ -54,7 +55,7 @@ module Uia
                      when String
                        encode_str(key)
                      when Symbol
-                       KEYS[key]
+                       encode_sym(key)
                      when Array
                        "#{encode([key.shift])}(#{encode(key)})"
                    end
@@ -63,6 +64,12 @@ module Uia
 
     def self.encode_str(s)
       s.gsub(/([#{SPECIAL_KEYS.join ''}])/, '{\1}')
+    end
+
+    def self.encode_sym(sym)
+      found = KEYS[sym]
+      raise InvalidKey, "#{sym} is not a valid key" unless found
+      found
     end
   end
 end
