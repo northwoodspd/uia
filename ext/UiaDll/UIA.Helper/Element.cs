@@ -22,6 +22,12 @@ namespace UIA.Helper
             return (TPattern) _element.GetCurrentPattern(pattern);
         }
 
+        public void SendKeys(string keysToSend)
+        {
+            _element.SetFocus();
+            System.Windows.Forms.SendKeys.SendWait(keysToSend);
+        }
+
         public virtual int[] RuntimeId
         {
             get { return _element.GetRuntimeId(); }

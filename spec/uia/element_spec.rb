@@ -54,6 +54,12 @@ describe Uia::Element do
     end
   end
 
+  context '#send_keys' do
+    Given(:text_field) { element.find(id: 'textField').as :value }
+    When { text_field.send_keys 'abcde{LEFT 3} fgh ' }
+    Then { text_field.value == 'ab fgh cde'}
+  end
+
   context '#find' do
     context 'id' do
       Then { element.find(id: 'textField') != nil }

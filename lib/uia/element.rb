@@ -24,6 +24,10 @@ module Uia
       Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first
     end
 
+    def send_keys(keys_to_send)
+      Library.send_keys @element, keys_to_send
+    end
+
     def refresh
       Library.refresh @element
       self
