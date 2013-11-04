@@ -1,6 +1,7 @@
 === Version 0.0.8
 *	Enhancements
 	*	Element#send_keys
+	*	Window#close
 
 === Version 0.0.7.3 / 2013-11-02
 *	Enhancements
