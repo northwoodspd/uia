@@ -6,6 +6,7 @@ module Uia
         :shift => '+',
         :control => '^',
         :alt => '%',
+        :space => ' ',
         :backspace => '{BS}',
         :break => '{BREAK}',
         :caps_lock => '{CAPSLOCK}',
