@@ -28,6 +28,8 @@ module Uia
         find_by_runtime_id how[:runtime_id]
       when how[:handle]
         find_by_handle how[:handle]
+      when how[:title]
+        find_by_title how[:title]
       else
         raise BadLocator, "#{how} is not a valid locator"
     end

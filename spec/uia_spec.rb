@@ -16,7 +16,7 @@ describe Uia do
 
     context 'by name' do
       Then { expect(Uia.find_element(name: 'MainFormWindow')).to be_instance_of(Element) }
-      Then { expect(Uia.find_element(name: /[Mm]ain.*Window/ )).to be_instance_of(Element) }
+      Then { expect(Uia.find_element(name: /[Mm]ain.*Window/)).to be_instance_of(Element) }
       Then { Uia.find_element(name: 'not there') == nil }
     end
 
@@ -37,6 +37,12 @@ describe Uia do
     context 'by window handle' do
       Then { expect(Uia.find_element(handle: main_window.handle)).to be_instance_of(Element) }
       Then { expect { Uia.find_element(handle: 0x0) }.to raise_error }
+    end
+
+    context 'by title' do
+      Then { expect(Uia.find_element(title: 'MainFormWindow')).to be_instance_of(Element) }
+      Then { expect(Uia.find_element(title: /Main[Ff]orm/)).to be_instance_of(Element) }
+      Then { Uia.find_element(title: 'probably will not find') == nil }
     end
 
     context 'invalid locators' do

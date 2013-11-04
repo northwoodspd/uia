@@ -1,3 +1,5 @@
+require 'uia/library/win32'
+
 module Uia
   module Finder
     def find_by_id(id)
@@ -18,6 +20,18 @@ module Uia
 
     def find_by_handle(handle)
       Library.find_by_handle handle
+    end
+
+    def find_by_title(title)
+      found_window = Win32.find_window do |handle|
+        case title
+          when Regexp
+            Win32.window_title(handle) =~ title
+          else
+            Win32.window_title(handle) == title
+        end
+      end
+      find_by_handle found_window if found_window
     end
 
     private
