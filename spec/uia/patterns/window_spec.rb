@@ -28,4 +28,18 @@ describe Uia::Patterns::Window do
       Then { window.visual_state == :normal }
     end
   end
+
+  context '#close' do
+    def notepad_window
+      Uia.find_element(title: /^Untitled.*Notepad/i)
+    end
+
+    Given(:notepad) do
+      ChildProcess.build('notepad.exe').start
+      wait_until { notepad_window }.as :window
+    end
+    When { notepad.close }
+    Then { notepad_window == nil }
+  end
+
 end

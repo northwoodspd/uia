@@ -9,6 +9,16 @@ require 'uia'
 
 include Uia
 
+def wait_until(timeout=10, &block)
+  start = Time.now
+  until (result = block.call) || (Time.now - start > timeout)
+    sleep 0.25
+  end
+
+  raise 'Timed out' unless result
+  result
+end
+
 RSpec.configure do |config|
   config.before(:all) do
     @app = ChildProcess.build('spec/app/WindowsForms.exe').start

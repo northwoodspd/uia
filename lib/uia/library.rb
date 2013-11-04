@@ -76,6 +76,7 @@ module Uia
     # WindowPattern methods
     attach_throwable_function :window_information, :Window_Information, [:pointer], WindowInformation.by_ref
     attach_throwable_function :set_visual_state, :Window_SetVisualState, [:pointer, :string], :void
+    attach_throwable_function :close_window, :Window_Close, [:pointer], :void
 
     # ValuePattern methods
     attach_throwable_function :set_value, :Value_Set, [:pointer, :string], :void

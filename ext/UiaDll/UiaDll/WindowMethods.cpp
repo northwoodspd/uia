@@ -21,4 +21,12 @@ extern "C" {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
   }
+
+  __declspec(dllexport) void Window_Close(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
+    try {
+      Find(element)->As<WindowPattern^>(WindowPattern::Pattern)->Close();
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+    }
+  }
 }

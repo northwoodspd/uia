@@ -1,6 +1,10 @@
 module Uia
   module Patterns
     module Window
+      def close
+        Library.close_window @element
+      end
+
       def visual_state
         window_information.visual_state.to_snake_case_sym
       end
