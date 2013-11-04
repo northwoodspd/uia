@@ -16,6 +16,9 @@ module Uia
     attach_function :init, :initialize, [:string], :void
     init(uia_directory)
 
+    attach_function :warm_up_automation, :Automation_WarmUp, [], :void
+    warm_up_automation
+
     def self.attach_throwable_function(name_alias, name, arg_types, return_type, &block)
       attach_function name, arg_types + [:pointer, :int], return_type
       define_singleton_method(name_alias) do |*args|
