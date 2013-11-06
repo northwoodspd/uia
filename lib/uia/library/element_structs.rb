@@ -63,17 +63,5 @@ module Uia
     class ElementStruct < FFI::Struct
       include ElementLayout
     end
-
-    class Elements < FFI::Struct
-      layout :length, :int,
-             :items, :pointer
-
-      def children
-        self[:length].times.collect do |i|
-          pointer = self[:items] + i * ElementStruct.size
-          Uia::Element.new(ElementStruct.new(pointer))
-        end
-      end
-    end
   end
 end

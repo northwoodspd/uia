@@ -16,7 +16,7 @@ module Uia
       end
 
       def headers
-        table_info.headers
+        Library.table_headers @element
       end
 
       def rows

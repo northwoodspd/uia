@@ -41,8 +41,3 @@ TEST(WindowInformation, CanBeInitialized) {
   ASSERT_STREQ("Minimized", windowInformation.VisualState);
   ASSERT_STREQ("Closing", windowInformation.InteractionState);
 }
-
-TEST(TableInformation, NullHeadersYieldsEmptyElements) {
-  auto tableInformation = TableInformation(0, 0, nullptr);
-  ASSERT_EQ(0, tableInformation.Headers->length);
-}

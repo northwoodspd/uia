@@ -15,10 +15,6 @@ extern "C" {
     delete elementInformation;
   }
 
-  __declspec(dllexport) void Element_ReleaseMany(ElementsPtr elements) {
-    delete elements;
-  }
-
   __declspec(dllexport) void Element_Refresh(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
     try {
       element->Refresh(Find(element));

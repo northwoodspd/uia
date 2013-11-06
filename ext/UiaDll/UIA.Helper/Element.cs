@@ -103,6 +103,11 @@ namespace UIA.Helper
             return new Element(element);
         }
 
+        public static Element[] From(AutomationElement[] elements)
+        {
+            return elements.Select(x => new Element(x)).ToArray();
+        }
+
         public static Element ById(string automationId)
         {
             return FindFirst(automationId.IdCondition());

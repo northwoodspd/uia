@@ -65,26 +65,3 @@ private:
   }
 
 } ElementInformation, *ElementInformationPtr;
-
-typedef struct _Elements {
-  int length;
-  ElementInformation* elements;
-
-  _Elements() : length(0), elements(NULL) {}
-
-  _Elements(array<Element^>^ elements) : length(0), elements(NULL) {
-    if( nullptr == elements ) return;
-
-    length = elements->Length;
-    if( length > 0 ) this->elements = new ElementInformation[length];
-
-    auto index = 0;
-    for each(auto element in elements) {
-      this->elements[index++].Refresh(element);
-    }
-  }
-
-  ~_Elements() {
-    delete[] elements;
-  }
-} Elements, *ElementsPtr;

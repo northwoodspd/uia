@@ -13,4 +13,14 @@ extern "C" {
       return NULL;
     }
   }
+
+  __declspec(dllexport) int Table_Headers(ElementInformationPtr element, ElementInformation** headers, char* errorInfo, const int errorInfoLength) {
+    try {
+      auto headerElements = Find(element)->As<TablePattern^>(TablePattern::Pattern)->Current.GetColumnHeaders();
+      *headers = ElementInformation::From(Element::From(headerElements));
+      return headerElements->Length;
+    } catch(Exception^ e) {
+      return 0;
+    }
+  }
 }

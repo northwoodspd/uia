@@ -95,14 +95,9 @@ module Uia
       extend StructAttributes
 
       layout :row_count, :int,
-             :column_count, :int,
-             :headers, Elements.ptr
+             :column_count, :int
 
       struct_attr :row_count, :column_count
-
-      def headers
-        self[:headers].children
-      end
 
       def self.release(pointer)
         Library.release_table_info(pointer)

@@ -127,31 +127,11 @@ private:
 typedef struct _TableInformation {
   int RowCount;
   int ColumnCount;
-  ElementsPtr Headers;
-
-  _TableInformation(int rowCount, int columnCount, ...array<Element^> ^headers) {
-    init(rowCount, columnCount, headers);
-  }
 
   _TableInformation(TablePattern::TablePatternInformation^ tableInfo) {
-    auto headers = tableInfo->GetColumnHeaders();
-    auto toElementFunc = gcnew Func<AutomationElement^, Element^>(Element::From);
-
-    init(tableInfo->RowCount, tableInfo->ColumnCount, Enumerable::ToArray(Enumerable::Select<AutomationElement^, Element^>(headers, toElementFunc)));
+    RowCount = tableInfo->RowCount;
+    ColumnCount = tableInfo->ColumnCount;
   }
-
-  ~_TableInformation() {
-    delete Headers;
-  }
-
-private:
-  void init(int rowCount, int columnCount, ...array<Element^> ^headers) {
-    RowCount = rowCount;
-    ColumnCount = columnCount;
-
-    Headers = new Elements(headers);
-  }
-
 } TableInformation, *TableInformationPtr;
 
 typedef struct _TableItemInformation {

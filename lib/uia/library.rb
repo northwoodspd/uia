@@ -105,6 +105,7 @@ module Uia
 
     # TablePattern methods
     attach_throwable_function :table_info, :Table_Information, [:pointer], TableInformation.by_ref
+    elements_from :table_headers, :Table_Headers, [:pointer]
 
     # TableItemPattern methods
     attach_throwable_function :table_item_info, :TableItem_Information, [:pointer], TableItemInformation.by_ref
