@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Uia::Element do
   Given(:element) { Uia.find_element(id: 'MainFormWindow') }
-  Given(:about_box) { Uia.find_element(id: 'AboutBox') }
+  Given(:about_box) { wait_until { Uia.find_element(id: 'AboutBox') } }
   Given { element.as(:window).visual_state = :normal }
 
   context 'properties' do
