@@ -71,6 +71,11 @@ describe Uia::Element do
       Then { element.find(name: 'does not exist') == nil }
     end
 
+    context 'invalid' do
+      When(:bad_locator) { element.find(bad_locator: 123) }
+      Then { bad_locator.should have_failed BadLocator, "{:bad_locator=>123} is not a valid locator" }
+    end
+
     context 'limiting scope' do
       Then { element.find(name: 'label2', scope: :children) == nil }
     end

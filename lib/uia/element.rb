@@ -42,6 +42,8 @@ module Uia
           Library::find_child_by_id(@element, locator[:id], scope)
         when locator[:name]
           Library::find_child_by_name(@element, locator[:name], scope)
+        else
+          raise BadLocator, locator
       end
     end
 
