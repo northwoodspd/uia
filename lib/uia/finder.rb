@@ -22,8 +22,8 @@ module Uia
       Library.find_by_handle handle
     end
 
-    def find_by_title(title)
-      found_window = Win32.find_window do |handle|
+    def find_by_title(title, parent=0)
+      found_window = Win32.find_window(parent) do |handle|
         case title
           when Regexp
             Win32.window_title(handle) =~ title

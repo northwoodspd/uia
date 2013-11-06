@@ -71,6 +71,10 @@ describe Uia::Element do
       Then { element.find(name: 'does not exist') == nil }
     end
 
+    context 'title' do
+      Then { element.find(title: /Group.*of radio/i) != nil }
+    end
+
     context 'invalid' do
       When(:bad_locator) { element.find(bad_locator: 123) }
       Then { bad_locator.should have_failed BadLocator, "{:bad_locator=>123} is not a valid locator" }

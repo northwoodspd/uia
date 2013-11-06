@@ -10,6 +10,7 @@ module Uia
   end
 
   class Element
+    include Finder
     extend ElementAttributes
 
     def initialize(element)
@@ -42,6 +43,8 @@ module Uia
           Library::find_child_by_id(@element, locator[:id], scope)
         when locator[:name]
           Library::find_child_by_name(@element, locator[:name], scope)
+        when locator[:title]
+          find_by_title locator[:title], @element.handle
         else
           raise BadLocator, locator
       end
