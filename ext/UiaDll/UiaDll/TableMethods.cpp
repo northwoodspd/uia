@@ -20,6 +20,7 @@ extern "C" {
       *headers = ElementInformation::From(Element::From(headerElements));
       return headerElements->Length;
     } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
       return 0;
     }
   }
