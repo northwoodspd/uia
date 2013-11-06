@@ -56,11 +56,7 @@ module Uia
 
     def as(pattern)
       raise UnsupportedPattern.new(pattern, patterns) unless patterns.include? pattern
-
-      which = "Uia::Patterns::#{pattern.to_s.capitalize}".split('::').reduce(Object) do |m, current|
-        m.const_get current.split('_').map(&:capitalize).join
-      end
-      extend which
+      extend pattern.to_pattern_const
     end
 
     def patterns
