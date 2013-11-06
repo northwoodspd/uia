@@ -1,5 +1,6 @@
 === Version 0.0.8
 *	Enhancements
+	*	Uia#find_element and Element#find can locate by :title
 	*	Element#send_keys
 	*	Window#close
 
