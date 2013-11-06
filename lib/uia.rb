@@ -9,12 +9,6 @@ require_rel 'uia/patterns'
 require_rel 'core_ext'
 
 module Uia
-  class BadLocator < StandardError
-    def initialize(locator)
-      super "#{locator} is not a valid locator"
-    end
-  end
-
   extend Finder
 
   def self.children
@@ -22,21 +16,6 @@ module Uia
   end
 
   def self.find_element(how)
-    case
-      when how[:id]
-        find_by_id how[:id]
-      when how[:name]
-        find_by_name how[:name]
-      when how[:pid]
-        find_by_pid how[:pid]
-      when how[:runtime_id]
-        find_by_runtime_id how[:runtime_id]
-      when how[:handle]
-        find_by_handle how[:handle]
-      when how[:title]
-        find_by_title how[:title]
-      else
-        raise BadLocator, how
-    end
+    find_from_root(how)
   end
 end

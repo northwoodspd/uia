@@ -36,18 +36,7 @@ module Uia
     end
 
     def find(locator)
-      scope = (locator[:scope] || :descendants).to_s.capitalize
-
-      case
-        when locator[:id]
-          Library::find_child_by_id(@element, locator[:id], scope)
-        when locator[:name]
-          Library::find_child_by_name(@element, locator[:name], scope)
-        when locator[:title]
-          find_by_title locator[:title], @element.handle
-        else
-          raise BadLocator, locator
-      end
+      find_child(@element, locator)
     end
 
     def locators_match?(locator)
