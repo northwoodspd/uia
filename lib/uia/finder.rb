@@ -13,8 +13,8 @@ module Uia
       case
         when locator[:id]
           find_by_id locator[:id]
-        when locator[:name]
-          find_by_name locator[:name]
+        when locator[:name], locator[:value]
+          find_by_name locator[:name] || locator[:value]
         when locator[:pid]
           find_by_pid locator[:pid]
         when locator[:runtime_id]
@@ -34,8 +34,9 @@ module Uia
       case
         when locator[:id]
           find_child_by_id parent, locator[:id], scope
-        when locator[:name]
-          find_child_by_name parent, locator[:name], scope
+        when locator[:name], locator[:value]
+          name_or_value = locator[:name] || locator[:value]
+          find_child_by_name parent, name_or_value, scope
         when locator[:title]
           find_by_title locator[:title], parent.handle
         else

@@ -14,9 +14,10 @@ describe Uia do
       Then { Uia.find_element(id: 'not there') == nil }
     end
 
-    context 'by name' do
+    context 'by name / value' do
       Then { expect(Uia.find_element(name: 'MainFormWindow')).to be_instance_of(Element) }
       Then { expect(Uia.find_element(name: /[Mm]ain.*Window/)).to be_instance_of(Element) }
+      Then { expect(Uia.find_element(value: /[Mm]ain.*Window/)).to be_instance_of(Element) }
       Then { Uia.find_element(name: 'not there') == nil }
     end
 

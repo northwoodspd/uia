@@ -66,9 +66,10 @@ describe Uia::Element do
       Then { element.find(id: 'does not exist') == nil }
     end
 
-    context 'name' do
+    context 'name, value' do
       Then { element.find(name: 'No option selected') != nil }
       Then { element.find(name: 'does not exist') == nil }
+      Then { element.find(value: 'No option selected') != nil }
     end
 
     context 'title' do
