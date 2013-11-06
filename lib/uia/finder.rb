@@ -32,6 +32,8 @@ module Uia
         end
       end
       find_by_handle found_window if found_window
+    rescue
+      nil
     end
 
     private
