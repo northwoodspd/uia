@@ -24,7 +24,7 @@ namespace UIA.Helper
 
         public void SendKeys(string keysToSend)
         {
-            _element.SetFocus();
+            _element.TryToFocus();
             System.Windows.Forms.SendKeys.SendWait(keysToSend);
         }
 

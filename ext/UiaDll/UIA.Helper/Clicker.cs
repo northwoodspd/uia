@@ -23,7 +23,7 @@ namespace UIA.Helper
         public static void MouseClick(AutomationElement element)
         {
             element.ScrollToIfPossible();
-            element.SetFocus();
+            element.TryToFocus();
 
             var clickablePoint = element.GetClickablePoint();
             Cursor.Position = new System.Drawing.Point((int)clickablePoint.X, (int)clickablePoint.Y);

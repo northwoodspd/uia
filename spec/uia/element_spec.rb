@@ -110,11 +110,6 @@ describe Uia::Element do
       Then { about_box != nil }
       And { about_box.children.find { |c| c.name == 'OK' }.click }
     end
-
-    context 'disabled elements' do
-      When(:click_disabled) { disabled_checkbox.click }
-      Then { click_disabled.should have_failed('Target element cannot receive focus.') }
-    end
   end
 
   context '#children' do

@@ -30,6 +30,14 @@ namespace UIA.Helper
 
     public static class ElementExtensions
     {
+        public static bool TryToFocus(this AutomationElement automationElement)
+        {
+            try
+            {
+                automationElement.SetFocus();
+                return true;
+            } catch { return false; }
+        }
 
         public static bool ScrollToIfPossible(this AutomationElement automationElement)
         {
