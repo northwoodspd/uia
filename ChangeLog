@@ -3,6 +3,7 @@
 	*	Uia#find_element and Element#find can locate by :title
 	*	Element#send_keys
 	*	Window#close
+	*	TextPattern support to get / set the text
 
 === Version 0.0.7.3 / 2013-11-02
 *	Enhancements
