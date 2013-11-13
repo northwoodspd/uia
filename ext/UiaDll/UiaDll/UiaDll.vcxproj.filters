@@ -83,5 +83,8 @@
     <ClCompile Include="RangeValueMethods.cpp">
       <Filter>Source Files\Patterns</Filter>
     </ClCompile>
+    <ClCompile Include="TextMethods.cpp">
+      <Filter>Source Files\Patterns</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

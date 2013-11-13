@@ -114,6 +114,16 @@ module Uia
     attach_throwable_function :range_value_info, :RangeValue_Information, [:pointer], RangeValueInformation.by_ref
     attach_throwable_function :set_range_value, :RangeValue_SetValue, [:pointer, :double], :void
 
+    # TextPattern methods
+    attach_function :Text_GetText, [:pointer, :pointer, :int, :pointer, :int], :int
+
+    def self.get_text(element)
+      length = can_throw(:Text_GetText, element, nil, 0) + 1
+      p = FFI::MemoryPointer.new :pointer, length
+      can_throw(:Text_GetText, element, p, length)
+      p.read_string
+    end
+
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
       p.write_array_of_int(id)

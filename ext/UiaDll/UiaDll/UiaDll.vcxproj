@@ -101,6 +101,7 @@
     </ClCompile>
     <ClCompile Include="TableItemMethods.cpp" />
     <ClCompile Include="TableMethods.cpp" />
+    <ClCompile Include="TextMethods.cpp" />
     <ClCompile Include="ToggleMethods.cpp" />
     <ClCompile Include="UiaDll.cpp" />
     <ClCompile Include="ValuePatternMethods.cpp" />
