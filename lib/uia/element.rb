@@ -50,7 +50,7 @@ module Uia
       end
     end
 
-    def select(locator)
+    def filter(locator)
       descendants.select { |e| e.locators_match? locator }
     end
 

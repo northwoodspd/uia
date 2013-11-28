@@ -88,16 +88,16 @@ describe Uia::Element do
 
   context '#select' do
     context 'control_type' do
-      When(:buttons) { element.select(control_type: :radio_button) }
+      When(:buttons) { element.filter(control_type: :radio_button) }
       Then { buttons.map(&:control_type) == [:radio_button] * 3 }
     end
 
     context 'pattern' do
-      Then { element.select(pattern: :value).count == 4 }
+      Then { element.filter(pattern: :value).count == 4 }
     end
 
     context 'combinations' do
-      Then { element.select(control_type: :button, name: 'About')[0].id == 'aboutButton' }
+      Then { element.filter(control_type: :button, name: 'About')[0].id == 'aboutButton' }
     end
   end
 
