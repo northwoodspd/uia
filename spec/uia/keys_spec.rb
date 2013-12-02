@@ -5,7 +5,7 @@ describe Uia::Keys do
     Keys.encode keys
   end
 
-  Then { encode('Turd sandwich') == 'Turd sandwich' }
+  Then { encode('Bacon sandwich') == 'Bacon sandwich' }
   Then { encode([:control, :shift, 'a']) == '^(+a)' }
 
   context 'special keys' do
@@ -20,7 +20,7 @@ describe Uia::Keys do
     Then { encode('(1 - 2)') == '{(}1 - 2{)}' }
     Then { encode('{DUDE}') == '{{}DUDE{}}' }
     Then { encode('[DUDE]') == '{[}DUDE{]}' }
-    Then { encode('(Turd + sand%wich^ [sweet] {}') == '{(}Turd {+} sand{%}wich{^} {[}sweet{]} {{}{}}' }
+    Then { encode('(Bacon + sand%wich^ [sweet] {}') == '{(}Bacon {+} sand{%}wich{^} {[}sweet{]} {{}{}}' }
   end
 
   context 'invalid' do
