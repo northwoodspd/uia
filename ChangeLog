@@ -1,4 +1,4 @@
-=== Version 0.0.8
+=== Version 0.0.8 / 2013-12-02
 *	Enhancements
 	*	Uia#find_element and Element#find can locate by :title
 	*	Element#send_keys
