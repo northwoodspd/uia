@@ -5,6 +5,9 @@
 	*	Window#close
 	*	TextPattern support to get / set the text
 
+*	Bug Fixes
+	*	Fix issue with selecting cells in a table
+
 === Version 0.0.7.3 / 2013-11-02
 *	Enhancements
 	*	Element#visible?
