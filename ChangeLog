@@ -1,3 +1,7 @@
+===	Version 0.0.9
+*	Enhancements
+	*	Element#focused? and Element#focus
+
 === Version 0.0.8 / 2013-12-02
 *	Enhancements
 	*	Uia#find_element and Element#find can locate by :title
