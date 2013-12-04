@@ -90,6 +90,14 @@ TEST_F(ElementInformationTest, ItKnowIfItIsEnabled)
   ASSERT_EQ(true, ElementInformation(element).isEnabled);
 }
 
+TEST_F(ElementInformationTest, ItKnowsIfItHasFocus)
+{
+  auto element = gcnew ElementStub("");
+  element->HasKeyboardFocus = true;
+
+  ASSERT_EQ(true, ElementInformation(element).hasKeyboardFocus);
+}
+
 TEST_F(ElementInformationTest, ItCanBeRefreshed)
 {
   auto elementInformation = ElementInformation(gcnew ElementStub("Initial", 0));

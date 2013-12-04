@@ -20,7 +20,7 @@ module Uia
 
     element_attr :id, :name, :handle, :runtime_id,
                  :class_name, :children, :descendants
-    refreshed_element_attr :enabled?, :visible?
+    refreshed_element_attr :enabled?, :visible?, :focused?
 
     def control_type
       Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first
@@ -66,6 +66,10 @@ module Uia
     def click
       Library.click(@element)
       true
+    end
+
+    def focus
+      Library.focus(@element)
     end
   end
 end

@@ -40,6 +40,12 @@ public:
     void set(bool value) { _isVisible = value; }
   }
 
+  virtual property bool HasKeyboardFocus
+  {
+    bool get() override { return _hasKeyboardFocus; }
+    void set(bool value) { _hasKeyboardFocus = value; }
+  }
+
   virtual property array<int>^ RuntimeId
   {
     array<int>^ get() override { return _runtimeIds; }
@@ -77,4 +83,5 @@ private:
   int _controlTypeId;
   bool _isEnabled;
   bool _isVisible;
+  bool _hasKeyboardFocus;
 };

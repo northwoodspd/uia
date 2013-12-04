@@ -143,4 +143,13 @@ extern "C" {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
   }
+
+  __declspec(dllexport) void Element_Focus(ElementInformationPtr element, char* errorInfo, const int errorLength) {
+    try {
+      Find(element)->SetFocus();
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+  }
+
 }

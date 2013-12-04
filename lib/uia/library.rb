@@ -71,6 +71,7 @@ module Uia
     elements_from :children, :Element_Children, [:pointer]
     elements_from :descendants, :Element_Descendants, [:pointer]
     attach_throwable_function :click, :Element_Click, [:pointer], :void
+    attach_throwable_function :focus, :Element_Focus, [:pointer], :void
     attach_throwable_function :refresh, :Element_Refresh, [:pointer], :void
 
     # WindowPattern methods

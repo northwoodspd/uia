@@ -28,6 +28,11 @@ namespace UIA.Helper
             System.Windows.Forms.SendKeys.SendWait(keysToSend);
         }
 
+        public void SetFocus()
+        {
+            _element.SetFocus();
+        }
+
         public virtual int[] RuntimeId
         {
             get { return _element.GetRuntimeId(); }
@@ -56,6 +61,11 @@ namespace UIA.Helper
         public virtual bool IsVisible
         {
             get { return _element.Current.IsOffscreen == false; }
+        }
+
+        public virtual bool HasKeyboardFocus
+        {
+            get { return _element.Current.HasKeyboardFocus; }
         }
 
         public virtual int NativeWindowHandle

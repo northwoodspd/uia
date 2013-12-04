@@ -15,6 +15,7 @@ typedef struct _ElementInformation {
 
   bool isEnabled;
   bool isVisible;
+  bool hasKeyboardFocus;
 
   _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL) {}
 
@@ -52,6 +53,7 @@ typedef struct _ElementInformation {
 
     isEnabled = element->IsEnabled;
     isVisible = element->IsVisible;
+    hasKeyboardFocus = element->HasKeyboardFocus;
   }
 
   ~_ElementInformation() {

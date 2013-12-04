@@ -18,6 +18,19 @@ describe Uia::Element do
       Then { element.visible? == false }
     end
 
+    context 'focus' do
+      Given(:text_field) { element.find(id: 'textField').as :value }
+
+      context 'initially' do
+        Then { text_field.focused? == false }
+      end
+
+      context 'explicitly' do
+        When { text_field.focus }
+        Then { text_field.focused? == true }
+      end
+    end
+
     context '#control_type' do
       Then { element.control_type == :window }
 
