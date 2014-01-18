@@ -27,5 +27,13 @@ describe Uia::Patterns::Selection do
         Then { tree_view.selection_items.map(&:name) == ['Parent One', 'Child 1', 'Child 2', 'Parent Two'] }
       end
     end
+
+    context '#selected_items' do
+      When do
+        main.find(name: 'Toggle Multi-Select').click
+        select_list.selection_items.each &:add_to_selection
+      end
+      Then { expect(select_list.selected_items.map(&:name)).to eq ['Apple', 'Orange', 'Mango'] }
+    end
   end
 end

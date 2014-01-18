@@ -22,7 +22,7 @@ end
 RSpec.configure do |config|
   config.before(:all) do
     @app = ChildProcess.build('spec/app/WindowsForms.exe').start
-    sleep 0.5
+    wait_until { Uia.find_element title: /MainFormWindow/ }
   end
 
   config.after(:all) do

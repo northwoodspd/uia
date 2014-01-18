@@ -5,6 +5,10 @@ module Uia
         filter(pattern: :selection_item).map {|e| e.as :selection_item }
       end
 
+      def selected_items
+        Library.selected_items(@element).map {|e| e.as :selection_item }
+      end
+
       def multi_select?
         Library.selection_info(@element).multi_select?
       end

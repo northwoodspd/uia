@@ -97,6 +97,7 @@ module Uia
 
     # SelectionPattern methods
     attach_throwable_function :selection_info, :Selection_Information, [:pointer], SelectionInformation.by_ref
+    elements_from :selected_items, :Selection_Selections, [:pointer]
 
     # SelectionItemPattern methods
     attach_throwable_function :selection_item_info, :SelectionItem_Information, [:pointer], SelectionItemInformation.by_ref
