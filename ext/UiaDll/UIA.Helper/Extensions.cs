@@ -34,8 +34,13 @@ namespace UIA.Helper
         {
             try
             {
-                automationElement.SetFocus();
-                return true;
+                var timesTried = 0;
+                while (timesTried++ < 5 && !automationElement.Current.HasKeyboardFocus)
+                {
+                    automationElement.SetFocus();
+                    Thread.Sleep(100);
+                }
+                return automationElement.Current.HasKeyboardFocus;
             } catch { return false; }
         }
 
