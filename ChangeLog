@@ -1,6 +1,7 @@
 ===	Version 0.0.9
 *	Enhancements
 	*	Element#focused? and Element#focus
+	*	Element#bounding_rectangle
 
 === Version 0.0.8 / 2013-12-02
 *	Enhancements
