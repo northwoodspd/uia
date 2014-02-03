@@ -12,6 +12,10 @@ describe Uia::Element do
     Then { element.id == 'MainFormWindow' }
     Then { element.class_name =~ /Forms.*app/i }
     Then { expect(element.find(id: 'textField')).to be_enabled }
+    Then do
+      expect(element.bounding_rectangle.count).to eq(4)
+      expect(element.bounding_rectangle).to be_all {|e| e.instance_of? Fixnum }
+    end
 
     context 'visibility' do
       When { element.as(:window).visual_state = :minimized }

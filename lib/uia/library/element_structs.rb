@@ -20,13 +20,18 @@ module Uia
                  :id, :string,
                  :is_enabled, :bool,
                  :is_visible, :bool,
-                 :has_focus, :bool
+                 :has_focus, :bool,
+                 :bounding_rectangle, :pointer
 
           struct_attr :id, :name, :handle, :control_type_id, :class_name,
                       [:enabled?, :is_enabled], [:visible?, :is_visible], [:focused?, :has_focus]
 
           def runtime_id
             self[:runtime_id].read_array_of_int(number_of_ids)
+          end
+
+          def bounding_rectangle
+            self[:bounding_rectangle].read_array_of_long(4)
           end
 
           def pattern_ids

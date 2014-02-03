@@ -19,7 +19,7 @@ namespace UIA.Helper
 
         public TPattern As<TPattern>(AutomationPattern pattern)
         {
-            return (TPattern) _element.GetCurrentPattern(pattern);
+            return (TPattern)_element.GetCurrentPattern(pattern);
         }
 
         public void SendKeys(string keysToSend)
@@ -36,6 +36,15 @@ namespace UIA.Helper
         public virtual int[] RuntimeId
         {
             get { return _element.GetRuntimeId(); }
+        }
+
+        public virtual long[] BoundingRectangle
+        {
+            get
+            {
+                var r = _element.Current.BoundingRectangle;
+                return new[] { (long)r.Left, (long)r.Top, (long)(r.Right - r.Left), (long)(r.Bottom - r.Top) };
+            }
         }
 
         public virtual string Name
@@ -145,7 +154,7 @@ namespace UIA.Helper
 
         public static Element ByHandle(IntPtr windowHandle)
         {
-           return NullOr(AutomationElement.FromHandle(windowHandle));
+            return NullOr(AutomationElement.FromHandle(windowHandle));
         }
 
         public static Element ByRuntimeId(int[] runtimeId)

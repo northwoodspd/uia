@@ -20,7 +20,7 @@ module Uia
 
     element_attr :id, :name, :handle, :runtime_id,
                  :class_name, :children, :descendants
-    refreshed_element_attr :enabled?, :visible?, :focused?
+    refreshed_element_attr :enabled?, :visible?, :focused?, :bounding_rectangle
 
     def control_type
       Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first

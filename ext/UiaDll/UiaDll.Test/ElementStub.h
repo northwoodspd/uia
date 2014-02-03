@@ -51,6 +51,11 @@ public:
     array<int>^ get() override { return _runtimeIds; }
   }
 
+  virtual property array<long long>^ BoundingRectangle
+  {
+    array<long long>^ get() override { return gcnew array<long long> {0, 0, 0, 0}; }
+  }
+
   virtual property int NativeWindowHandle
   {
     int get() override { return _nativeWindowHandle; }
