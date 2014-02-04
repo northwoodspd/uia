@@ -23,11 +23,15 @@ module Uia
                  :has_focus, :bool,
                  :bounding_rectangle, [:long, 4]
 
-          struct_attr :id, :name, :handle, :control_type_id, :class_name, :bounding_rectangle,
+          struct_attr :id, :name, :handle, :control_type_id, :class_name,
                       [:enabled?, :is_enabled], [:visible?, :is_visible], [:focused?, :has_focus]
 
           def runtime_id
             self[:runtime_id].read_array_of_int(number_of_ids)
+          end
+
+          def bounding_rectangle
+            self[:bounding_rectangle].to_a
           end
 
           def pattern_ids
