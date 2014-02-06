@@ -1,7 +1,11 @@
-===	Version 0.0.9
+===	Version 0.0.9 / 2014-02-06
 *	Enhancements
 	*	Element#focused? and Element#focus
 	*	Element#bounding_rectangle
+	*	Selection#selected_items for multi-select
+	*	#focus will try multiple times to focus an element before it gives up
+	*	#click will attempt to use the bounding_rectangle if there is no
+	"clickable point"
 
 === Version 0.0.8 / 2013-12-02
 *	Enhancements
