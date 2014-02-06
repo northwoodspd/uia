@@ -13,6 +13,14 @@ namespace UIA.Helper
         {
             return string.Join(separator, items.Select(x => x.ToString()));
         }
+
+        public static Point Center(this Rect rectangle)
+        {
+            if( rectangle == Rect.Empty )
+                throw new Exception("No point could be found");
+
+            return new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top + rectangle.Height / 2);
+        }
     }
 
     public static class PropertyExtensions

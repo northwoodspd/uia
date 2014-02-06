@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Forms;
 
@@ -25,10 +26,22 @@ namespace UIA.Helper
             element.ScrollToIfPossible();
             element.TryToFocus();
 
-            var clickablePoint = element.GetClickablePoint();
+            var clickablePoint = ClickablePoint(element);
             Cursor.Position = new System.Drawing.Point((int)clickablePoint.X, (int)clickablePoint.Y);
             mouse_event(MOUSEEVENTLF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTLF_LEFTUP, 0, 0, 0, 0);
+        }
+
+        private static Point ClickablePoint(AutomationElement element)
+        {
+            try
+            {
+                return element.GetClickablePoint();
+            }
+            catch (Exception)
+            {
+                return element.Current.BoundingRectangle.Center();
+            }
         }
     }
 }
