@@ -136,9 +136,17 @@ extern "C" {
     }
   }
 
-  __declspec(dllexport) void Element_Click(ElementInformationPtr element, char* errorInfo, const int errorLength) {
+  __declspec(dllexport) void Element_ClickClickablePoint(ElementInformationPtr element, char* errorInfo, const int errorLength) {
     try {
-      Find(element)->MouseClick();
+      Find(element)->ClickClickablePoint();
+    } catch(Exception^ error) {
+      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+    }
+  }
+
+  __declspec(dllexport) void Element_ClickCenter(ElementInformationPtr element, char* errorInfo, const int errorLength) {
+    try {
+      Find(element)->ClickCenter();
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }

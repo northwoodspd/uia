@@ -70,7 +70,8 @@ module Uia
     attach_throwable_function :find_child_by_name, :Element_FindChildByName, [:pointer, :string, :string], ManagedElementStruct.by_ref, &element_or_nil
     elements_from :children, :Element_Children, [:pointer]
     elements_from :descendants, :Element_Descendants, [:pointer]
-    attach_throwable_function :click, :Element_Click, [:pointer], :void
+    attach_throwable_function :click, :Element_ClickClickablePoint, [:pointer], :void
+    attach_throwable_function :click_center, :Element_ClickCenter, [:pointer], :void
     attach_throwable_function :focus, :Element_Focus, [:pointer], :void
     attach_throwable_function :refresh, :Element_Refresh, [:pointer], :void
 

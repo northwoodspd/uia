@@ -68,6 +68,11 @@ module Uia
       true
     end
 
+    def click_center
+      Library.click_center(@element)
+      true
+    end
+
     def focus
       Library.focus(@element)
     end

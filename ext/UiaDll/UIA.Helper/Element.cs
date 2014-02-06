@@ -112,9 +112,14 @@ namespace UIA.Helper
             get { return Find(TreeScope.Descendants, Condition.TrueCondition); }
         }
 
-        public void MouseClick()
+        public void ClickClickablePoint()
         {
-            Clicker.MouseClick(_element);
+            Clicker.ClickClickablePoint(_element);
+        }
+
+        public void ClickCenter()
+        {
+            Clicker.ClickCenter(_element);
         }
 
         public static Element From(AutomationElement element)

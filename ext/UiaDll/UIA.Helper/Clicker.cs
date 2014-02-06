@@ -21,18 +21,27 @@ namespace UIA.Helper
         private const uint MOUSEEVENTLF_LEFTDOWN = 0x2;
         private const uint MOUSEEVENTLF_LEFTUP = 0x4;
 
-        public static void MouseClick(AutomationElement element)
+        public static void ClickClickablePoint(AutomationElement element)
+        {
+            Click(element, element.GetClickablePoint());
+        }
+
+        public static void ClickCenter(AutomationElement element)
+        {
+            Click(element, Center(element));
+        }
+
+        private static void Click(AutomationElement element, Point point)
         {
             element.ScrollToIfPossible();
             element.TryToFocus();
 
-            var clickablePoint = ClickablePoint(element);
-            Cursor.Position = new System.Drawing.Point((int)clickablePoint.X, (int)clickablePoint.Y);
+            Cursor.Position = new System.Drawing.Point((int) point.X, (int) point.Y);
             mouse_event(MOUSEEVENTLF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTLF_LEFTUP, 0, 0, 0, 0);
         }
 
-        private static Point ClickablePoint(AutomationElement element)
+        private static Point Center(AutomationElement element)
         {
             try
             {
