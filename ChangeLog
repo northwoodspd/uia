@@ -1,3 +1,8 @@
+=== Verions 0.1 / 2013-02-06
+*   Enhancements
+    *   changed #click to be clickable point only
+    *   added #click_center to try to click in the bounding_rectangle
+
 ===	Version 0.0.9 / 2014-02-06
 *	Enhancements
 	*	Element#focused? and Element#focus
