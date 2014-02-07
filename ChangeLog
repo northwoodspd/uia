@@ -1,4 +1,8 @@
-=== Verions 0.1 / 2013-02-06
+=== Version 0.1.1 / 2013-02-07
+*   Bug Fixes
+    *   Prior to trying to click on an element, it needs to scroll to and focus it first
+
+=== Version 0.1 / 2013-02-06
 *   Enhancements
     *   changed #click to be clickable point only
     *   added #click_center to try to click in the bounding_rectangle
