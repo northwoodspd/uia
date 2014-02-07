@@ -23,18 +23,20 @@ namespace UIA.Helper
 
         public static void ClickClickablePoint(AutomationElement element)
         {
-            Click(element, element.GetClickablePoint());
+            Click(element, element.GetClickablePoint);
         }
 
         public static void ClickCenter(AutomationElement element)
         {
-            Click(element, Center(element));
+            Click(element, () => Center(element));
         }
 
-        private static void Click(AutomationElement element, Point point)
+        private static void Click(AutomationElement element, Func<Point> GetPoint)
         {
             element.ScrollToIfPossible();
             element.TryToFocus();
+
+            var point = GetPoint();
 
             Cursor.Position = new System.Drawing.Point((int) point.X, (int) point.Y);
             mouse_event(MOUSEEVENTLF_LEFTDOWN, 0, 0, 0, 0);
