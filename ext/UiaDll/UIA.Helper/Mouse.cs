@@ -21,6 +21,14 @@ namespace UIA.Helper
         private const uint MOUSEEVENTLF_LEFTDOWN = 0x2;
         private const uint MOUSEEVENTLF_LEFTUP = 0x4;
 
+        public static void Drag(int startX, int startY, int endX, int endY)
+        {
+            Cursor.Position = new System.Drawing.Point(startX, startY);
+            Down();
+            Cursor.Position = new System.Drawing.Point(endX, endY);
+            Up();
+        }
+
         public static void ClickClickablePoint(AutomationElement element)
         {
             Click(element, element.GetClickablePoint);
@@ -39,8 +47,18 @@ namespace UIA.Helper
             var point = GetPoint();
 
             Cursor.Position = new System.Drawing.Point((int) point.X, (int) point.Y);
-            mouse_event(MOUSEEVENTLF_LEFTDOWN, 0, 0, 0, 0);
+            Down();
+            Up();
+        }
+
+        private static void Up()
+        {
             mouse_event(MOUSEEVENTLF_LEFTUP, 0, 0, 0, 0);
+        }
+
+        private static void Down()
+        {
+            mouse_event(MOUSEEVENTLF_LEFTDOWN, 0, 0, 0, 0);
         }
 
         private static Point Center(AutomationElement element)

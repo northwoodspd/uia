@@ -26,6 +26,21 @@ module Uia
       Library::Constants::ControlTypes.find(@default) { |_, v| v == @element.control_type_id }.first
     end
 
+    def drag(info)
+      until focused?
+        focus
+      end
+
+      r = bounding_rectangle
+      coords = [
+          r[0] + info[:start][0],
+          r[1] + info[:start][1],
+          r[0] + info[:end][0],
+          r[1] + info[:end][1],
+      ]
+      Library.drag *coords
+    end
+
     def send_keys(*keys)
       Library.send_keys @element, Keys.encode(keys)
     end

@@ -75,6 +75,9 @@ module Uia
     attach_throwable_function :focus, :Element_Focus, [:pointer], :void
     attach_throwable_function :refresh, :Element_Refresh, [:pointer], :void
 
+    # mouse methods
+    attach_throwable_function :drag, :Mouse_Drag, [:int, :int, :int, :int], :void
+
     # WindowPattern methods
     attach_throwable_function :window_information, :Window_Information, [:pointer], WindowInformation.by_ref
     attach_throwable_function :set_visual_state, :Window_SetVisualState, [:pointer, :string], :void

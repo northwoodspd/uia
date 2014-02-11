@@ -5,6 +5,25 @@ describe Uia::Element do
   Given(:about_box) { wait_until { Uia.find_element(id: 'AboutBox') } }
   Given { element.as(:window).visual_state = :normal }
 
+  context '#drag' do
+    Given(:text_field) do
+      text_field = element.find(id: 'multiLineTextField')
+      text_field.send_keys ['this', :enter, 'is', :enter, 'multiple', :enter, 'lines']
+      text_field
+    end
+    Given(:dimensions) do
+      r = text_field.bounding_rectangle
+      {width: r[2], height: r[3]}
+    end
+
+    When do
+      text_field.drag start: [2, 2], end: [dimensions[:width], dimensions[:height]]
+      text_field.send_keys :backspace
+    end
+
+    Then { expect(text_field.as(:text).text).to eq('') }
+  end
+
   context 'properties' do
     let(:raw_element) { element.instance_variable_get(:@element) }
     Then { element.handle != 0 }

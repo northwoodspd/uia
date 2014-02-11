@@ -92,6 +92,7 @@
     <ClCompile Include="ElementMethods.cpp" />
     <ClCompile Include="ExpandCollapseMethods.cpp" />
     <ClCompile Include="InvokePatternMethods.cpp" />
+    <ClCompile Include="MouseMethods.cpp" />
     <ClCompile Include="RangeValueMethods.cpp" />
     <ClCompile Include="SelectionItemMethods.cpp" />
     <ClCompile Include="SelectionMethods.cpp" />
