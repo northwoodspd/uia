@@ -114,12 +114,12 @@ namespace UIA.Helper
 
         public void ClickClickablePoint()
         {
-            Clicker.ClickClickablePoint(_element);
+            Mouse.ClickClickablePoint(_element);
         }
 
         public void ClickCenter()
         {
-            Clicker.ClickCenter(_element);
+            Mouse.ClickCenter(_element);
         }
 
         public static Element From(AutomationElement element)

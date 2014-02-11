@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace UIA.Helper
 {
-    public class Clicker
+    public class Mouse
     {
         [DllImport("user32.dll")]
         static extern void mouse_event(uint flags, uint x, uint y, uint data, int extraInfo);
