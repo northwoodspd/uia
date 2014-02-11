@@ -1,8 +1,12 @@
-=== Version 0.1.1 / 2013-02-07
+=== Version 0.1.2 / 2014-02-11
+*   Enhancements
+    *   Added #drag method to Element to drag the mouse within a client area of an element
+
+=== Version 0.1.1 / 2014-02-07
 *   Bug Fixes
     *   Prior to trying to click on an element, it needs to scroll to and focus it first
 
-=== Version 0.1 / 2013-02-06
+=== Version 0.1 / 2014-02-06
 *   Enhancements
     *   changed #click to be clickable point only
     *   added #click_center to try to click in the bounding_rectangle
