@@ -27,17 +27,18 @@ module Uia
     end
 
     def drag(info)
-      until focused?
-        focus
-      end
+      start_x, start_y = info[:start]
+      end_x, end_y = info[:end]
+      left, top = bounding_rectangle
 
-      r = bounding_rectangle
       coords = [
-          r[0] + info[:start][0],
-          r[1] + info[:start][1],
-          r[0] + info[:end][0],
-          r[1] + info[:end][1],
+          left + start_x,
+          top + start_y,
+          left + end_x,
+          top + end_y
       ]
+
+      focus
       Library.drag *coords
     end
 
@@ -89,7 +90,9 @@ module Uia
     end
 
     def focus
-      Library.focus(@element)
+      until focused?
+        Library.focus(@element)
+      end
     end
   end
 end
