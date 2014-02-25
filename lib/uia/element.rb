@@ -38,7 +38,9 @@ module Uia
           top + end_y
       ]
 
-      focus
+      until focused?
+        focus
+      end
       Library.drag *coords
     end
 
@@ -90,9 +92,7 @@ module Uia
     end
 
     def focus
-      until focused?
-        Library.focus(@element)
-      end
+      Library.focus(@element)
     end
   end
 end
