@@ -39,6 +39,8 @@ module Uia
           find_child_by_name parent, name_or_value, scope
         when locator[:title]
           find_by_title locator[:title], parent.handle
+        when locator[:handle]
+          find_by_handle locator[:handle]
         else
           raise BadChildLocator, locator
       end
