@@ -2,6 +2,66 @@
 #include "ArrayHelper.h"
 #include "StringHelper.h"
 
+#include <list>
+using namespace std;
+
+typedef struct _SearchCondition {
+  int propertyId;
+
+  int number;
+  char* string;
+  int* numbers;
+  int numbersCount;
+
+  _SearchCondition(const int id, const char* string) {
+    Reset(id);
+
+    auto length = strnlen_s(string, 10000);
+    this->string = new char[length + 1];
+    strcpy_s(this->string, 10000, string);
+  }
+
+  _SearchCondition(const int id, const int number) {
+    Reset(id);
+    this->number = number;
+  }
+
+  _SearchCondition(const int id, list<const int>& numbers) {
+    Reset(id);
+    numbersCount = numbers.size();
+    this->numbers = new int[numbersCount];
+
+    int index = 0; 
+    for(std::list<const int>::iterator number = numbers.begin(); number != numbers.end(); ++number, ++index) {
+      this->numbers[index] = *number;
+    }
+  }
+
+  bool HasNumbers() {
+    return NULL != numbers;
+  }
+
+  bool IsString() {
+    return NULL != string;
+  }
+
+  static _SearchCondition* FromControlTypes(list<const int>& controlTypes) {
+    return new SearchCondition(System::Windows::Automation::AutomationElement::ControlTypeProperty->Id, controlTypes);
+  }
+
+  void Reset(const int id) {
+    propertyId = id;
+    delete[] string; delete[] numbers;
+    string = NULL; numbers = NULL;
+    number = 0; numbersCount = 0;
+  }
+
+  ~_SearchCondition() {
+    Console::WriteLine("~_SearchCondition (id: {2}, number: {0}, string: {1})", number, gcnew String(string), propertyId);
+  }
+
+} SearchCondition, *SearchConditionPtr;
+
 typedef struct _ElementInformation {
   int nativeWindowHandle;
   int* runtimeId;

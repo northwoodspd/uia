@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayHelper.h" />
+    <ClInclude Include="ConditionHelper.h" />
     <ClInclude Include="DynamicAssemblyResolver.h" />
     <ClInclude Include="ElementStructures.h" />
     <ClInclude Include="PatternInformationStructures.h" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="ConditionMethods.cpp" />
     <ClCompile Include="DynamicAssemblyResolver.cpp" />
     <ClCompile Include="ElementMethods.cpp" />
     <ClCompile Include="ExpandCollapseMethods.cpp" />

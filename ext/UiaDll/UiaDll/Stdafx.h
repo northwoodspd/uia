@@ -13,5 +13,6 @@ using namespace UIA::Helper;
 #include "ArrayHelper.h"
 #include "ElementStructures.h"
 #include "PatternInformationStructures.h"
+#include <list>
 
 extern "C" Element^ Find(ElementInformationPtr element);

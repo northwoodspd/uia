@@ -69,5 +69,25 @@ module Uia
     class ElementStruct < FFI::Struct
       include ElementLayout
     end
+
+    class SearchCondition < FFI::ManagedStruct
+      extend StructAttributes
+
+      layout :property_id, :int,
+             :int_value, :int,
+             :string_value, :string,
+             :numbers, :pointer,
+             :numbers_count, :int
+
+      struct_attr :property_id, :int_value, :string_value
+
+      def numbers
+        self[:numbers].read_array_of_int self[:numbers_count]
+      end
+
+      def self.release(pointer)
+        Library.release_condition(pointer)
+      end
+    end
   end
 end

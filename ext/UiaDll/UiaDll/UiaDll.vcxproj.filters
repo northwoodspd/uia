@@ -36,6 +36,9 @@
     <ClInclude Include="PatternInformationStructures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConditionHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UiaDll.cpp">
@@ -87,6 +90,9 @@
       <Filter>Source Files\Patterns</Filter>
     </ClCompile>
     <ClCompile Include="MouseMethods.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConditionMethods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
