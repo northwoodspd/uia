@@ -124,7 +124,7 @@ namespace UIA.Helper
 
         public static Element From(AutomationElement element)
         {
-            return new Element(element);
+            return null == element ? null : new Element(element);
         }
 
         public static Element[] From(AutomationElement[] elements)
