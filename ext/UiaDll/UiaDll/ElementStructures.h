@@ -13,20 +13,21 @@ typedef struct _SearchCondition {
   int* numbers;
   int numbersCount;
 
-  _SearchCondition(const int id, const char* string) {
+  _SearchCondition(const int id, const char* s) : string(NULL), numbers(NULL) {
     Reset(id);
 
-    auto length = strnlen_s(string, 10000);
-    this->string = new char[length + 1];
-    strcpy_s(this->string, 10000, string);
+    auto length = strnlen_s(s, 10000);
+    auto size = length + 1;
+    this->string = new char[size];
+    strcpy_s(this->string, size, s);
   }
 
-  _SearchCondition(const int id, const int number) {
+  _SearchCondition(const int id, const int number) : string(NULL), numbers(NULL) {
     Reset(id);
     this->number = number;
   }
 
-  _SearchCondition(const int id, list<const int>& numbers) {
+  _SearchCondition(const int id, list<const int>& numbers) : string(NULL), numbers(NULL) {
     Reset(id);
     numbersCount = numbers.size();
     this->numbers = new int[numbersCount];
@@ -57,7 +58,7 @@ typedef struct _SearchCondition {
   }
 
   ~_SearchCondition() {
-    Console::WriteLine("~_SearchCondition (id: {2}, number: {0}, string: {1})", number, gcnew String(string), propertyId);
+    Reset(propertyId);
   }
 
 } SearchCondition, *SearchConditionPtr;
