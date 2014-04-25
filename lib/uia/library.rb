@@ -63,10 +63,9 @@ module Uia
     attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ManagedElementStruct.by_ref, &element_or_nil
     attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ManagedElementStruct.by_ref, &element_or_nil
     attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ManagedElementStruct.by_ref
-
-    attach_throwable_function :find_by_condition, :FindByCondition, [:pointer, SearchCondition.by_ref], ManagedElementStruct.by_ref, &element_or_nil
     attach_function :FindByConditions, [:pointer, :string, :pointer, :int, :int, :varargs], ManagedElementStruct.by_ref
 
+    ## conditions
     attach_function :release_condition, :Condition_Release, [:pointer], :void
     attach_function :id_condition, :Condition_Id, [:string], SearchCondition.by_ref
     attach_function :name_condition, :Condition_Name, [:string], SearchCondition.by_ref
@@ -79,8 +78,6 @@ module Uia
 
     # element methods
     attach_throwable_function :send_keys, :Element_SendKeys, [:pointer, :string], :void
-    attach_throwable_function :find_child_by_id, :Element_FindChildById, [:pointer, :string, :string], ManagedElementStruct.by_ref, &element_or_nil
-    attach_throwable_function :find_child_by_name, :Element_FindChildByName, [:pointer, :string, :string], ManagedElementStruct.by_ref, &element_or_nil
     elements_from :children, :Element_Children, [:pointer]
     elements_from :descendants, :Element_Descendants, [:pointer]
     attach_throwable_function :click, :Element_ClickClickablePoint, [:pointer], :void

@@ -56,16 +56,6 @@ extern "C" {
     return ManagedFindByConditions(element, treeScope, conditions, errorInfo, errorInfoLength);
   }
 
-  __declspec(dllexport) ElementInformationPtr FindByCondition(ElementInformationPtr element, SearchConditionPtr searchCondition, char* errorInfo, const int errorInfoLength) {
-    try {
-      return ElementInformation::From(Find(element)->ChildWith(TreeScope::Descendants, ConditionHelper::ConditionFrom(searchCondition)));
-    } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
-    }
-
-    return NULL;
-  }
-
   __declspec(dllexport) ElementInformationPtr Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ById(gcnew String(automationId)));
@@ -76,31 +66,9 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) ElementInformationPtr Element_FindChildById(ElementInformationPtr parent, const char* automationId, const char* treeScope, char* errorInfo, const int errorLength) {
-    try {
-      auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
-      return ElementInformation::From(Find(parent)->ChildById(gcnew String(automationId), scope));
-    } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
-    }
-
-    return NULL;
-  }
-
   __declspec(dllexport) ElementInformationPtr Element_FindByName(const char* name, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ByName(gcnew String(name)));
-    } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
-    }
-
-    return NULL;
-  }
-
-  __declspec(dllexport) ElementInformationPtr Element_FindChildByName(ElementInformationPtr parent, const char* name, const char* treeScope, char* errorInfo, const int errorLength) {
-    try {
-      auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
-      return ElementInformation::From(Find(parent)->ChildByName(gcnew String(name), scope));
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
