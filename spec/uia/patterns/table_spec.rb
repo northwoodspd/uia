@@ -17,7 +17,7 @@ describe Uia::Patterns::Table do
 
   context '#headers' do
     Then { data_grid.headers.map(&:control_type) == [:header_item] * 3 }
-    Then { data_grid.headers.map(&:name) == ['Name', 'Date of birth', 'State'] }
+    Then { data_grid.headers.map(&:name) == ['Full Name', 'Date of birth', 'State'] }
   end
 
   context '#rows' do

@@ -73,7 +73,10 @@ typedef struct _SelectionItemInformation {
 private:
   void init(bool isSelected, Element^ selectionContainer) {
     IsSelected = isSelected;
-    Container = new ElementInformation(selectionContainer);
+    Container = NULL;
+    if( nullptr != selectionContainer ) {
+        Container = new ElementInformation(selectionContainer);
+    }
   }
 
 } SelectionItemInformation, *SelectionItemInformationPtr;

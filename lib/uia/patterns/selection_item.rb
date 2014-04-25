@@ -18,7 +18,8 @@ module Uia
       end
 
       def container
-        Uia::Element.new Library.selection_item_info(@element).container
+        container = Library.selection_item_info(@element).container
+        Uia::Element.new container if container
       end
     end
   end
