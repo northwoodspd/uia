@@ -51,16 +51,16 @@ module Uia
       find_by_property(:id, id)
     end
 
-    def find_child_by_id(parent, id, scope)
-      Library.find_child_by_id(parent, id, (scope || :descendants).to_s.capitalize)
-    end
-
     def find_by_name(name)
       find_by_property(:name, name)
     end
 
+    def find_child_by_id(parent, id, scope)
+      Library.find_by_conditions(parent, (scope || :descendants).to_s.capitalize, Library.id_condition(id))
+    end
+
     def find_child_by_name(parent, name, scope)
-      Library.find_child_by_name(parent, name, (scope || :descendants).to_s.capitalize)
+      Library.find_by_conditions(parent, (scope || :descendants).to_s.capitalize, Library.name_condition(name))
     end
 
     def find_by_pid(pid)
