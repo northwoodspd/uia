@@ -15,6 +15,10 @@ public:
       conditions->Add(ConditionFrom(*condition));
     }
 
+    if(conditions->Count == 1) {
+        conditions->Add(Condition::TrueCondition);
+    }
+
     return gcnew AndCondition(conditions->ToArray());
   }
 

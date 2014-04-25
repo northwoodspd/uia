@@ -32,9 +32,10 @@ extern "C" {
     }
   }
 
-  ElementInformationPtr ManagedFindByConditions(ElementInformationPtr element, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
+  ElementInformationPtr ManagedFindByConditions(ElementInformationPtr element, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
     try {
-      return ElementInformation::From(Find(element)->ChildWith(ConditionHelper::ConditionFrom(conditions)));
+      auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
+      return ElementInformation::From(Find(element)->ChildWith(scope, ConditionHelper::ConditionFrom(conditions)));
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
@@ -42,7 +43,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) ElementInformationPtr FindByConditions(ElementInformationPtr element, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
+  __declspec(dllexport) ElementInformationPtr FindByConditions(ElementInformationPtr element, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
     va_list arguments;
     va_start(arguments, arg0);
 
@@ -52,12 +53,12 @@ extern "C" {
       conditions.push_back(va_arg(arguments, SearchConditionPtr));
     }
 
-    return ManagedFindByConditions(element, conditions, errorInfo, errorInfoLength);
+    return ManagedFindByConditions(element, treeScope, conditions, errorInfo, errorInfoLength);
   }
 
   __declspec(dllexport) ElementInformationPtr FindByCondition(ElementInformationPtr element, SearchConditionPtr searchCondition, char* errorInfo, const int errorInfoLength) {
     try {
-      return ElementInformation::From(Find(element)->ChildWith(ConditionHelper::ConditionFrom(searchCondition)));
+      return ElementInformation::From(Find(element)->ChildWith(TreeScope::Descendants, ConditionHelper::ConditionFrom(searchCondition)));
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
