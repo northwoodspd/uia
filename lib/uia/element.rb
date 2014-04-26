@@ -61,9 +61,19 @@ module Uia
       locator.all? do |locator, value|
         case locator
           when :pattern
-            patterns.include? value
+            case value
+              when Array
+                !(patterns & value).empty?
+              else
+                patterns.include? value
+            end
           else
-            send(locator) == value
+            case value
+              when Array
+                value.include? send(locator)
+              else
+                send(locator) == value
+            end
         end
       end
     end

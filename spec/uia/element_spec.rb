@@ -33,7 +33,7 @@ describe Uia::Element do
     Then { expect(element.find(id: 'textField')).to be_enabled }
     Then do
       expect(element.bounding_rectangle.count).to eq(4)
-      expect(element.bounding_rectangle).to be_all {|e| e.instance_of? Fixnum }
+      expect(element.bounding_rectangle).to be_all { |e| e.instance_of? Fixnum }
     end
 
     context 'visibility' do
@@ -93,7 +93,7 @@ describe Uia::Element do
   context '#send_keys' do
     Given(:text_field) { element.find(id: 'textField').as :value }
     When { text_field.send_keys 'abcde', [:left] * 3, ' fgh ' }
-    Then { text_field.value == 'ab fgh cde'}
+    Then { text_field.value == 'ab fgh cde' }
   end
 
   context '#find' do
@@ -139,6 +139,14 @@ describe Uia::Element do
 
     context 'combinations' do
       Then { element.filter(control_type: :button, name: 'About')[0].id == 'aboutButton' }
+    end
+
+    context 'multiple' do
+      When(:radio_or_value) { element.filter(control_type: [:radio_button, :text]) }
+      Then { expect(radio_or_value.count).to eq(8) }
+
+      When(:value_or_invoke) { element.filter(pattern: [:value, :text]) }
+      Then { expect(value_or_invoke.count).to eq(5) }
     end
   end
 
