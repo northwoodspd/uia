@@ -127,7 +127,7 @@ describe Uia::Element do
     end
   end
 
-  context '#select' do
+  context '#filter' do
     context 'control_type' do
       When(:buttons) { element.filter(control_type: :radio_button) }
       Then { buttons.map(&:control_type) == [:radio_button] * 3 }
