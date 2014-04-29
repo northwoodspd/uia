@@ -1,4 +1,10 @@
 module Uia
+  class InvalidControlType < StandardError
+    def initialize(control_type)
+      super "#{control_type} is not valid"
+    end
+  end
+
   module Library
     module Constants
       Patterns = {

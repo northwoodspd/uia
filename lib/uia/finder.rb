@@ -37,6 +37,8 @@ module Uia
         when locator[:name], locator[:value]
           name_or_value = locator[:name] || locator[:value]
           find_child_by_name parent, name_or_value, scope
+        when locator[:control_type]
+          find_child_by_control_type parent, scope, locator[:control_type]
         when locator[:title]
           find_by_title locator[:title], parent.handle
         when locator[:handle]
@@ -61,6 +63,10 @@ module Uia
 
     def find_child_by_name(parent, name, scope)
       Library.find_by_conditions(parent, (scope || :descendants).to_s.capitalize, Library.name_condition(name))
+    end
+
+    def find_child_by_control_type(parent, scope, control_type)
+      Library.find_by_conditions(parent, (scope || :descendants).to_s.capitalize, Library.control_type_condition(control_type))
     end
 
     def find_by_pid(pid)

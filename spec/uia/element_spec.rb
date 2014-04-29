@@ -117,6 +117,11 @@ describe Uia::Element do
       Then { element.find(handle: child_handle).id == 'textField' }
     end
 
+    context 'control_type' do
+      Then { element.find(control_type: :custom).id == 'automatableMonthCalendar1' }
+      Then { element.find(control_type: [:custom, :semantic_zoom]).id == 'automatableMonthCalendar1' }
+    end
+
     context 'invalid' do
       When(:bad_locator) { element.find(bad_locator: 123) }
       Then { bad_locator.should have_failed BadLocator, "{:bad_locator=>123} is not a valid locator" }
