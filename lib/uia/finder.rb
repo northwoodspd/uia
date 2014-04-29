@@ -29,7 +29,7 @@ module Uia
     end
 
     def find_child(parent, locator)
-      scope = (locator[:scope] || :descendants).to_s.capitalize
+      scope = (locator.delete(:scope) || :descendants).to_s.capitalize
 
       valid_locators = [:title, :handle, :id, :name, :value, :control_type, :scope]
       raise BadChildLocator, locator unless (locator.keys - valid_locators).empty?
@@ -39,14 +39,9 @@ module Uia
           find_by_title locator[:title], parent.handle
         when locator[:handle]
           find_by_handle locator[:handle]
-        when locator[:id]
-          find_child_by_id parent, locator[:id], scope
-        when locator[:name], locator[:value]
-          name_or_value = locator[:name] || locator[:value]
-          find_child_by_name parent, name_or_value, scope
-        when locator[:control_type]
-          find_child_by_control_type parent, scope, locator[:control_type]
         else
+          conditions = locator.collect {|k, v|  Library.send("#{k}_condition", v) }
+          Library.find_by_conditions parent, scope, *conditions
       end
     end
 

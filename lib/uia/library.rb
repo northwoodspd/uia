@@ -69,6 +69,7 @@ module Uia
     attach_function :release_condition, :Condition_Release, [:pointer], :void
     attach_function :id_condition, :Condition_Id, [:string], SearchCondition.by_ref
     attach_function :name_condition, :Condition_Name, [:string], SearchCondition.by_ref
+    self.singleton_class.send(:alias_method, :value_condition, :name_condition)
     attach_function :Condition_ControlType, [:int, :varargs], SearchCondition.by_ref
 
     def self.control_type_condition(*control_types)
