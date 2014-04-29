@@ -9,4 +9,10 @@ class Symbol
       m.const_get current.split('_').map(&:capitalize).join
     end
   end
+
+  def to_control_type_const
+    control_type = Uia::Library::Constants::ControlTypes[self]
+    raise InvalidControlType.new(self) unless control_type
+    control_type
+  end
 end
