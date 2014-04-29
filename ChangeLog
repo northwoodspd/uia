@@ -1,3 +1,8 @@
+=== Version 0.1.3 / 2014-04-29
+*   Enhancements
+    *   Element#find can combine multiple locators for filtering on the .NET side
+    *   #find by :control_type
+
 === Version 0.1.2.3 / 2014-04-21
 *   Bug Fixes
     *   Handles scenario when a Container is not reported from UIA for a SelectionItem element
