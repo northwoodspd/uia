@@ -58,15 +58,15 @@ module Uia
     end
 
     def find_child_by_id(parent, id, scope)
-      Library.find_by_conditions(parent, (scope || :descendants).to_s.capitalize, Library.id_condition(id))
+      Library.find_by_conditions(parent, scope, Library.id_condition(id))
     end
 
     def find_child_by_name(parent, name, scope)
-      Library.find_by_conditions(parent, (scope || :descendants).to_s.capitalize, Library.name_condition(name))
+      Library.find_by_conditions(parent, scope, Library.name_condition(name))
     end
 
     def find_child_by_control_type(parent, scope, control_type)
-      Library.find_by_conditions(parent, (scope || :descendants).to_s.capitalize, Library.control_type_condition(control_type))
+      Library.find_by_conditions(parent, scope, Library.control_type_condition(control_type))
     end
 
     def find_by_pid(pid)
