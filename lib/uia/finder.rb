@@ -54,18 +54,6 @@ module Uia
       find_by_property(:name, name)
     end
 
-    def find_child_by_id(parent, id, scope)
-      Library.find_by_conditions(parent, scope, Library.id_condition(id))
-    end
-
-    def find_child_by_name(parent, name, scope)
-      Library.find_by_conditions(parent, scope, Library.name_condition(name))
-    end
-
-    def find_child_by_control_type(parent, scope, control_type)
-      Library.find_by_conditions(parent, scope, Library.control_type_condition(control_type))
-    end
-
     def find_by_pid(pid)
       Library.find_by_pid(pid)
     end
