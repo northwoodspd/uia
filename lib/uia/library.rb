@@ -63,7 +63,7 @@ module Uia
     attach_throwable_function :find_by_pid, :Element_FindByProcessId, [:int], ManagedElementStruct.by_ref, &element_or_nil
     attach_throwable_function :find_by_handle, :Element_FindByHandle, [:int], ManagedElementStruct.by_ref, &element_or_nil
     attach_function :Element_FindByRuntimeId, [:pointer, :int, :pointer, :int], ManagedElementStruct.by_ref
-    attach_function :FindByConditions, [:pointer, :string, :pointer, :int, :int, :varargs], ManagedElementStruct.by_ref
+    attach_function :FindFirst, [:pointer, :string, :pointer, :int, :int, :varargs], ManagedElementStruct.by_ref
     attach_function :FindAllByConditions, [:pointer, :pointer, :string, :pointer, :int, :int, :varargs], :int
 
     ## conditions
@@ -162,10 +162,10 @@ module Uia
       result
     end
 
-    def self.find_by_conditions(element, scope, *args)
+    def self.find_first(element, scope, *args)
       string_buffer = FFI::MemoryPointer.new :char, 1024
       conditions = args.reduce([]) { |a, c| a << :pointer << c }
-      result = FindByConditions element, scope, string_buffer, 1024, args.count, *conditions
+      result = FindFirst element, scope, string_buffer, 1024, args.count, *conditions
       error_info = string_buffer.read_string
       raise error_info unless error_info.empty?
       Uia::Element.new(result) unless result.empty?

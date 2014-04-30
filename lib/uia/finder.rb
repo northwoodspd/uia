@@ -41,7 +41,7 @@ module Uia
           find_by_handle locator[:handle]
         else
           conditions = locator.collect {|k, v|  Library.send("#{k}_condition", v) }
-          Library.find_by_conditions parent, scope, *conditions
+          Library.find_first parent, scope, *conditions
       end
     end
 

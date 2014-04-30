@@ -32,7 +32,7 @@ extern "C" {
     }
   }
 
-  ElementInformationPtr ManagedFindByConditions(ElementInformationPtr element, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
+  ElementInformationPtr ManagedFindFirst(ElementInformationPtr element, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
     try {
       auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
       return ElementInformation::From(Find(element)->ChildWith(scope, ConditionHelper::ConditionFrom(conditions)));
@@ -43,7 +43,7 @@ extern "C" {
     return NULL;
   }
 
-  __declspec(dllexport) ElementInformationPtr FindByConditions(ElementInformationPtr element, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
+  __declspec(dllexport) ElementInformationPtr FindFirst(ElementInformationPtr element, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
     va_list arguments;
     va_start(arguments, arg0);
 
@@ -53,7 +53,7 @@ extern "C" {
       conditions.push_back(va_arg(arguments, SearchConditionPtr));
     }
 
-    return ManagedFindByConditions(element, treeScope, conditions, errorInfo, errorInfoLength);
+    return ManagedFindFirst(element, treeScope, conditions, errorInfo, errorInfoLength);
   }
 
   int ManagedFindAllByConditions(ElementInformationPtr element, ElementInformation** elements, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
