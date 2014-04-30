@@ -52,7 +52,7 @@ module Uia
       raise BadChildLocator, locator unless (locator.keys - valid_locators).empty?
 
       conditions = locator.collect {|k, v|  Library.send("#{k}_condition", v) }
-      Library.find_all_by_conditions parent, scope, *conditions
+      Library.find_all parent, scope, *conditions
     end
 
     private
