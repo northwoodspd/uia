@@ -3,7 +3,7 @@ module Uia
     module Table
       module Row
         def items
-          filter(pattern: :table_item).each { |e| e.as :table_item }
+          find_all(pattern: :table_item).each { |e| e.as :table_item }
         end
       end
 
@@ -20,7 +20,7 @@ module Uia
       end
 
       def rows
-        filter(control_type: :data_item).each { |e| e.extend Row }
+        find_all(control_type: :data_item).each { |e| e.extend Row }
       end
 
       private
