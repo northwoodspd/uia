@@ -2,7 +2,7 @@ module Uia
   module Patterns
     module Selection
       def selection_items
-        filter(pattern: :selection_item).map {|e| e.as :selection_item }
+        find_all(pattern: :selection_item).map {|e| e.as :selection_item }
       end
 
       def selected_items
