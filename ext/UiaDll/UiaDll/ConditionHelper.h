@@ -30,6 +30,8 @@ public:
       return ControlTypeConditions(searchCondition->numbers, searchCondition->numbersCount);
     } else if(searchCondition->IsString()) {
       value = gcnew String(searchCondition->string);
+    } else if(searchCondition->IsPatternAvailableProperty()) {
+      value = true;
     } else {
       value = searchCondition->number;
     }

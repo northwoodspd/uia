@@ -13,6 +13,10 @@ typedef struct _SearchCondition {
   int* numbers;
   int numbersCount;
 
+  _SearchCondition(const int id) : string(NULL), numbers(NULL) {
+    Reset(id);
+  }
+
   _SearchCondition(const int id, const char* s) : string(NULL), numbers(NULL) {
     Reset(id);
 
@@ -44,6 +48,16 @@ typedef struct _SearchCondition {
 
   bool IsString() {
     return NULL != string;
+  }
+
+  bool IsPatternAvailableProperty() {
+    try {
+      auto automationProperty = System::Windows::Automation::AutomationProperty::LookupById(propertyId);
+      return automationProperty->ProgrammaticName->Contains("PatternAvailableProperty");
+    } catch(Exception^ e) {
+      Console::WriteLine(e->Message);
+      return false;
+    }
   }
 
   static _SearchCondition* FromControlTypes(list<const int>& controlTypes) {

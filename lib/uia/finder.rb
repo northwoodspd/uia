@@ -31,7 +31,7 @@ module Uia
     def find_child(parent, locator)
       scope = (locator.delete(:scope) || :descendants).to_s.capitalize
 
-      valid_locators = [:title, :handle, :id, :name, :value, :control_type, :scope]
+      valid_locators = [:title, :handle, :id, :name, :value, :control_type, :pattern, :scope]
       raise BadChildLocator, locator unless (locator.keys - valid_locators).empty?
 
       case

@@ -15,6 +15,16 @@ extern "C" {
     return new SearchCondition(AutomationElement::NameProperty->Id, name);
   }
 
+  __declspec(dllexport) SearchConditionPtr Condition_Pattern(const char* pattern, char* errorInfo, const int errorInfoLength) {
+    try {
+      auto patternPropertyId = dynamic_cast<AutomationProperty^>(AutomationElement::typeid->GetField(gcnew String(pattern))->GetValue(nullptr))->Id;
+      return new SearchCondition(patternPropertyId, true);
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(String::Format("{0} is an invalid AutomationProperty", gcnew String(pattern)), errorInfo, errorInfoLength);
+      return NULL;
+    }
+  }
+
   __declspec(dllexport) SearchConditionPtr Condition_ControlType(const int n, const int arg0, ...) {
     va_list arguments;
     va_start(arguments, arg0);

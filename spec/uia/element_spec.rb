@@ -122,9 +122,14 @@ describe Uia::Element do
       Then { element.find(control_type: [:custom, :semantic_zoom]).id == 'automatableMonthCalendar1' }
     end
 
+    context 'pattern' do
+      Then { element.find(pattern: :range_value).id == 'numericUpDown1' }
+    end
+
     context 'combinations' do
       Then { element.find(control_type: :list, name: 'linkLabel1').id == 'FruitListBox' }
       Then { element.find(control_type: :button, name: 'Forward', scope: :children) == nil }
+      Then { element.find(pattern: :invoke, name: 'About').id == 'aboutButton' }
       Then { element.find(control_type: :custom, id: 'automatableMonthCalendar1').name == 'linkLabel1'}
       Then { element.find(value: 'linkLabel1', id: 'automatableMonthCalendar1').control_type == :custom }
     end

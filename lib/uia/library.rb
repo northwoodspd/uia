@@ -68,9 +68,14 @@ module Uia
     ## conditions
     attach_function :release_condition, :Condition_Release, [:pointer], :void
     attach_function :id_condition, :Condition_Id, [:string], SearchCondition.by_ref
+    attach_function :Condition_Pattern, [:string, :pointer, :int], SearchCondition.by_ref
     attach_function :name_condition, :Condition_Name, [:string], SearchCondition.by_ref
     self.singleton_class.send(:alias_method, :value_condition, :name_condition)
     attach_function :Condition_ControlType, [:int, :varargs], SearchCondition.by_ref
+
+    def self.pattern_condition(pattern)
+      can_throw(:Condition_Pattern, "Is#{pattern.to_camelized_s.delete(' ')}PatternAvailableProperty")
+    end
 
     def self.control_type_condition(*control_types)
       args = control_types.flatten.map(&:to_control_type_const).reduce([]) { |a, n| a << :int << n }
