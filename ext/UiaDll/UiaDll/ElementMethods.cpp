@@ -56,6 +56,32 @@ extern "C" {
     return ManagedFindByConditions(element, treeScope, conditions, errorInfo, errorInfoLength);
   }
 
+  int ManagedFindAllByConditions(ElementInformationPtr element, ElementInformation** elements, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
+    try {
+      auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
+      auto foundElements = Find(element)->ChildrenWith(scope, ConditionHelper::ConditionFrom(conditions));
+      *elements = ElementInformation::From(foundElements);
+      return foundElements->Length;
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message + Environment::NewLine + e->StackTrace, errorInfo, errorInfoLength);
+    }
+
+    return 0;
+  }
+
+  __declspec(dllexport) int FindAllByConditions(ElementInformationPtr parent, ElementInformation** elements, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
+    va_list arguments;
+    va_start(arguments, arg0);
+
+    list<SearchConditionPtr> conditions;
+    conditions.push_back(arg0);
+    for(auto index = 1; index < count; index++) {
+      conditions.push_back(va_arg(arguments, SearchConditionPtr));
+    }
+
+    return ManagedFindAllByConditions(parent, elements, treeScope, conditions, errorInfo, errorInfoLength);
+  }
+
   __declspec(dllexport) ElementInformationPtr Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
     try {
       return ElementInformation::From(Element::ById(gcnew String(automationId)));

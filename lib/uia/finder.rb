@@ -45,6 +45,16 @@ module Uia
       end
     end
 
+    def find_children(parent, locator)
+      scope = (locator.delete(:scope) || :descendants).to_s.capitalize
+
+      valid_locators = [:id, :name, :value, :control_type, :pattern, :scope]
+      raise BadChildLocator, locator unless (locator.keys - valid_locators).empty?
+
+      conditions = locator.collect {|k, v|  Library.send("#{k}_condition", v) }
+      Library.find_all_by_conditions parent, scope, *conditions
+    end
+
     private
     def find_by_id(id)
       find_by_property(:id, id)

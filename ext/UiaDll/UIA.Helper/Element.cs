@@ -147,6 +147,11 @@ namespace UIA.Helper
             return FindFirst(scope, condition);
         }
 
+        public Element[] ChildrenWith(TreeScope scope, Condition condition)
+        {
+            return Find(scope, condition);
+        }
+
         public static Element ByName(string name)
         {
             return FindFirst(new PropertyCondition(AutomationElement.NameProperty, name));

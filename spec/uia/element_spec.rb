@@ -144,6 +144,13 @@ describe Uia::Element do
     end
   end
 
+  context '#find_all' do
+    Given(:list_box) { element.find(id: 'FruitListBox') }
+
+    Then { list_box.find_all(control_type: :list_item).map(&:name) == ['Apple', 'Orange', 'Mango'] }
+    Then { element.find_all(control_type: :tree_item, name: 'Parent Two').count == 1 }
+  end
+
   context '#filter' do
     context 'control_type' do
       When(:buttons) { element.filter(control_type: :radio_button) }

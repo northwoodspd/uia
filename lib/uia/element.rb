@@ -57,6 +57,10 @@ module Uia
       find_child(@element, locator)
     end
 
+    def find_all(locator)
+      find_children(@element, locator)
+    end
+
     def locators_match?(locator)
       locator.all? do |locator, value|
         case locator
