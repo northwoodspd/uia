@@ -130,7 +130,7 @@ describe Uia::Element do
       Then { element.find(control_type: :list, name: 'linkLabel1').id == 'FruitListBox' }
       Then { element.find(control_type: :button, name: 'Forward', scope: :children) == nil }
       Then { element.find(pattern: :invoke, name: 'About').id == 'aboutButton' }
-      Then { element.find(control_type: :custom, id: 'automatableMonthCalendar1').name == 'linkLabel1'}
+      Then { element.find(control_type: :custom, id: 'automatableMonthCalendar1').name == 'linkLabel1' }
       Then { element.find(value: 'linkLabel1', id: 'automatableMonthCalendar1').control_type == :custom }
     end
 
@@ -149,6 +149,7 @@ describe Uia::Element do
 
     Then { list_box.find_all(control_type: :list_item).map(&:name) == ['Apple', 'Orange', 'Mango'] }
     Then { element.find_all(control_type: :tree_item, name: 'Parent Two').count == 1 }
+    Then { expect { element.find_all(handle: 123) }.to raise_error BadLocator }
   end
 
   context '#filter' do
