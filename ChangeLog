@@ -1,4 +1,8 @@
-=== Version 0.2
+=== Version 0.2.1 / 2014-04-30
+*   Bug Fixes
+    *   fixes issue with using the :control_type condition with multiple types allowed (i.e. [:button, :list])
+
+=== Version 0.2 / 2014-04-30
 *   Enhancements
     *   added Element#find_all method to find multiple elements by locators
     *   Table and SelectionItem utilize #find_all rather than #filter
