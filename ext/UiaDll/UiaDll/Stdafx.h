@@ -15,4 +15,4 @@ using namespace UIA::Helper;
 #include "PatternInformationStructures.h"
 #include <list>
 
-extern "C" Element^ Find(ElementInformationPtr element);
+extern "C" Element^ ElementFrom(ElementInformationPtr element);

@@ -7,7 +7,7 @@ extern "C" {
 
   __declspec(dllexport) SelectionInformationPtr Selection_Information(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
     try {
-      return new SelectionInformation(Find(element)->As<SelectionPattern^>(SelectionPattern::Pattern)->Current);
+      return new SelectionInformation(ElementFrom(element)->As<SelectionPattern^>(SelectionPattern::Pattern)->Current);
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
       return NULL;
@@ -16,7 +16,7 @@ extern "C" {
 
   __declspec(dllexport) int Selection_Selections(ElementInformationPtr element, ElementInformation** selections, char* errorInfo, const int errorInfoLength) {
     try {
-      auto selectedElements = Element::From(Find(element)->As<SelectionPattern^>(SelectionPattern::Pattern)->Current.GetSelection());
+      auto selectedElements = Element::From(ElementFrom(element)->As<SelectionPattern^>(SelectionPattern::Pattern)->Current.GetSelection());
       *selections = ElementInformation::From(selectedElements);
       return selectedElements->Length;
     } catch(Exception^ e) {

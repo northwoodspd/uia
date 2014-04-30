@@ -4,21 +4,20 @@
 using namespace UIA::Helper;
 
 extern "C" {
-  Element^ Find(ElementInformationPtr element) {
+  Element^ ElementFrom(ElementInformationPtr element) {
     if( element->nativeWindowHandle > 0 ) {
       return Element::ByHandle(IntPtr(element->nativeWindowHandle));
     }
 
-    return Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength));
-  }
-
+  return Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength));
+}
   __declspec(dllexport) void Element_Release(ElementInformationPtr elementInformation) {
     delete elementInformation;
   }
 
   __declspec(dllexport) void Element_Refresh(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
     try {
-      element->Refresh(Find(element));
+      element->Refresh(ElementFrom(element));
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
@@ -26,7 +25,7 @@ extern "C" {
 
   __declspec(dllexport) void Element_SendKeys(ElementInformationPtr element, const char* keysToSend, char* errorInfo, const int errorInfoLength) {
     try {
-      Find(element)->SendKeys(gcnew String(keysToSend));
+      ElementFrom(element)->SendKeys(gcnew String(keysToSend));
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
@@ -35,7 +34,7 @@ extern "C" {
   ElementInformationPtr ManagedFindFirst(ElementInformationPtr element, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
     try {
       auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
-      return ElementInformation::From(Find(element)->ChildWith(scope, ConditionHelper::ConditionFrom(conditions)));
+      return ElementInformation::From(ElementFrom(element)->FindFirst(scope, ConditionHelper::ConditionFrom(conditions)));
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
@@ -59,7 +58,7 @@ extern "C" {
   int ManagedFindAll(ElementInformationPtr element, ElementInformation** elements, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
     try {
       auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
-      auto foundElements = Find(element)->ChildrenWith(scope, ConditionHelper::ConditionFrom(conditions));
+      auto foundElements = ElementFrom(element)->Find(scope, ConditionHelper::ConditionFrom(conditions));
       *elements = ElementInformation::From(foundElements);
       return foundElements->Length;
     } catch(Exception^ e) {
@@ -145,7 +144,7 @@ extern "C" {
 
   __declspec(dllexport) int Element_Children(ElementInformationPtr parentElement, ElementInformation** children, char* errorInfo, const int errorLength) {
     try {
-      auto elements = Find(parentElement)->Children;
+      auto elements = ElementFrom(parentElement)->Children;
       *children = ElementInformation::From(elements);
       return elements->Length;
     } catch(Exception^ error) {
@@ -156,7 +155,7 @@ extern "C" {
 
   __declspec(dllexport) int Element_Descendants(ElementInformationPtr parentElement, ElementInformation** descendants, char* errorInfo, const int errorLength) {
     try {
-      auto elements = Find(parentElement)->Descendants;
+      auto elements = ElementFrom(parentElement)->Descendants;
       *descendants = ElementInformation::From(elements);
       return elements->Length;
     } catch(Exception^ error) {
@@ -167,7 +166,7 @@ extern "C" {
 
   __declspec(dllexport) void Element_ClickClickablePoint(ElementInformationPtr element, char* errorInfo, const int errorLength) {
     try {
-      Find(element)->ClickClickablePoint();
+      ElementFrom(element)->ClickClickablePoint();
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
@@ -175,7 +174,7 @@ extern "C" {
 
   __declspec(dllexport) void Element_ClickCenter(ElementInformationPtr element, char* errorInfo, const int errorLength) {
     try {
-      Find(element)->ClickCenter();
+      ElementFrom(element)->ClickCenter();
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }
@@ -183,7 +182,7 @@ extern "C" {
 
   __declspec(dllexport) void Element_Focus(ElementInformationPtr element, char* errorInfo, const int errorLength) {
     try {
-      Find(element)->SetFocus();
+      ElementFrom(element)->SetFocus();
     } catch(Exception^ error) {
       StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
     }

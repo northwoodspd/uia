@@ -7,7 +7,7 @@ extern "C" {
 
   __declspec(dllexport) TableInformationPtr Table_Information(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
     try {
-      return new TableInformation(Find(element)->As<TablePattern^>(TablePattern::Pattern)->Current);
+      return new TableInformation(ElementFrom(element)->As<TablePattern^>(TablePattern::Pattern)->Current);
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
       return NULL;
@@ -16,7 +16,7 @@ extern "C" {
 
   __declspec(dllexport) int Table_Headers(ElementInformationPtr element, ElementInformation** headers, char* errorInfo, const int errorInfoLength) {
     try {
-      auto headerElements = Find(element)->As<TablePattern^>(TablePattern::Pattern)->Current.GetColumnHeaders();
+      auto headerElements = ElementFrom(element)->As<TablePattern^>(TablePattern::Pattern)->Current.GetColumnHeaders();
       *headers = ElementInformation::From(Element::From(headerElements));
       return headerElements->Length;
     } catch(Exception^ e) {

@@ -7,7 +7,7 @@ extern "C" {
 
   __declspec(dllexport) void Value_Set(ElementInformationPtr element, const char* value, char* errorInfo, const int errorInfoLength) {
     try {
-      Find(element)->As<ValuePattern^>(ValuePattern::Pattern)->SetValue(gcnew String(value));
+      ElementFrom(element)->As<ValuePattern^>(ValuePattern::Pattern)->SetValue(gcnew String(value));
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
@@ -15,7 +15,7 @@ extern "C" {
 
   __declspec(dllexport) ValuePatternInformationPtr Value_Information(ElementInformationPtr element, char* errorInfo, const int errorInfoLength) {
     try {
-      auto valuePattern = Find(element)->As<ValuePattern^>(ValuePattern::Pattern);
+      auto valuePattern = ElementFrom(element)->As<ValuePattern^>(ValuePattern::Pattern);
       return new ValuePatternInformation(valuePattern->Current);
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);

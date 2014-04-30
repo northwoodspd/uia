@@ -132,6 +132,16 @@ namespace UIA.Helper
             return elements.Select(x => new Element(x)).ToArray();
         }
 
+        public Element[] Find(TreeScope scope, Condition condition)
+        {
+            return Find(_element, scope, condition);
+        }
+
+        public Element FindFirst(TreeScope scope, Condition condition)
+        {
+            return NullOr(_element.FindFirst(scope, condition));
+        }
+
         public static Element ById(string automationId)
         {
             return FindFirst(automationId.IdCondition());
@@ -140,16 +150,6 @@ namespace UIA.Helper
         public Element ChildById(string automationId, TreeScope scope)
         {
             return FindFirst(scope, automationId.IdCondition());
-        }
-
-        public Element ChildWith(TreeScope scope, Condition condition)
-        {
-            return FindFirst(scope, condition);
-        }
-
-        public Element[] ChildrenWith(TreeScope scope, Condition condition)
-        {
-            return Find(scope, condition);
         }
 
         public static Element ByName(string name)
@@ -177,21 +177,11 @@ namespace UIA.Helper
             return FindFirst(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId), TreeScope.Descendants);
         }
 
-        private Element[] Find(TreeScope scope, Condition condition)
-        {
-            return Find(_element, scope, condition);
-        }
-
         private static Element[] Find(AutomationElement element, TreeScope scope, Condition condition)
         {
             return element.FindAll(scope, condition).Cast<AutomationElement>()
                            .Select(x => new Element(x))
                            .ToArray();
-        }
-
-        private Element FindFirst(TreeScope scope, Condition condition)
-        {
-            return NullOr(_element.FindFirst(scope, condition));
         }
 
         private static Element FindFirst(Condition condition, TreeScope scope = TreeScope.Children)
