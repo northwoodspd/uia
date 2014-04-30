@@ -1,3 +1,7 @@
+=== Version 0.2
+*   Enhancements
+    *   added Element#find_all method to find multiple elements by locators
+
 === Version 0.1.3.1 / 2014-04-29
 *   Bug Fixes
     *   fixed issue with non-fully referenced InvalidControlType class
