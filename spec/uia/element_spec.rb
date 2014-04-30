@@ -119,7 +119,7 @@ describe Uia::Element do
 
     context 'control_type' do
       Then { element.find(control_type: :custom).id == 'automatableMonthCalendar1' }
-      Then { element.find(control_type: [:custom, :semantic_zoom]).id == 'automatableMonthCalendar1' }
+      Then { element.find(control_type: [:semantic_zoom, :custom]).id == 'automatableMonthCalendar1' }
     end
 
     context 'pattern' do
