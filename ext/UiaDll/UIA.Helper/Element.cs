@@ -17,6 +17,16 @@ namespace UIA.Helper
             _element = element;
         }
 
+        public static Element From(AutomationElement element)
+        {
+            return null == element ? null : new Element(element);
+        }
+
+        public static Element[] From(AutomationElement[] elements)
+        {
+            return elements.Select(x => new Element(x)).ToArray();
+        }
+
         public TPattern As<TPattern>(AutomationPattern pattern)
         {
             return (TPattern)_element.GetCurrentPattern(pattern);
@@ -102,11 +112,6 @@ namespace UIA.Helper
             get { return Find(TreeScope.Children, Condition.TrueCondition); }
         }
 
-        public Element[] ChildrenOf(AutomationPropertyCondition.Id id)
-        {
-            return Find(TreeScope.Children, AutomationPropertyCondition.From(id));
-        }
-
         public Element[] Descendants
         {
             get { return Find(TreeScope.Descendants, Condition.TrueCondition); }
@@ -120,16 +125,6 @@ namespace UIA.Helper
         public void ClickCenter()
         {
             Mouse.ClickCenter(_element);
-        }
-
-        public static Element From(AutomationElement element)
-        {
-            return null == element ? null : new Element(element);
-        }
-
-        public static Element[] From(AutomationElement[] elements)
-        {
-            return elements.Select(x => new Element(x)).ToArray();
         }
 
         public Element[] Find(TreeScope scope, Condition condition)
