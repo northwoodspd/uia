@@ -12,7 +12,7 @@ class Symbol
 
   def to_control_type_const
     control_type = Uia::Library::Constants::ControlTypes[self]
-    raise InvalidControlType.new(self) unless control_type
+    raise Uia::InvalidControlType.new(self) unless control_type
     control_type
   end
 end
