@@ -69,15 +69,15 @@ module Uia
     ## conditions
     attach_function :release_condition, :Condition_Release, [:pointer], :void
     attach_function :id_condition, :Condition_Id, [:string], SearchCondition.by_ref
-    attach_function :Condition_Pattern, [:pointer, :int, :varargs], SearchCondition.by_ref
+    attach_function :Condition_Pattern, [:pointer, :int, :int, :varargs], SearchCondition.by_ref
     attach_function :name_condition, :Condition_Name, [:string], SearchCondition.by_ref
     self.singleton_class.send(:alias_method, :value_condition, :name_condition)
     attach_function :Condition_ControlType, [:int, :varargs], SearchCondition.by_ref
 
     def self.pattern_condition(*patterns)
       string_buffer = FFI::MemoryPointer.new :char, 1024
-      pattern_strings = patterns.flatten.map(&:to_pattern_available_property) << nil
-      result = Condition_Pattern string_buffer, 1024, *pattern_strings.reduce([]) { |a, n| a << :string << n }
+      pattern_strings = patterns.flatten.map(&:to_pattern_available_property)
+      result = Condition_Pattern string_buffer, 1024, pattern_strings.count, *to_var_arg(pattern_strings, :string)
       error_info = string_buffer.read_string
       raise error_info unless error_info.empty?
       result
@@ -85,8 +85,7 @@ module Uia
 
     def self.control_type_condition(*control_types)
       control_types = control_types.flatten
-      args = control_types.map(&:to_control_type_const).reduce([]) { |a, n| a << :int << n }
-      Condition_ControlType control_types.count, *args
+      Condition_ControlType control_types.count, *to_var_arg(control_types.map(&:to_control_type_const), :int)
     end
 
     # element methods
@@ -188,6 +187,10 @@ module Uia
         pointer = elements_pointer.read_pointer + which_element * ManagedElementStruct.size
         Uia::Element.new(ManagedElementStruct.new(pointer))
       end
+    end
+
+    def self.to_var_arg(array, type)
+      array.reduce([]) { |a, n| a << type << n }
     end
 
   rescue LoadError => e

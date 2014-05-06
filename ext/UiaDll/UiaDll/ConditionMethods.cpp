@@ -30,18 +30,16 @@ extern "C" {
     }
   }
 
-  __declspec(dllexport) SearchConditionPtr Condition_Pattern(char* errorInfo, const int errorInfoLength, const char* arg0, ...) {
+  __declspec(dllexport) SearchConditionPtr Condition_Pattern(char* errorInfo, const int errorInfoLength, const int n, const char* arg0, ...) {
     va_list arguments;
     va_start(arguments, arg0);
 
     list<const char*> patterns;
-
-    const char* pattern = arg0;
-    while(NULL != pattern) {
-      patterns.push_back(pattern);
-      pattern = va_arg(arguments, const char*);
+    patterns.push_back(arg0);
+    for(auto index = 1; index < n; ++index) {
+      auto value = va_arg(arguments, const char*);
+      patterns.push_back(value);
     }
-    va_end(arguments);
 
     return ManagedBuildPatternCondition(patterns, errorInfo, errorInfoLength); 
   }
