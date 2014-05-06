@@ -16,7 +16,7 @@ namespace UIA.Helper
 
         public static Point Center(this Rect rectangle)
         {
-            if( rectangle == Rect.Empty )
+            if (rectangle == Rect.Empty)
                 throw new Exception("No point could be found");
 
             return new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top + rectangle.Height / 2);
@@ -34,6 +34,16 @@ namespace UIA.Helper
         {
             return new PropertyCondition(AutomationElement.NameProperty, name);
         }
+
+        public static int PropertyId(this string propertyName)
+        {
+            var automationField = typeof(AutomationElement).GetField(propertyName);
+
+            if (null == automationField)
+                throw new ArgumentException(string.Format("{0} is not a valid AutomationProperty", propertyName));
+
+            return ((AutomationProperty)automationField.GetValue(null)).Id;
+        }
     }
 
     public static class ElementExtensions
@@ -49,7 +59,8 @@ namespace UIA.Helper
                     Thread.Sleep(100);
                 }
                 return automationElement.Current.HasKeyboardFocus;
-            } catch { return false; }
+            }
+            catch { return false; }
         }
 
         public static bool ScrollToIfPossible(this AutomationElement automationElement)

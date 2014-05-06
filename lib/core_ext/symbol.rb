@@ -3,6 +3,10 @@ class Symbol
     self.to_s.split('_').map(&:capitalize).join(' ')
   end
 
+  def to_pattern_available_property
+    "Is#{self.to_camelized_s.delete(' ')}PatternAvailableProperty"
+  end
+
   # :selection_item => Uia::Patterns::SelectionItem
   def to_pattern_const
     "Uia::Patterns::#{self.to_s.capitalize}".split('::').reduce(Object) do |m, current|

@@ -15,14 +15,35 @@ extern "C" {
     return new SearchCondition(AutomationElement::NameProperty->Id, name);
   }
 
-  __declspec(dllexport) SearchConditionPtr Condition_Pattern(const char* pattern, char* errorInfo, const int errorInfoLength) {
+   SearchConditionPtr ManagedBuildPatternCondition(list<const char*>& patterns, char* errorInfo, const int errorInfoLength) {
     try {
-      auto patternPropertyId = dynamic_cast<AutomationProperty^>(AutomationElement::typeid->GetField(gcnew String(pattern))->GetValue(nullptr))->Id;
-      return new SearchCondition(patternPropertyId, true);
+      list<const int> patternIds;
+
+      for(auto pattern = patterns.begin(); pattern != patterns.end(); ++pattern) {
+        patternIds.push_back(PropertyExtensions::PropertyId(gcnew String(*pattern)));
+      }
+
+      return new SearchCondition(patternIds);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(String::Format("{0} is an invalid AutomationProperty", gcnew String(pattern)), errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
       return NULL;
     }
+  }
+
+  __declspec(dllexport) SearchConditionPtr Condition_Pattern(char* errorInfo, const int errorInfoLength, const char* arg0, ...) {
+    va_list arguments;
+    va_start(arguments, arg0);
+
+    list<const char*> patterns;
+
+    const char* pattern = arg0;
+    while(NULL != pattern) {
+      patterns.push_back(pattern);
+      pattern = va_arg(arguments, const char*);
+    }
+    va_end(arguments);
+
+    return ManagedBuildPatternCondition(patterns, errorInfo, errorInfoLength); 
   }
 
   __declspec(dllexport) SearchConditionPtr Condition_ControlType(const int n, const int arg0, ...) {

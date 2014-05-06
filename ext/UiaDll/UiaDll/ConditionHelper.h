@@ -30,8 +30,8 @@ public:
       return ControlTypeConditions(searchCondition->numbers, searchCondition->numbersCount);
     } else if(searchCondition->IsString()) {
       value = gcnew String(searchCondition->string);
-    } else if(searchCondition->IsPatternAvailableProperty()) {
-      value = true;
+    } else if(searchCondition->IsPattern()) {
+      return PatternConditions(searchCondition->patterns, searchCondition->patternsCount);
     } else {
       value = searchCondition->number;
     }
@@ -53,7 +53,25 @@ private:
     return gcnew OrCondition(conditions->ToArray());
   }
 
+  static Condition^ PatternConditions(const int* patternIds, const int patterns) {
+    if(patterns == 1) {
+      return Pattern(patternIds[0]);
+    }
+
+    auto conditions = gcnew List<Condition^>();
+    for(auto index = 0; index < patterns; ++index) {
+      conditions->Add(Pattern(patternIds[index]));
+    }
+
+    return gcnew OrCondition(conditions->ToArray());
+  }
+
   static Condition^ ControlType(const int id) {
     return gcnew PropertyCondition(AutomationElement::ControlTypeProperty, ControlType::LookupById(id));
+  }
+
+  static Condition^ Pattern(const int patternId) {
+    auto automationProperty = AutomationProperty::LookupById(patternId);
+    return gcnew PropertyCondition(automationProperty, true);
   }
 };

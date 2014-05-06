@@ -12,12 +12,14 @@ typedef struct _SearchCondition {
   char* string;
   int* numbers;
   int numbersCount;
+  int* patterns;
+  int patternsCount;
 
-  _SearchCondition(const int id) : string(NULL), numbers(NULL) {
+  _SearchCondition(const int id) : string(NULL), numbers(NULL), patterns(NULL) {
     Reset(id);
   }
 
-  _SearchCondition(const int id, const char* s) : string(NULL), numbers(NULL) {
+  _SearchCondition(const int id, const char* s) : string(NULL), numbers(NULL), patterns(NULL) {
     Reset(id);
 
     auto length = strnlen_s(s, 10000);
@@ -26,12 +28,12 @@ typedef struct _SearchCondition {
     strcpy_s(this->string, size, s);
   }
 
-  _SearchCondition(const int id, const int number) : string(NULL), numbers(NULL) {
+  _SearchCondition(const int id, const int number) : string(NULL), numbers(NULL), patterns(NULL) {
     Reset(id);
     this->number = number;
   }
 
-  _SearchCondition(const int id, list<const int>& numbers) : string(NULL), numbers(NULL) {
+  _SearchCondition(const int id, list<const int>& numbers) : string(NULL), numbers(NULL), patterns(NULL) {
     Reset(id);
     numbersCount = numbers.size();
     this->numbers = new int[numbersCount];
@@ -39,6 +41,18 @@ typedef struct _SearchCondition {
     int index = 0; 
     for(std::list<const int>::iterator number = numbers.begin(); number != numbers.end(); ++number, ++index) {
       this->numbers[index] = *number;
+    }
+  }
+
+  _SearchCondition(list<const int>& patterns) : string(NULL), numbers(NULL), patterns(NULL) {
+    Reset(patterns.front());
+
+    patternsCount = patterns.size();
+    this->patterns = new int[patternsCount];
+
+    int index = 0;
+    for(std::list<const int>::iterator pattern = patterns.begin(); pattern != patterns.end(); ++pattern, ++index) {
+      this->patterns[index] = * pattern;
     }
   }
 
@@ -50,14 +64,8 @@ typedef struct _SearchCondition {
     return NULL != string;
   }
 
-  bool IsPatternAvailableProperty() {
-    try {
-      auto automationProperty = System::Windows::Automation::AutomationProperty::LookupById(propertyId);
-      return automationProperty->ProgrammaticName->Contains("PatternAvailableProperty");
-    } catch(Exception^ e) {
-      Console::WriteLine(e->Message);
-      return false;
-    }
+  bool IsPattern() {
+    return NULL != patterns;
   }
 
   static _SearchCondition* FromControlTypes(list<const int>& controlTypes) {
@@ -66,9 +74,9 @@ typedef struct _SearchCondition {
 
   void Reset(const int id) {
     propertyId = id;
-    delete[] string; delete[] numbers;
+    delete[] string; delete[] numbers; delete[] patterns;
     string = NULL; numbers = NULL;
-    number = 0; numbersCount = 0;
+    number = 0; numbersCount = 0; patternsCount = 0;
   }
 
   ~_SearchCondition() {
