@@ -84,8 +84,9 @@ module Uia
     end
 
     def self.control_type_condition(*control_types)
-      args = control_types.flatten.map(&:to_control_type_const).reduce([]) { |a, n| a << :int << n }
-      Condition_ControlType args.count, *args
+      control_types = control_types.flatten
+      args = control_types.map(&:to_control_type_const).reduce([]) { |a, n| a << :int << n }
+      Condition_ControlType control_types.count, *args
     end
 
     # element methods
