@@ -1,26 +1,26 @@
 #include "stdafx.h"
 #include <SearchCondition.h>
 
-TEST(Conditions_HaveIds)
+TEST(Conditions, HaveIds)
 {
   auto condition = SearchCondition(123, 0);
   ASSERT_EQ(123, condition.propertyId);
 }
 
-TEST(Conditions_CanBeNumbers)
+TEST(Conditions, CanBeNumbers)
 {
   auto condition = SearchCondition(0, 456);
   ASSERT_EQ(456, condition.number);
 }
 
-TEST(Conditions_CanBeStrings)
+TEST(Conditions, CanBeStrings)
 {
   auto condition = SearchCondition(0, "expected value");
   ASSERT_STREQ("expected value", condition.string);
   ASSERT_TRUE(condition.IsString());
 }
 
-TEST(Conditions_CanHaveMultipleNumbers)
+TEST(Conditions, CanHaveMultipleNumbers)
 {
   list<const int> numbers;
   numbers.push_back(7);
@@ -33,7 +33,7 @@ TEST(Conditions_CanHaveMultipleNumbers)
   ASSERT_TRUE(condition.HasNumbers());
 }
 
-TEST(Conditions_CanBePatterns)
+TEST(Conditions, CanBePatterns)
 {
   list<const int> patterns;
   patterns.push_back(123);

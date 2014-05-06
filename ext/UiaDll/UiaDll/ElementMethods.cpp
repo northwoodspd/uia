@@ -42,10 +42,12 @@ extern "C" {
     return NULL;
   }
 
+  #pragma managed(push, off)
   __declspec(dllexport) ElementInformationPtr FindFirst(ElementInformationPtr element, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
     GRAB_VARARGS(conditions, SearchConditionPtr, count);
     return ManagedFindFirst(element, treeScope, conditions, errorInfo, errorInfoLength);
   }
+  #pragma managed(pop)
 
   int ManagedFindAll(ElementInformationPtr element, ElementInformation** elements, const char* treeScope, list<SearchConditionPtr>& conditions, char* errorInfo, const int errorInfoLength) {
     try {
@@ -60,10 +62,12 @@ extern "C" {
     return 0;
   }
 
+  #pragma managed(push, off)
   __declspec(dllexport) int FindAll(ElementInformationPtr parent, ElementInformation** elements, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
     GRAB_VARARGS(conditions, SearchConditionPtr, count);
     return ManagedFindAll(parent, elements, treeScope, conditions, errorInfo, errorInfoLength);
   }
+  #pragma managed(pop)
 
   __declspec(dllexport) ElementInformationPtr Element_FindById(const char* automationId, char* errorInfo, const int errorLength) {
     try {

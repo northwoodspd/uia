@@ -48,12 +48,12 @@ namespace UIA.Helper
             get { return _element.GetRuntimeId(); }
         }
 
-        public virtual long[] BoundingRectangle
+        public virtual int[] BoundingRectangle
         {
             get
             {
                 var r = _element.Current.BoundingRectangle;
-                return new[] { (long)r.Left, (long)r.Top, (long)(r.Right - r.Left), (long)(r.Bottom - r.Top) };
+                return new[] { (int)r.Left, (int)r.Top, (int)(r.Right - r.Left), (int)(r.Bottom - r.Top) };
             }
         }
 

@@ -30,13 +30,17 @@ extern "C" {
     }
   }
 
+  #pragma managed(push, off)
   __declspec(dllexport) SearchConditionPtr Condition_Pattern(char* errorInfo, const int errorInfoLength, const int n, const char* arg0, ...) {
     GRAB_VARARGS(patterns, const char*, n);
     return ManagedBuildPatternCondition(patterns, errorInfo, errorInfoLength); 
   }
+  #pragma managed(pop)
 
+  #pragma managed(push, off)
   __declspec(dllexport) SearchConditionPtr Condition_ControlType(const int n, const int arg0, ...) {
     GRAB_VARARGS(controlTypes, const int, n);
     return SearchCondition::FromControlTypes(controlTypes);
   }
+  #pragma managed(pop)
 }
