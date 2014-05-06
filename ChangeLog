@@ -1,3 +1,7 @@
+=== Version 0.3 /2014-05-06
+*   Enhancements
+    *   added the ability to list more than one pattern to search for
+
 === Version 0.2.1 / 2014-04-30
 *   Bug Fixes
     *   fixes issue with using the :control_type condition with multiple types allowed (i.e. [:button, :list])
