@@ -16,3 +16,13 @@ using namespace UIA::Helper;
 #include <list>
 
 extern "C" Element^ ElementFrom(ElementInformationPtr element);
+
+#define GRAB_VARARGS(argument_list, arg_type, arg_count) \
+  va_list arguments;\
+  va_start(arguments, arg0);\
+  list<##arg_type##> ##argument_list##;\
+  ##argument_list##.push_back(arg0);\
+  for(auto index = 1; index < ##arg_count##; ++index) {\
+    auto value = va_arg(arguments, ##arg_type##);\
+    ##argument_list##.push_back(value);\
+  }

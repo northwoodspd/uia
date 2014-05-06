@@ -43,15 +43,7 @@ extern "C" {
   }
 
   __declspec(dllexport) ElementInformationPtr FindFirst(ElementInformationPtr element, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
-    va_list arguments;
-    va_start(arguments, arg0);
-
-    list<SearchConditionPtr> conditions;
-    conditions.push_back(arg0);
-    for(auto index = 1; index < count; index++) {
-      conditions.push_back(va_arg(arguments, SearchConditionPtr));
-    }
-
+    GRAB_VARARGS(conditions, SearchConditionPtr, count);
     return ManagedFindFirst(element, treeScope, conditions, errorInfo, errorInfoLength);
   }
 
@@ -69,15 +61,7 @@ extern "C" {
   }
 
   __declspec(dllexport) int FindAll(ElementInformationPtr parent, ElementInformation** elements, const char* treeScope, char* errorInfo, const int errorInfoLength, const int count, SearchConditionPtr arg0, ...) {
-    va_list arguments;
-    va_start(arguments, arg0);
-
-    list<SearchConditionPtr> conditions;
-    conditions.push_back(arg0);
-    for(auto index = 1; index < count; index++) {
-      conditions.push_back(va_arg(arguments, SearchConditionPtr));
-    }
-
+    GRAB_VARARGS(conditions, SearchConditionPtr, count);
     return ManagedFindAll(parent, elements, treeScope, conditions, errorInfo, errorInfoLength);
   }
 

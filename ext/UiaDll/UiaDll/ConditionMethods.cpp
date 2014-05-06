@@ -31,30 +31,12 @@ extern "C" {
   }
 
   __declspec(dllexport) SearchConditionPtr Condition_Pattern(char* errorInfo, const int errorInfoLength, const int n, const char* arg0, ...) {
-    va_list arguments;
-    va_start(arguments, arg0);
-
-    list<const char*> patterns;
-    patterns.push_back(arg0);
-    for(auto index = 1; index < n; ++index) {
-      auto value = va_arg(arguments, const char*);
-      patterns.push_back(value);
-    }
-
+    GRAB_VARARGS(patterns, const char*, n);
     return ManagedBuildPatternCondition(patterns, errorInfo, errorInfoLength); 
   }
 
   __declspec(dllexport) SearchConditionPtr Condition_ControlType(const int n, const int arg0, ...) {
-    va_list arguments;
-    va_start(arguments, arg0);
-
-    list<const int> controlTypes;
-    controlTypes.push_back(arg0);
-    for(auto index = 1; index < n; index++) {
-      auto value = va_arg(arguments, int);
-      controlTypes.push_back(value);
-    }
-
+    GRAB_VARARGS(controlTypes, const int, n);
     return SearchCondition::FromControlTypes(controlTypes);
   }
 }
