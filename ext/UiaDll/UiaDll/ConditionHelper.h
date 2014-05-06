@@ -1,6 +1,7 @@
 #pragma once
 #include "ElementStructures.h"
 #include <list>
+#include <functional>
 
 using namespace System::Collections::Generic;
 using namespace std;
@@ -27,11 +28,11 @@ public:
     Object^ value = nullptr;
 
     if(automationProperty == AutomationElement::ControlTypeProperty) {
-      return ControlTypeConditions(searchCondition->numbers, searchCondition->numbersCount);
+      return Or(searchCondition->numbers, searchCondition->numbersCount, ControlType);
     } else if(searchCondition->IsString()) {
       value = gcnew String(searchCondition->string);
     } else if(searchCondition->IsPattern()) {
-      return PatternConditions(searchCondition->patterns, searchCondition->patternsCount);
+      return Or(searchCondition->patterns, searchCondition->patternsCount, Pattern);
     } else {
       value = searchCondition->number;
     }
@@ -40,27 +41,14 @@ public:
   }
 
 private:
-  static Condition^ ControlTypeConditions(const int* controlTypeIds, const int controlTypes) {
-    if(controlTypes == 1) {
-      return ControlType(controlTypeIds[0]);
+  static Condition^ Or(const int* ids, const int count, std::function<Condition^(int)> conditionFor) {
+    if( count == 1 ) {
+      return conditionFor(ids[0]);
     }
 
     auto conditions = gcnew List<Condition^>();
-    for(auto index = 0; index < controlTypes; ++index) {
-      conditions->Add(ControlType(controlTypeIds[index]));
-    }
-
-    return gcnew OrCondition(conditions->ToArray());
-  }
-
-  static Condition^ PatternConditions(const int* patternIds, const int patterns) {
-    if(patterns == 1) {
-      return Pattern(patternIds[0]);
-    }
-
-    auto conditions = gcnew List<Condition^>();
-    for(auto index = 0; index < patterns; ++index) {
-      conditions->Add(Pattern(patternIds[index]));
+    for(auto index = 0; index < count; ++index) {
+      conditions->Add(conditionFor(ids[index]));
     }
 
     return gcnew OrCondition(conditions->ToArray());
@@ -71,7 +59,6 @@ private:
   }
 
   static Condition^ Pattern(const int patternId) {
-    auto automationProperty = AutomationProperty::LookupById(patternId);
-    return gcnew PropertyCondition(automationProperty, true);
+    return gcnew PropertyCondition(AutomationProperty::LookupById(patternId), true);
   }
 };
