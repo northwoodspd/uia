@@ -84,6 +84,7 @@
     <ClInclude Include="DynamicAssemblyResolver.h" />
     <ClInclude Include="ElementStructures.h" />
     <ClInclude Include="PatternInformationStructures.h" />
+    <ClInclude Include="SearchCondition.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="StringHelper.h" />
   </ItemGroup>

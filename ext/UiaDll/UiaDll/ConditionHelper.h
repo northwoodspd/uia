@@ -1,5 +1,5 @@
 #pragma once
-#include "ElementStructures.h"
+#include "SearchCondition.h"
 #include <list>
 #include <functional>
 

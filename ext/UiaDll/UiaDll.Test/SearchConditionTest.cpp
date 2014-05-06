@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <ElementStructures.h>
+#include <SearchCondition.h>
 
 TEST(Conditions_HaveIds)
 {
