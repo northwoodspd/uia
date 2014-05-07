@@ -1,4 +1,8 @@
-=== Version 0.3 /2014-05-06
+=== Version 0.3.1 / 2014-05-07
+*   Enhancements
+    *   added Table#row_at method
+
+=== Version 0.3 / 2014-05-06
 *   Enhancements
     *   added the ability to list more than one pattern to search for
 
