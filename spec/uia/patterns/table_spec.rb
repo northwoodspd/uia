@@ -31,4 +31,8 @@ describe Uia::Patterns::Table do
       end
     end
   end
+
+  context '#row_at' do
+    Then { data_grid.row_at(1).items[1].name == '3/4/1975'}
+  end
 end

@@ -19,6 +19,10 @@ module Uia
         Library.table_headers @element
       end
 
+      def row_at(index)
+        Library.table_row(@element, index).extend Row
+      end
+
       def rows
         find_all(control_type: :data_item).each { |e| e.extend Row }
       end

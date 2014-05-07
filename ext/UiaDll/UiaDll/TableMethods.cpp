@@ -24,4 +24,14 @@ extern "C" {
       return 0;
     }
   }
+
+  __declspec(dllexport) ElementInformationPtr Table_Row(ElementInformationPtr element, const int index, char* errorInfo, const int errorInfoLength) {
+    try {
+      auto table = ElementFrom(element);
+      return ElementInformation::From(table->Find(TreeScope::Children, gcnew PropertyCondition(AutomationElement::ControlTypeProperty, ControlType::DataItem))[index]);
+    } catch(Exception^ e) {
+      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      return NULL;
+    }
+  }
 }
