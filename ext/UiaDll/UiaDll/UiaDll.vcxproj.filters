@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Patterns">
       <UniqueIdentifier>{a1dddb33-e832-4b83-b6d7-46462084fad2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ControlTypes">
+      <UniqueIdentifier>{f17fb0d5-c4d9-44ae-9cf3-518f4f70839d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="ConditionMethods.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuItemMethods.cpp">
+      <Filter>Source Files\ControlTypes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

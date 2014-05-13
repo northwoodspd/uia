@@ -9,9 +9,11 @@ class Symbol
 
   # :selection_item => Uia::Patterns::SelectionItem
   def to_pattern_const
-    "Uia::Patterns::#{self.to_s.capitalize}".split('::').reduce(Object) do |m, current|
-      m.const_get current.split('_').map(&:capitalize).join
-    end
+    Uia::Patterns.const_get_path "#{self.capitalize}"
+  end
+
+  def to_control_type
+    Uia::ControlTypes.const_get_path "#{self.capitalize}"
   end
 
   def to_control_type_const

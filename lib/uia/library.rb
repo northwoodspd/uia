@@ -153,6 +153,12 @@ module Uia
       p.read_string
     end
 
+    # MenuItem methods
+    attach_function :MenuItem_SelectPath, [:pointer, :pointer, :int, :int, :varargs], :void
+    def self.select_menu_path(element, *path)
+      try_catch {|s, n| MenuItem_SelectPath element, s, n, path.count, *path.to_var_args(:string) }
+    end
+
     def self.find_by_runtime_id(id)
       p = FFI::MemoryPointer.new :int, id.count
       p.write_array_of_int(id)
@@ -160,12 +166,16 @@ module Uia
       Uia::Element.new(result) unless result.empty?
     end
 
-    def self.can_throw(method, *args)
+    def self.try_catch(&block)
       string_buffer = FFI::MemoryPointer.new :char, 1024
-      result = send method, *(args << string_buffer << 1024)
+      result = block.call(string_buffer, 1024)
       error_info = string_buffer.read_string
       raise error_info unless error_info.empty?
       result
+    end
+
+    def self.can_throw(method, *args)
+      try_catch {|s, n| send method, *(args << s << n) }
     end
 
     def self.find_first(element, scope, *conditions)

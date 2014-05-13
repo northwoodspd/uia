@@ -35,6 +35,11 @@ namespace UIA.Helper
             return new PropertyCondition(AutomationElement.NameProperty, name);
         }
 
+        public static Condition Condition(this ControlType controlType)
+        {
+            return new PropertyCondition(AutomationElement.ControlTypeProperty, controlType);
+        }
+
         public static int PropertyId(this string propertyName)
         {
             var automationField = typeof(AutomationElement).GetField(propertyName);

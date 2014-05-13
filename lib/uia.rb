@@ -6,6 +6,7 @@ require 'uia/finder'
 require 'uia/element'
 
 require_rel 'uia/patterns'
+require_rel 'uia/control_types'
 require_rel 'core_ext'
 
 module Uia

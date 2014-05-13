@@ -91,6 +91,10 @@ module Uia
       extend pattern.to_pattern_const
     end
 
+    def with(control_types)
+      extend control_types.to_control_type
+    end
+
     def patterns
       @element.pattern_ids.map { |id| Library::Constants::Patterns.find(@default) { |_, v| v == id }.first }
     end

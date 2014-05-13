@@ -167,6 +167,11 @@ namespace UIA.Helper
             return NullOr(AutomationElement.FromHandle(windowHandle));
         }
 
+        public Element MenuItem(string name)
+        {
+            return FindFirst(TreeScope.Subtree, new AndCondition(name.NameCondition(), ControlType.MenuItem.Condition()));
+        }
+
         public static Element ByRuntimeId(int[] runtimeId)
         {
             return FindFirst(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId), TreeScope.Descendants);
