@@ -1,3 +1,8 @@
+=== Version 0.3.2 / 2014-05-13
+*   Enhancements
+    *   added #with method to extend an Element based on ControlPatterns
+        *   Uia::ControlPatterns::MenuItems can select a menu item by name or path
+
 === Version 0.3.1 / 2014-05-07
 *   Enhancements
     *   added Table#row_at method
