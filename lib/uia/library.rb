@@ -75,12 +75,10 @@ module Uia
     attach_function :Condition_ControlType, [:int, :varargs], SearchCondition.by_ref
 
     def self.pattern_condition(*patterns)
-      string_buffer = FFI::MemoryPointer.new :char, 1024
-      pattern_strings = patterns.flatten.map(&:to_pattern_available_property)
-      result = Condition_Pattern string_buffer, 1024, pattern_strings.count, *pattern_strings.to_var_args(:string)
-      error_info = string_buffer.read_string
-      raise error_info unless error_info.empty?
-      result
+      try_catch do |s, n|
+        pattern_strings = patterns.flatten.map(&:to_pattern_available_property)
+        Condition_Pattern s, n, pattern_strings.count, *pattern_strings.to_var_args(:string)
+      end
     end
 
     def self.control_type_condition(*control_types)
@@ -179,26 +177,20 @@ module Uia
     end
 
     def self.find_first(element, scope, *conditions)
-      string_buffer = FFI::MemoryPointer.new :char, 1024
-      result = FindFirst element, scope, string_buffer, 1024, conditions.count, *conditions.to_var_args(:pointer)
-      error_info = string_buffer.read_string
-      raise error_info unless error_info.empty?
+      result = try_catch {|s, n| FindFirst element, scope, s, n, conditions.count, *conditions.to_var_args(:pointer) }
       Uia::Element.new(result) unless result.empty?
     end
 
     def self.find_all(element, scope, *conditions)
       elements_pointer = FFI::MemoryPointer.new :pointer
-      string_buffer = FFI::MemoryPointer.new :char, 1024
-      result = FindAll element, elements_pointer, scope, string_buffer, 1024, conditions.count, *conditions.to_var_args(:pointer)
-      error_info = string_buffer.read_string
-      raise error_info unless error_info.empty?
+      result = try_catch {|s, n| FindAll element, elements_pointer, scope, s, n, conditions.count, *conditions.to_var_args(:pointer) }
       result.times.collect do |which_element|
         pointer = elements_pointer.read_pointer + which_element * ManagedElementStruct.size
         Uia::Element.new(ManagedElementStruct.new(pointer))
       end
     end
 
-  rescue LoadError => e
+  rescue LoadError
     raise LoadError, 'You must install the Visual Studio 2012 C++ Runtime Environment to use the Uia gem (http://www.microsoft.com/en-us/download/details.aspx?id=30679)'
   end
 end
