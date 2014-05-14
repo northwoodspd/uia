@@ -1,3 +1,7 @@
+=== Version 0.4.1 / 2014-05-14
+*   Enhancements
+    *   Element#help_text
+
 === Version 0.4 / 2014-05-13
 *   Enhancements
     *   MenuItems#menu_item - find by path
