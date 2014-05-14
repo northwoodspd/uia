@@ -7,6 +7,7 @@ typedef struct _ElementInformation {
   int* runtimeId;
   int runtimeIdLength;
   char* name;
+  char* helpText;
   char* className;
   int controlTypeId;
   int* patterns;
@@ -18,9 +19,9 @@ typedef struct _ElementInformation {
   bool hasKeyboardFocus;
   long boundingRectangle[4];
 
-  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL) {}
+  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL), helpText(NULL) {}
 
-  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL) {
+  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL), helpText(NULL) {
     Refresh(element);
   }
 
@@ -56,6 +57,8 @@ typedef struct _ElementInformation {
     isVisible = element->IsVisible;
     hasKeyboardFocus = element->HasKeyboardFocus;
 
+    helpText = StringHelper::ToUnmanaged(element->HelpText);
+
     auto r = element->BoundingRectangle;
     for(auto coord = 0; coord < 4; coord++) {
       boundingRectangle[coord] = r[coord];
@@ -68,8 +71,8 @@ typedef struct _ElementInformation {
 
 private:
   void Reset() {
-    delete[] name; delete[] runtimeId; delete[] patterns; delete[] id; delete[] className;
-    name = NULL; runtimeId = NULL; patterns = NULL; id = NULL; className = NULL;
+    delete[] name; delete[] runtimeId; delete[] patterns; delete[] id; delete[] className; delete[] helpText;
+    name = NULL; runtimeId = NULL; patterns = NULL; id = NULL; className = NULL; helpText = NULL;
   }
 
 } ElementInformation, *ElementInformationPtr;

@@ -62,6 +62,11 @@ namespace UIA.Helper
             get { return _element.Current.Name; }
         }
 
+        public virtual string HelpText
+        {
+            get { return _element.Current.HelpText; }
+        }
+
         public virtual string ClassName
         {
             get { return _element.Current.ClassName; }

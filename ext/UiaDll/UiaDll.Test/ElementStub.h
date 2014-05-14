@@ -16,6 +16,12 @@ public:
     void set(String^ name) { _name = name; }
   }
 
+  virtual property String^ HelpText
+  {
+    String^ get() override { return _helpText; }
+    void set(String^ helpText) { _helpText = helpText; }
+  }
+
   virtual property String^ ClassName
   {
     String^ get() override { return _className; }
@@ -80,6 +86,7 @@ public:
 
 private:
   String^ _name;
+  String^ _helpText;
   String^ _className;
   String^ _id;
   array<int>^ _runtimeIds;

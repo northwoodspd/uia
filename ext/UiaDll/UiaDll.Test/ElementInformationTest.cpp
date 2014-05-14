@@ -37,6 +37,13 @@ TEST_F(ElementInformationTest, ItHasTheName)
   ASSERT_STREQ("Expected Name", ElementInformation(gcnew ElementStub("Expected Name")).name);
 }
 
+TEST_F(ElementInformationTest, ItHasTheHelpText) {
+  auto element = gcnew ElementStub("");
+  element->HelpText = gcnew String("Expected help text");
+
+  ASSERT_STREQ("Expected help text", ElementInformation(element).helpText);
+}
+
 TEST_F(ElementInformationTest, ItKnowsAboutTheRuntimeId)
 {
   auto elementInformation = ElementInformation(gcnew ElementStub("", 0, 1, 2));

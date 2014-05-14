@@ -18,7 +18,7 @@ module Uia
       @default = lambda { [:unknown] }
     end
 
-    element_attr :id, :name, :handle, :runtime_id,
+    element_attr :id, :name, :handle, :runtime_id, :help_text,
                  :class_name, :children, :descendants
     refreshed_element_attr :enabled?, :visible?, :focused?, :bounding_rectangle
 

@@ -13,6 +13,7 @@ module Uia
                  :runtime_id, :pointer,
                  :number_of_ids, :int,
                  :name, :string,
+                 :help_text, :string,
                  :class_name, :string,
                  :control_type_id, :int,
                  :patterns, :pointer,
@@ -23,7 +24,7 @@ module Uia
                  :has_focus, :bool,
                  :bounding_rectangle, [:long, 4]
 
-          struct_attr :id, :name, :handle, :control_type_id, :class_name,
+          struct_attr :id, :name, :handle, :control_type_id, :class_name, :help_text,
                       [:enabled?, :is_enabled], [:visible?, :is_visible], [:focused?, :has_focus]
 
           def runtime_id

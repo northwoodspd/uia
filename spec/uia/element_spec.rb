@@ -26,9 +26,12 @@ describe Uia::Element do
 
   context 'properties' do
     let(:raw_element) { element.instance_variable_get(:@element) }
+    Given(:about_button) { element.find name: 'About', control_type: :button }
+
     Then { element.handle != 0 }
     Then { element.name == 'MainFormWindow' }
     Then { element.id == 'MainFormWindow' }
+    Then { about_button.help_text =~ /click about to find out/i }
     Then { element.class_name =~ /Forms.*app/i }
     Then { expect(element.find(id: 'textField')).to be_enabled }
     Then do
