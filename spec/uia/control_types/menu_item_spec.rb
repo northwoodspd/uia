@@ -1,11 +1,19 @@
 require 'spec_helper'
 
 describe Uia::ControlTypes::MenuItems do
-  Given(:main)  { Uia.find_element(title: 'MainFormWindow').with(:menu_items) }
+  Given(:main) { Uia.find_element(title: 'MainFormWindow').with(:menu_items) }
 
   after(:each) do
     about = Uia.find_element(title: 'About')
     about.send_keys [:alt, :f4] if about
+  end
+
+  context 'existence' do
+    Then { expect(main).not_to have_menu_item 'non-existent' }
+    Then { expect(main).not_to have_menu_item 'File', 'Roundabout Way', 'To', 'Not There' }
+
+    Then { expect(main).to have_menu_item 'File' }
+    Then { expect(main).to have_menu_item 'File', 'Roundabout Way', 'To' }
   end
 
   context 'selecting individually' do
