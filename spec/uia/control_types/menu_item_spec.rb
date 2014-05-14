@@ -8,27 +8,22 @@ describe Uia::ControlTypes::MenuItems do
     about.send_keys [:alt, :f4] if about
   end
 
-  context 'existence' do
-    Then { expect(main).not_to have_menu_item 'non-existent' }
-    Then { expect(main).not_to have_menu_item 'File', 'Roundabout Way', 'To', 'Not There' }
+  context '#menu_item' do
+    Then { main.menu_item('non-existent') == nil }
+    Then { main.menu_item('File', 'Roundabout Way', 'To', 'Not There') == nil }
 
-    Then { expect(main).to have_menu_item 'File' }
-    Then { expect(main).to have_menu_item 'File', 'Roundabout Way', 'To' }
+    Then { main.menu_item('File').name == 'File' }
+    Then { main.menu_item('File', 'Roundabout Way', 'To').name == 'To' }
   end
 
-  context 'selecting individually' do
-    When { main.select_menu_item 'About' }
-    Then { Uia.find_element(title: 'About') != nil }
-  end
-
-  context 'selecting a path' do
+  context '#select_menu_item' do
     context 'valid' do
-      When { main.select_menu_path 'File', 'Roundabout Way', 'To', 'About' }
+      When { main.select_menu_item 'File', 'Roundabout Way', 'To', 'About' }
       Then { Uia.find_element(title: 'About') != nil }
     end
 
     context 'invalid' do
-      Given(:bad_path) { main.select_menu_path 'File', 'Roundabout Way', 'To', 'Something Not There' }
+      Given(:bad_path) { main.select_menu_item 'File', 'Roundabout Way', 'To', 'Something Not There' }
       Then { expect { bad_path }.to raise_error(RuntimeError, /Something Not There/) }
     end
   end

@@ -153,14 +153,15 @@ module Uia
 
     # MenuItem methods
     attach_function :MenuItem_SelectPath, [:pointer, :pointer, :int, :int, :varargs], :void
-    attach_function :MenuItem_HasPath, [:pointer, :pointer, :int, :int, :varargs], :bool
+    attach_function :MenuItem_ByPath, [:pointer, :pointer, :int, :int, :varargs], ManagedElementStruct.by_ref
 
     def self.select_menu_path(element, *path)
       try_catch {|s, n| MenuItem_SelectPath element, s, n, path.count, *path.to_var_args(:string) }
     end
 
-    def self.has_menu_item(element, *path)
-      try_catch {|s, n| MenuItem_HasPath element, s, n, path.count, *path.to_var_args(:string) }
+    def self.menu_item(element, *path)
+      e = try_catch {|s, n| MenuItem_ByPath element, s, n, path.count, *path.to_var_args(:string) }
+      Uia::Element.new(e) unless e.empty?
     end
 
     def self.find_by_runtime_id(id)

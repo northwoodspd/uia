@@ -7,12 +7,12 @@ extern "C" {
   };
 
   void SelectMenuItemPath(ElementInformationPtr, char*, const int, list<const char*>&);
-  bool HasMenuItemPath(ElementInformationPtr, char*, const int, list<const char*>&);
-  InvokePattern^ MenuItemPath(ElementInformationPtr, list<const char*>&);
+  ElementInformationPtr MenuItemByPath(ElementInformationPtr element, char*, const int, list<const char*>& items);
+  Element^ MenuItemPath(ElementInformationPtr, list<const char*>&);
 
-  __declspec(dllexport) bool MenuItem_HasPath(ElementInformationPtr element, char* errorInfo, const int errorInfoLength, const int n, const char* arg0, ...) {
+  __declspec(dllexport) ElementInformationPtr MenuItem_ByPath(ElementInformationPtr element, char* errorInfo, const int errorInfoLength, const int n, const char* arg0, ...) {
     GRAB_VARARGS(menuItems, const char*, n);
-    return HasMenuItemPath(element, errorInfo, errorInfoLength, menuItems);
+    return MenuItemByPath(element, errorInfo, errorInfoLength, menuItems);
   }
 
   __declspec(dllexport) void MenuItem_SelectPath(ElementInformationPtr element, char* errorInfo, const int errorInfoLength, const int n, const char* arg0, ...) {
@@ -22,24 +22,24 @@ extern "C" {
 
   void SelectMenuItemPath(ElementInformationPtr element, char* errorInfo, const int errorInfoLength, list<const char*>& items) {
     try {
-      MenuItemPath(element, items)->Invoke();
+      MenuItemPath(element, items)->As<InvokePattern^>(InvokePattern::Pattern)->Invoke();
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
     }
   }
 
-  bool HasMenuItemPath(ElementInformationPtr element, char* errorInfo, const int errorInfoLength, list<const char*>& items) {
+  ElementInformationPtr MenuItemByPath(ElementInformationPtr element, char* errorInfo, const int errorInfoLength, list<const char*>& items) {
     try {
-      return nullptr != MenuItemPath(element, items);
+      return ElementInformation::From(MenuItemPath(element, items));
     } catch(MenuItemNotFound^) {
-      return false;
+      return NULL;
     } catch(Exception^ e) { 
       StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
-      return false;
+      return NULL;
     }
   }
 
-  InvokePattern^ MenuItemPath(ElementInformationPtr element, list<const char*>& items) {
+  Element^ MenuItemPath(ElementInformationPtr element, list<const char*>& items) {
     auto current = ElementFrom(element);
 
     for(auto item = items.begin(); item != items.end(); ++item) {
@@ -55,6 +55,6 @@ extern "C" {
       }
     }
 
-    return current->As<InvokePattern^>(InvokePattern::Pattern);
+    return current;
   }
 }
