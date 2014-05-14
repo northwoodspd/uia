@@ -1,3 +1,7 @@
+=== Version 0.3.3 / 2014-05-13
+*   Enhancements
+    *   MenuItems#has_menu_item?
+
 === Version 0.3.2 / 2014-05-13
 *   Enhancements
     *   added #with method to extend an Element based on ControlPatterns
