@@ -1,3 +1,8 @@
+===	Version 0.4.2
+*	Bug Fixes
+		*		Fixes a potential memory leak if an ElementNotAvailableException
+		occurs when grabbing elements
+
 === Version 0.4.1 / 2014-05-14
 *   Enhancements
     *   Element#help_text
