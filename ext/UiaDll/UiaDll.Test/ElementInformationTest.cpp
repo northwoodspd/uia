@@ -133,3 +133,30 @@ TEST_F(ElementInformationTest, ItIsNullIfThereAreNoElements) {
   array<Element^>^ nullElements = nullptr;
   ASSERT_EQ(NULL, ElementInformation::From(nullElements));
 }
+
+TEST_F(ElementInformationTest,  BadThingsHappenInChildren_ItCleansUpWhatItAllocated) {
+  auto badElement = gcnew ElementStub("Bad element", 123);
+  badElement->SetupBoundingRectangleToThrow();
+
+  Exception^ caughtException = nullptr;
+
+  try {
+    ElementInformation::From(gcnew ElementStub("Good element", 456), badElement);
+  } catch(Exception^ e) { caughtException = e; }
+
+  ASSERT_TRUE(caughtException != nullptr);
+}
+
+TEST_F(ElementInformationTest, BadThingsHappenForSingleElement_ItCleansUp) {
+  auto badElement = gcnew ElementStub("Bad element", 123);
+  badElement->SetupBoundingRectangleToThrow();
+
+  Exception^ caughtException = nullptr;
+
+  try {
+    ElementInformation::From(badElement);
+  } catch(Exception^ e) { caughtException = e; }
+
+  // should have cleaned up memory
+  ASSERT_TRUE(caughtException != nullptr);
+}

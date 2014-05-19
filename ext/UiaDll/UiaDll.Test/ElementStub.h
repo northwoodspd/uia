@@ -59,7 +59,16 @@ public:
 
   virtual property array<int>^ BoundingRectangle
   {
-    array<int>^ get() override { return gcnew array<int> {0, 0, 0, 0}; }
+    array<int>^ get() override {
+      if( _throwOnBoundingRectangle ) {
+        throw gcnew System::Windows::Automation::ElementNotAvailableException("oops");
+      }
+      return gcnew array<int> {0, 0, 0, 0};
+    }
+  }
+
+  void SetupBoundingRectangleToThrow() {
+    _throwOnBoundingRectangle = true;
   }
 
   virtual property int NativeWindowHandle
@@ -96,4 +105,5 @@ private:
   bool _isEnabled;
   bool _isVisible;
   bool _hasKeyboardFocus;
+  bool _throwOnBoundingRectangle;
 };
