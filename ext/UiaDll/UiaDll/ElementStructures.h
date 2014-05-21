@@ -1,6 +1,7 @@
 #pragma once
 #include "ArrayHelper.h"
 #include "StringHelper.h"
+#include <stdio.h>
 
 typedef struct _ElementInformation {
   int nativeWindowHandle;
@@ -77,6 +78,14 @@ typedef struct _ElementInformation {
     }
   }
 
+  const int ToString(char* s, const int length) {
+    const char* format = "id: %s, name: %s, handle: 0x%x, runtime_id: %s";
+    auto runtimeIdString = RuntimeIdString();
+    auto neededLength = _snprintf(s, length, format, id, name, nativeWindowHandle, runtimeIdString) + 1;
+    delete[] runtimeIdString;
+    return neededLength;
+  }
+
   ~_ElementInformation() {
     Reset();
   }
@@ -85,6 +94,26 @@ private:
   void Reset() {
     delete[] name; delete[] runtimeId; delete[] patterns; delete[] id; delete[] className; delete[] helpText;
     name = NULL; runtimeId = NULL; patterns = NULL; id = NULL; className = NULL; helpText = NULL;
+  }
+
+  char* RuntimeIdString() {
+    if(NULL == runtimeId || runtimeIdLength == 0) return NULL;
+    
+    auto max = 1000;
+    auto s = new char[max];
+    strcpy(s, "[");
+
+    char current[20] = {0};
+
+    for(auto index = 0; index < runtimeIdLength; ++index) {
+      _snprintf(current, 20, "%d, ", runtimeId[index]);
+      strncat_s(s, max, current, _TRUNCATE);
+    }
+    s[strlen(s) - 2] = NULL;
+
+    strncat_s(s, max, "]", _TRUNCATE);
+
+    return s;
   }
 
 } ElementInformation, *ElementInformationPtr;

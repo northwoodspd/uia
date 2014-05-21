@@ -160,3 +160,70 @@ TEST_F(ElementInformationTest, BadThingsHappenForSingleElement_ItCleansUp) {
   // should have cleaned up memory
   ASSERT_TRUE(caughtException != nullptr);
 }
+
+#define GRAB_VARARGS(argument_list, arg_type, arg_count) \
+   va_list arguments;\
+   va_start(arguments, arg0);\
+   list<##arg_type##> ##argument_list##;\
+   ##argument_list##.push_back(arg0);\
+   for(auto index = 1; index < ##arg_count##; ++index) {\
+     auto value = va_arg(arguments, ##arg_type##);\
+     ##argument_list##.push_back(value);\
+   }
+
+#define ASSERT_EXPECTED_EL_TO_STRING(expectedValue) \
+  auto length = 0; \
+  auto expectedLength = strlen(expectedValue) + 1; \
+  ASSERT_EQ(expectedLength, length = el.ToString(NULL, 0)); \
+  auto actual = new char[expectedLength]; \
+  el.ToString(actual, expectedLength); \
+  ASSERT_STREQ(expectedValue, actual); \
+  delete[] actual;
+
+TEST(ElementInformation, ToString_AllEmpty)
+{
+  ElementInformation el;
+  ASSERT_EXPECTED_EL_TO_STRING("id: (null), name: (null), handle: 0x0, runtime_id: (null)");
+}
+
+TEST(ElementInformation, ToString_HasId)
+{
+  ElementInformation el;
+  el.id = StringHelper::ToUnmanaged("someId");
+  ASSERT_EXPECTED_EL_TO_STRING("id: someId, name: (null), handle: 0x0, runtime_id: (null)");
+}
+
+TEST(ElementInformation, ToString_HasName)
+{
+  ElementInformation el;
+  el.name = StringHelper::ToUnmanaged("someName");
+  ASSERT_EXPECTED_EL_TO_STRING("id: (null), name: someName, handle: 0x0, runtime_id: (null)");
+}
+
+TEST(ElementInformation, ToString_HasHandle)
+{
+  ElementInformation el;
+  el.nativeWindowHandle = 0x123;
+  ASSERT_EXPECTED_EL_TO_STRING("id: (null), name: (null), handle: 0x123, runtime_id: (null)");
+}
+
+TEST(ElementInformation, ToString_HasRuntimeId)
+{
+  ElementInformation el;
+  el.runtimeId = new int[2];
+  el.runtimeId[0] = 123; el.runtimeId[1] = 456;
+  el.runtimeIdLength = 2;
+  ASSERT_EXPECTED_EL_TO_STRING("id: (null), name: (null), handle: 0x0, runtime_id: [123, 456]");
+}
+
+TEST(ElementInformation, ToString_AllTheThings)
+{
+  ElementInformation el;
+  el.name = StringHelper::ToUnmanaged("someName");
+  el.id = StringHelper::ToUnmanaged("someId");
+  el.nativeWindowHandle = 0xffff;
+  el.runtimeId = new int[1];
+  el.runtimeId[0] = 42789;
+  el.runtimeIdLength = 1;
+  ASSERT_EXPECTED_EL_TO_STRING("id: someId, name: someName, handle: 0xffff, runtime_id: [42789]");
+}
