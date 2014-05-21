@@ -1,4 +1,10 @@
-===	Version 0.4.2
+===	Version 0.4.2 / 2014-05-21
+*	Enhancements
+		*		Exceptions on the .NET side of things now include stack trace
+		information
+		*		Better errors when elements that are expected to exist are no longer
+		there
+
 *	Bug Fixes
 		*		Fixes a potential memory leak if an ElementNotAvailableException
 		occurs when grabbing elements
