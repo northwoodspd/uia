@@ -9,7 +9,7 @@ extern "C" {
     try {
       return new TableInformation(ElementFrom(element)->As<TablePattern^>(TablePattern::Pattern)->Current);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }
@@ -20,7 +20,7 @@ extern "C" {
       *headers = ElementInformation::From(Element::From(headerElements));
       return headerElements->Length;
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return 0;
     }
   }
@@ -30,7 +30,7 @@ extern "C" {
       auto table = ElementFrom(element);
       return ElementInformation::From(table->Find(TreeScope::Children, gcnew PropertyCondition(AutomationElement::ControlTypeProperty, ControlType::DataItem))[index]);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }

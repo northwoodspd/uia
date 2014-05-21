@@ -9,7 +9,7 @@ extern "C" {
     try {
       return new SelectionInformation(ElementFrom(element)->As<SelectionPattern^>(SelectionPattern::Pattern)->Current);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }
@@ -20,7 +20,7 @@ extern "C" {
       *selections = ElementInformation::From(selectedElements);
       return selectedElements->Length;
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return 0;
     }
   }

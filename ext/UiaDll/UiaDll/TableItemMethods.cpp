@@ -9,7 +9,7 @@ extern "C" {
     try {
       return new TableItemInformation(ElementFrom(element)->As<TableItemPattern^>(TableItemPattern::Pattern)->Current);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }

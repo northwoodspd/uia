@@ -9,7 +9,7 @@ extern "C" {
     try {
       return new RangeValueInformation(ElementFrom(element)->As<RangeValuePattern^>(RangeValuePattern::Pattern)->Current);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }
@@ -18,7 +18,7 @@ extern "C" {
     try {
       return ElementFrom(element)->As<RangeValuePattern^>(RangeValuePattern::Pattern)->SetValue(value);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 

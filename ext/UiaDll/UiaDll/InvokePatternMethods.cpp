@@ -5,7 +5,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<InvokePattern^>(InvokePattern::Pattern)->Invoke();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 }

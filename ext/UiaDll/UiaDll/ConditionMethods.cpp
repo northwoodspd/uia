@@ -25,7 +25,7 @@ extern "C" {
 
       return new SearchCondition(patternIds);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }

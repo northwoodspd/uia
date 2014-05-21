@@ -5,6 +5,11 @@ using namespace System::Runtime::InteropServices;
 ref class StringHelper
 {
 public:
+  static void CopyToUnmanagedString(Exception^ e, char* destination, const int destinationSize)
+  {
+    CopyToUnmanagedString(e->Message + e->StackTrace, destination, destinationSize);
+  }
+
   static void CopyToUnmanagedString(String^ source, char* destination, const int destinationSize)
   {
     auto unmanagedString = Marshal::StringToHGlobalAnsi(source);

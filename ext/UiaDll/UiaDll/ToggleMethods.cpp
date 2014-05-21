@@ -10,7 +10,7 @@ extern "C" {
       auto info = ElementFrom(element)->As<TogglePattern^>(TogglePattern::Pattern)->Current;
       return new ToggleInformation(info.ToggleState.ToString());
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }
@@ -19,7 +19,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<TogglePattern^>(TogglePattern::Pattern)->Toggle();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 }

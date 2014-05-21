@@ -7,7 +7,7 @@ extern "C" {
     try {
       Mouse::Drag(startX, startY, endX, endY);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInformation, errorInformationLength);
+      StringHelper::CopyToUnmanagedString(e, errorInformation, errorInformationLength);
     }
   }
 }

@@ -9,7 +9,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<ValuePattern^>(ValuePattern::Pattern)->SetValue(gcnew String(value));
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -18,7 +18,7 @@ extern "C" {
       auto valuePattern = ElementFrom(element)->As<ValuePattern^>(ValuePattern::Pattern);
       return new ValuePatternInformation(valuePattern->Current);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }

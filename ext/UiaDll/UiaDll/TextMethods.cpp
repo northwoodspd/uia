@@ -10,7 +10,7 @@ extern "C" {
 
       return theText->Length;
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return 0;
     }
   }

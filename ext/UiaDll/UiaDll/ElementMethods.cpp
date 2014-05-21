@@ -19,7 +19,7 @@ extern "C" {
     try {
       element->Refresh(ElementFrom(element));
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -27,7 +27,7 @@ extern "C" {
     try {
       ElementFrom(element)->SendKeys(gcnew String(keysToSend));
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -36,7 +36,7 @@ extern "C" {
       auto scope = (TreeScope) Enum::Parse(TreeScope::typeid, gcnew String(treeScope));
       return ElementInformation::From(ElementFrom(element)->FindFirst(scope, ConditionHelper::ConditionFrom(conditions)));
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
 
     return NULL;
@@ -56,7 +56,7 @@ extern "C" {
       *elements = ElementInformation::From(foundElements);
       return foundElements->Length;
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message + Environment::NewLine + e->StackTrace, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
 
     return 0;
@@ -73,7 +73,7 @@ extern "C" {
     try {
       return ElementInformation::From(Element::ById(gcnew String(automationId)));
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
 
     return NULL;
@@ -83,7 +83,7 @@ extern "C" {
     try {
       return ElementInformation::From(Element::ByName(gcnew String(name)));
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
 
     return NULL;
@@ -93,7 +93,7 @@ extern "C" {
     try {
       return ElementInformation::From(Element::ByProcessId(processId));
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
 
     return NULL;
@@ -103,7 +103,7 @@ extern "C" {
     try {
       return new ElementInformation(Element::ByHandle(IntPtr(windowHandle)));
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
 
     return NULL;
@@ -113,7 +113,7 @@ extern "C" {
     try {
       return ElementInformation::From(Element::ByRuntimeId(ArrayHelper::ToArray(runtimeIds, numberOfIds)));
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
 
     return NULL;
@@ -125,7 +125,7 @@ extern "C" {
       *children = ElementInformation::From(windows);
       return windows->Length;
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return 0;
     }
   }
@@ -136,7 +136,7 @@ extern "C" {
       *children = ElementInformation::From(elements);
       return elements->Length;
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
       return 0;
     }
   }
@@ -147,7 +147,7 @@ extern "C" {
       *descendants = ElementInformation::From(elements);
       return elements->Length;
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
       return 0;
     }
   }
@@ -156,7 +156,7 @@ extern "C" {
     try {
       ElementFrom(element)->ClickClickablePoint();
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
   }
 
@@ -164,7 +164,7 @@ extern "C" {
     try {
       ElementFrom(element)->ClickCenter();
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
   }
 
@@ -172,7 +172,7 @@ extern "C" {
     try {
       ElementFrom(element)->SetFocus();
     } catch(Exception^ error) {
-      StringHelper::CopyToUnmanagedString(error->Message, errorInfo, errorLength);
+      StringHelper::CopyToUnmanagedString(error, errorInfo, errorLength);
     }
   }
 

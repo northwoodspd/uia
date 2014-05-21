@@ -9,7 +9,7 @@ extern "C" {
     try {
       return new WindowInformation(ElementFrom(element)->As<WindowPattern^>(WindowPattern::Pattern)->Current);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }
@@ -18,7 +18,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<WindowPattern^>(WindowPattern::Pattern)->SetWindowVisualState((WindowVisualState) Enum::Parse(WindowVisualState::typeid, gcnew String(visualState), false));
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -26,7 +26,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<WindowPattern^>(WindowPattern::Pattern)->Close();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 }

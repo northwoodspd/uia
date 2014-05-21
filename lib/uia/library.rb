@@ -172,8 +172,9 @@ module Uia
     end
 
     def self.try_catch(&block)
-      string_buffer = FFI::MemoryPointer.new :char, 1024
-      result = block.call(string_buffer, 1024)
+      buffer_size = 4096
+      string_buffer = FFI::MemoryPointer.new :char, buffer_size
+      result = block.call(string_buffer, buffer_size)
       error_info = string_buffer.read_string
       raise error_info unless error_info.empty?
       result

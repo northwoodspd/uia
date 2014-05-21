@@ -10,7 +10,7 @@ extern "C" {
       auto info = ElementFrom(element)->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern)->Current;
       return new ExpandCollapseInfo(info.ExpandCollapseState.ToString());
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }
@@ -19,7 +19,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern)->Expand();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -27,7 +27,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern)->Collapse();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 }

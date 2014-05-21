@@ -24,7 +24,7 @@ extern "C" {
     try {
       MenuItemPath(element, items)->As<InvokePattern^>(InvokePattern::Pattern)->Invoke();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -34,7 +34,7 @@ extern "C" {
     } catch(MenuItemNotFound^) {
       return NULL;
     } catch(Exception^ e) { 
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }

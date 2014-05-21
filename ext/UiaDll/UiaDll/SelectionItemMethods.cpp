@@ -10,7 +10,7 @@ extern "C" {
       auto info = ElementFrom(element)->As<SelectionItemPattern^>(SelectionItemPattern::Pattern)->Current;
       return new SelectionItemInformation(info);
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return NULL;
     }
   }
@@ -19,7 +19,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<SelectionItemPattern^>(SelectionItemPattern::Pattern)->Select();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -27,7 +27,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<SelectionItemPattern^>(SelectionItemPattern::Pattern)->AddToSelection();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 
@@ -35,7 +35,7 @@ extern "C" {
     try {
       ElementFrom(element)->As<SelectionItemPattern^>(SelectionItemPattern::Pattern)->RemoveFromSelection();
     } catch(Exception^ e) {
-      StringHelper::CopyToUnmanagedString(e->Message, errorInfo, errorInfoLength);
+      StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
     }
   }
 }
