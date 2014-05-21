@@ -5,11 +5,21 @@ using namespace UIA::Helper;
 
 extern "C" {
   Element^ ElementFrom(ElementInformationPtr element) {
-    if( element->nativeWindowHandle > 0 ) {
-      return Element::ByHandle(IntPtr(element->nativeWindowHandle));
+    Element^ foundElement = nullptr;
+
+    try {
+      if( element->nativeWindowHandle > 0 ) {
+        foundElement = Element::ByHandle(IntPtr(element->nativeWindowHandle));
+      } else {
+        foundElement = Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength));
+      }
+    } catch(Exception^) { }
+
+    if( nullptr == foundElement ) {
+      throw gcnew Exception(String::Format("Element no longer exists ({0})", element->ToManagedString()));
     }
 
-    return Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength));
+    return foundElement;
   }
   __declspec(dllexport) void Element_Release(ElementInformationPtr elementInformation) {
     delete elementInformation;

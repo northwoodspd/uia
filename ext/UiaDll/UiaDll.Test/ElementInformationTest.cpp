@@ -227,3 +227,13 @@ TEST(ElementInformation, ToString_AllTheThings)
   el.runtimeIdLength = 1;
   ASSERT_EXPECTED_EL_TO_STRING("id: someId, name: someName, handle: 0xffff, runtime_id: [42789]");
 }
+
+TEST(ElementInformation, ToManagedString)
+{
+  ElementInformation el;
+  el.name = StringHelper::ToUnmanaged("someName");
+
+  auto actual = StringHelper::ToUnmanaged(el.ToManagedString());
+  ASSERT_STREQ("id: (null), name: someName, handle: 0x0, runtime_id: (null)", actual);
+  delete[] actual;
+}

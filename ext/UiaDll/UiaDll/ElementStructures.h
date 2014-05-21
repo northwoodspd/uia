@@ -86,6 +86,16 @@ typedef struct _ElementInformation {
     return neededLength;
   }
 
+  String^ ToManagedString() {
+    auto length = ToString(NULL, 0);
+    auto s = new char[length];
+    ToString(s, length);
+
+    auto managedString = gcnew String(s);
+    delete[] s;
+    return managedString;
+  }
+
   ~_ElementInformation() {
     Reset();
   }
