@@ -128,7 +128,7 @@ describe Uia::Element do
     context 'pattern' do
       Then { element.find(pattern: :range_value).id == 'numericUpDown1' }
       Then { element.find(pattern: [:selection_item, :range_value]).id == 'numericUpDown1' }
-      Then { expect { element.find(pattern: [:not_valid, :range_value]) }.to raise_error RuntimeError, 'IsNotValidPatternAvailableProperty is not a valid AutomationProperty' }
+      Then { expect { element.find(pattern: [:not_valid, :range_value]) }.to raise_error RuntimeError, /IsNotValidPatternAvailableProperty is not a valid AutomationProperty/ }
     end
 
     context 'combinations' do
