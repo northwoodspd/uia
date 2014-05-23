@@ -18,7 +18,7 @@ namespace UIA.Helper
         {
         }
 
-        private Element(AutomationElement element)
+        protected Element(AutomationElement element)
         {
             _element = element;
         }
@@ -186,15 +186,13 @@ namespace UIA.Helper
         public static Element ByRuntimeId(int[] runtimeId)
         {
             var condition = new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId);
-            var closestParent = ClosestParentOfId(runtimeId);
-
-            return null != closestParent ? closestParent.FindFirst(TreeScope.Subtree, condition) : FindFirst(condition, TreeScope.Subtree);
+            return ClosestParentOfId(runtimeId).FindFirst(TreeScope.Subtree, condition);
         }
 
         private static Element ClosestParentOfId(IEnumerable<int> runtimeId)
         {
             var parentHandle = runtimeId.LastOrDefault(x => IsWindow(x.IntPtr())).IntPtr();
-            return IntPtr.Zero != parentHandle ? ByHandle(parentHandle) : null;
+            return IntPtr.Zero != parentHandle ? ByHandle(parentHandle) : new RootElement();
         }
 
         private static Element[] Find(AutomationElement element, TreeScope scope, Condition condition)
@@ -213,5 +211,11 @@ namespace UIA.Helper
         {
             return null == automationElement ? null : new Element(automationElement);
         }
+    }
+
+    class RootElement : Element
+    {
+        public RootElement() : base(AutomationElement.RootElement)
+        { }
     }
 }
