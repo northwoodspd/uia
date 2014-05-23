@@ -73,8 +73,8 @@ public:
 
   virtual property int NativeWindowHandle
   {
-    int get() override { return _nativeWindowHandle; }
-    void set(int value) { _nativeWindowHandle = value; }
+    int get() override { return _handle; }
+    void set(int value) { _handle = value; }
   }
 
   virtual property int ControlTypeId
@@ -100,7 +100,7 @@ private:
   String^ _id;
   array<int>^ _runtimeIds;
   array<int>^ _patterns;
-  int _nativeWindowHandle;
+  int _handle;
   int _controlTypeId;
   bool _isEnabled;
   bool _isVisible;

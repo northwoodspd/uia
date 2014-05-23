@@ -8,8 +8,8 @@ extern "C" {
     Element^ foundElement = nullptr;
 
     try {
-      if( element->nativeWindowHandle > 0 ) {
-        foundElement = Element::ByHandle(IntPtr(element->nativeWindowHandle));
+      if( element->handle > 0 ) {
+        foundElement = Element::ByHandle(IntPtr(element->handle));
       } else {
         foundElement = Element::ByRuntimeId(ArrayHelper::ToArray(element->runtimeId, element->runtimeIdLength));
       }

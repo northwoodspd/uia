@@ -59,7 +59,7 @@ TEST_F(ElementInformationTest, ItKnowsTheWindowHandle)
   auto element = gcnew ElementStub("");
   element->NativeWindowHandle = 12345;
 
-  ASSERT_EQ(ElementInformation(element).nativeWindowHandle, 12345);
+  ASSERT_EQ(ElementInformation(element).handle, 12345);
 }
 
 TEST_F(ElementInformationTest, ItKnowsTheControlType)
@@ -116,7 +116,7 @@ TEST_F(ElementInformationTest, ItCanBeRefreshed)
   const int expectedId[] = {46, 2};
   ASSERT_THAT(expectedId, ::testing::ElementsAreArray(elementInformation.runtimeId, elementInformation.runtimeIdLength));
   ASSERT_STREQ("Refreshed", elementInformation.name);
-  ASSERT_EQ(123, elementInformation.nativeWindowHandle);
+  ASSERT_EQ(123, elementInformation.handle);
 }
 
 TEST_F(ElementInformationTest, ItCanBeInitializedFromManyElements) {
@@ -203,7 +203,7 @@ TEST(ElementInformation, ToString_HasName)
 TEST(ElementInformation, ToString_HasHandle)
 {
   ElementInformation el;
-  el.nativeWindowHandle = 0x123;
+  el.handle = 0x123;
   ASSERT_EXPECTED_EL_TO_STRING("id: (null), name: (null), handle: 0x123, runtime_id: (null)");
 }
 
@@ -221,7 +221,7 @@ TEST(ElementInformation, ToString_AllTheThings)
   ElementInformation el;
   el.name = StringHelper::ToUnmanaged("someName");
   el.id = StringHelper::ToUnmanaged("someId");
-  el.nativeWindowHandle = 0xffff;
+  el.handle = 0xffff;
   el.runtimeId = new int[1];
   el.runtimeId[0] = 42789;
   el.runtimeIdLength = 1;

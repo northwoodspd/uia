@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 typedef struct _ElementInformation {
-  int nativeWindowHandle;
+  int handle;
   int* runtimeId;
   int runtimeIdLength;
   char* name;
@@ -20,9 +20,9 @@ typedef struct _ElementInformation {
   bool hasKeyboardFocus;
   long boundingRectangle[4];
 
-  _ElementInformation() : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL), helpText(NULL) {}
+  _ElementInformation() : name(NULL), handle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL), helpText(NULL) {}
 
-  _ElementInformation(Element^ element) : name(NULL), nativeWindowHandle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL), helpText(NULL) {
+  _ElementInformation(Element^ element) : name(NULL), handle(0), runtimeId(NULL), patterns(NULL), id(NULL), className(NULL), helpText(NULL) {
     Refresh(element);
   }
 
@@ -55,7 +55,7 @@ typedef struct _ElementInformation {
       id = StringHelper::ToUnmanaged(element->Id);
       name = StringHelper::ToUnmanaged(element->Name);
       className = StringHelper::ToUnmanaged(element->ClassName);
-      nativeWindowHandle = element->NativeWindowHandle;
+      handle = element->NativeWindowHandle;
       runtimeId = ArrayHelper::FromArray(element->RuntimeId);
       runtimeIdLength = element->RuntimeId->Length;
       controlTypeId = element->ControlTypeId;
@@ -81,7 +81,7 @@ typedef struct _ElementInformation {
   const int ToString(char* s, const int length) {
     const char* format = "id: %s, name: %s, handle: 0x%x, runtime_id: %s";
     auto runtimeIdString = RuntimeIdString();
-    auto neededLength = _snprintf(s, length, format, id, name, nativeWindowHandle, runtimeIdString) + 1;
+    auto neededLength = _snprintf(s, length, format, id, name, handle, runtimeIdString) + 1;
     delete[] runtimeIdString;
     return neededLength;
   }
