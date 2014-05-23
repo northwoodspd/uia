@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Automation;
 
 namespace UIA.Helper
@@ -7,6 +9,10 @@ namespace UIA.Helper
     public class Element
     {
         private readonly AutomationElement _element;
+
+        [DllImport("user32")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool IsWindow(IntPtr hWnd);
 
         protected Element()
         {
@@ -179,7 +185,16 @@ namespace UIA.Helper
 
         public static Element ByRuntimeId(int[] runtimeId)
         {
-            return FindFirst(new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId), TreeScope.Descendants);
+            var condition = new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId);
+            var closestParent = ClosestParentOfId(runtimeId);
+
+            return null != closestParent ? closestParent.FindFirst(TreeScope.Subtree, condition) : FindFirst(condition, TreeScope.Subtree);
+        }
+
+        private static Element ClosestParentOfId(IEnumerable<int> runtimeId)
+        {
+            var parentHandle = runtimeId.LastOrDefault(x => IsWindow(x.IntPtr())).IntPtr();
+            return IntPtr.Zero != parentHandle ? ByHandle(parentHandle) : null;
         }
 
         private static Element[] Find(AutomationElement element, TreeScope scope, Condition condition)

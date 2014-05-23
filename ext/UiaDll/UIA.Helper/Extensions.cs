@@ -21,6 +21,11 @@ namespace UIA.Helper
 
             return new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top + rectangle.Height / 2);
         }
+
+        public static IntPtr IntPtr(this int value)
+        {
+            return new IntPtr(value);
+        }
     }
 
     public static class PropertyExtensions
