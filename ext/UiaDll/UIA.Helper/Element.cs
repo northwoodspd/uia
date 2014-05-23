@@ -191,7 +191,7 @@ namespace UIA.Helper
 
         private static Element ClosestParentOfId(IEnumerable<int> runtimeId)
         {
-            var parentHandle = runtimeId.LastOrDefault(x => IsWindow(x.IntPtr())).IntPtr();
+            var parentHandle = runtimeId.FirstOrDefault(x => IsWindow(x.IntPtr())).IntPtr();
             return IntPtr.Zero != parentHandle ? ByHandle(parentHandle) : new RootElement();
         }
 
