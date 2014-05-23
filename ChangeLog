@@ -1,3 +1,12 @@
+===	Version 0.4.4	/	2014-05-23
+*	Enhancements
+		*		modified how it uses the runtime_id to locate an element to use the
+		first found handle section, rather than the last
+
+===	Version 0.4.3	/	2014-05-23
+*	Enhancements
+		*		improved the speed at which you can locate an element by runtime_id
+
 ===	Version 0.4.2 / 2014-05-21
 *	Enhancements
 		*		Exceptions on the .NET side of things now include stack trace
