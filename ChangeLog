@@ -1,3 +1,8 @@
+===	Version 0.5	/ 2014-05-26
+*	Bug Fixes
+		*	fixed issue #5 where finding by runtime_id was not working on Windows 8
+		machines
+
 ===	Version 0.4.4	/	2014-05-23
 *	Enhancements
 		*		modified how it uses the runtime_id to locate an element to use the
