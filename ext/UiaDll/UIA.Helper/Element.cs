@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Automation;
 
@@ -181,13 +182,19 @@ namespace UIA.Helper
         public static Element ByRuntimeId(int[] runtimeId)
         {
             var condition = new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId);
-            return ClosestParentOfId(runtimeId).FindFirst(TreeScope.Subtree, condition);
+
+            Element foundElement = null;
+            PotentialParentsOf(runtimeId)
+                .FirstOrDefault(x => null != (foundElement = x.FindFirst(TreeScope.Subtree, condition)));
+
+            return foundElement;
         }
 
-        private static Element ClosestParentOfId(IEnumerable<int> runtimeId)
+        private static IEnumerable<Element> PotentialParentsOf(IEnumerable<int> runtimeId)
         {
-            var parentHandle = runtimeId.FirstOrDefault(x => Win32.IsWindow(x.IntPtr())).IntPtr();
-            return IntPtr.Zero != parentHandle ? ByHandle(parentHandle) : new RootElement();
+            return runtimeId.Where(x => Win32.IsWindow(x.IntPtr()))
+                     .Select(x => ByHandle(x.IntPtr()))
+                     .Concat(new[] {new RootElement()});
         }
 
         private static Element[] Find(AutomationElement element, TreeScope scope, Condition condition)
