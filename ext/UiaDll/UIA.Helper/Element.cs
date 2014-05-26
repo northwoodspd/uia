@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Automation;
 
 namespace UIA.Helper
@@ -9,10 +8,6 @@ namespace UIA.Helper
     public class Element
     {
         private readonly AutomationElement _element;
-
-        [DllImport("user32")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool IsWindow(IntPtr hWnd);
 
         protected Element()
         {
@@ -191,7 +186,7 @@ namespace UIA.Helper
 
         private static Element ClosestParentOfId(IEnumerable<int> runtimeId)
         {
-            var parentHandle = runtimeId.FirstOrDefault(x => IsWindow(x.IntPtr())).IntPtr();
+            var parentHandle = runtimeId.FirstOrDefault(x => Win32.IsWindow(x.IntPtr())).IntPtr();
             return IntPtr.Zero != parentHandle ? ByHandle(parentHandle) : new RootElement();
         }
 
