@@ -1,3 +1,7 @@
+===	Version 0.6	/ 2014-11014
+*	Changes
+		*	Loosened the ffi dependency to ~> 1.9.4
+
 ===	Version 0.5	/ 2014-05-26
 *	Bug Fixes
 		*	fixed issue #5 where finding by runtime_id was not working on Windows 8
