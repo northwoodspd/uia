@@ -26,10 +26,10 @@ require 'uia'
 main_window = Uia.find_element id: 'MainFormWindow'
 
 # returns all elements under main_window that are of control type button
-main_window.select(control_type: :button)
+main_window.find_all(control_type: :button)
 
 # returns the values of every element that implements the ValuePattern
-main_window.select(pattern: :value).map {|e| e.as :value}.map &:value
+main_window.find_all(pattern: :value).map {|e| e.as :value}.map &:value
 ```
 
 ### Finding Elements
