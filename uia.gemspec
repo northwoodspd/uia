@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rspec-given'
   spec.add_development_dependency 'childprocess'
+  spec.add_development_dependency 'albacore', '~> 2.2'
 end
