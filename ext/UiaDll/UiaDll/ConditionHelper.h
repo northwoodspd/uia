@@ -3,7 +3,9 @@
 #include <list>
 #include <functional>
 
+using namespace System;
 using namespace System::Collections::Generic;
+using namespace System::Windows::Automation;
 using namespace std;
 
 ref class ConditionHelper

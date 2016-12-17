@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 using namespace std;
+using namespace System::Windows::Automation;
 
 typedef struct _SearchCondition {
   int propertyId;
@@ -8,9 +9,9 @@ typedef struct _SearchCondition {
   int number;
   char* string;
   int* numbers;
-  int numbersCount;
+  size_t numbersCount;
   int* patterns;
-  int patternsCount;
+  size_t patternsCount;
 
   _SearchCondition(const int id) : string(NULL), numbers(NULL), patterns(NULL) {
     Reset(id);
@@ -66,7 +67,7 @@ typedef struct _SearchCondition {
   }
 
   static _SearchCondition* FromControlTypes(list<const int>& controlTypes) {
-    return new SearchCondition(System::Windows::Automation::AutomationElement::ControlTypeProperty->Id, controlTypes);
+    return new SearchCondition(AutomationElement::ControlTypeProperty->Id, controlTypes);
   }
 
   void Reset(const int id) {
