@@ -7,7 +7,8 @@ module Uia
     extend FFI::Library
 
     def self.uia_directory
-      File.dirname(__FILE__) + '/../../ext/UiaDll/Release'
+      flavor = !!(RUBY_PLATFORM =~ /x64/) ? 'x64/Release x64' : 'Release'
+      (File.dirname(__FILE__) + "/../../ext/UiaDll/#{flavor}")
     end
 
     ffi_lib File.join(uia_directory, 'UiaDll.dll')

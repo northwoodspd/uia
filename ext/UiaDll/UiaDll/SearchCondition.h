@@ -9,9 +9,9 @@ typedef struct _SearchCondition {
   int number;
   char* string;
   int* numbers;
-  size_t numbersCount;
+  int numbersCount;
   int* patterns;
-  size_t patternsCount;
+  int patternsCount;
 
   _SearchCondition(const int id) : string(NULL), numbers(NULL), patterns(NULL) {
     Reset(id);

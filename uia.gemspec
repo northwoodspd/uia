@@ -15,7 +15,9 @@ Gem::Specification.new do |spec|
 
   binaries = [
     'ext/UiaDll/Release/UiaDll.dll',
-    'ext/UiaDll/Release/UIA.Helper.dll'
+    'ext/UiaDll/Release/UIA.Helper.dll',
+    'ext/UiaDll/x64/Release x64/UiaDll.dll',
+    'ext/UiaDll/x64/Release x64/UIA.Helper.dll'
   ]
 
   exclude = lambda {|p| p =~ /(gtest)|(gmock)/i }
