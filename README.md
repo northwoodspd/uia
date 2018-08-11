@@ -116,6 +116,13 @@ Decorates your `Element` with the following methods:
 *  `selected?` - whether or not it is selected
 *  `container` - the `Selection` container
 
+## Known bug
+
+Crash with `[BUG] Segmentation fault`. Cause of this is ffi gem bug. Periodically the ffi team releases bad gem 
+[ffi/ffi#649](https://github.com/ffi/ffi/issues/649)
+[ffi/ffi#302](https://github.com/ffi/ffi/issues/302).
+The conditional solution is described [here](https://github.com/northwoodspd/uia/issues/14#issuecomment-411734522)
+
 ## Contributing
 
 1. Fork it
