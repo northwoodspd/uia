@@ -31,7 +31,7 @@ describe Uia do
 
       context 'can search descendants' do
         Given(:element_with_no_handle) { Uia.find_element(id: 'MainFormWindow').find(name: 'Parent Two') }
-        Then { element_with_no_handle.click.should be_true }
+        Then { element_with_no_handle.click.should be true }
       end
     end
 
