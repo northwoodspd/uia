@@ -31,7 +31,7 @@ describe Uia do
 
       context 'can search descendants' do
         Given(:element_with_no_handle) { Uia.find_element(id: 'MainFormWindow').find(name: 'Parent Two') }
-        Then { element_with_no_handle.click.should be true }
+        Then { expect(element_with_no_handle.click).to be true }
       end
     end
 
@@ -48,7 +48,7 @@ describe Uia do
 
     context 'invalid locators' do
       When(:bad_input) { Uia.find_element(bad: 123) }
-      Then { bad_input.should have_failed(Uia::BadLocator, '{:bad=>123} is not a valid locator') }
+      Then { expect(bad_input).to have_failed(Uia::BadLocator, '{:bad=>123} is not a valid locator') }
     end
   end
 end
