@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'ffi', '~> 1.9.4'
   spec.add_runtime_dependency 'require_all'
 
-  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'bundler', '>= 1.3'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec', '~> 2.9'
   spec.add_development_dependency 'rspec-given'
