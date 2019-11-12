@@ -37,7 +37,7 @@ describe Uia do
 
     context 'by window handle' do
       Then { expect(Uia.find_element(handle: main_window.handle)).to be_instance_of(Element) }
-      Then { expect { Uia.find_element(handle: 0x0) }.to raise_error }
+      Then { expect { Uia.find_element(handle: 0x0) }.to raise_error(RuntimeError, /hwnd cannot be IntPtr.Zero or null/) }
     end
 
     context 'by title' do
