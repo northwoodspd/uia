@@ -61,22 +61,22 @@ describe Uia::Element do
       Then { element.control_type == :window }
 
       context 'unknown' do
-        Given { raw_element.stub(:control_type_id).and_return(777) }
+        Given { allow(raw_element).to receive(:control_type_id).and_return(777) }
         Then { element.control_type == :unknown }
       end
     end
 
     context '#patterns' do
-      Then { element.patterns.should =~ [:transform, :window] }
+      Then { expect(element.patterns).to match_array([:transform, :window]) }
 
       context 'unknown' do
-        Given { raw_element.stub(:pattern_ids).and_return([7777]) }
-        Then { element.patterns.should == [:unknown] }
+        Given { allow(raw_element).to receive(:pattern_ids).and_return([7777]) }
+        Then { expect(element.patterns).to eq([:unknown]) }
       end
 
       context '#as' do
         When(:cast) { element.as :toggle }
-        Then { cast.should have_failed UnsupportedPattern, "Pattern toggle not found in [:window, :transform]" }
+        Then { expect(cast).to have_failed UnsupportedPattern, "Pattern toggle not found in [:window, :transform]" }
       end
     end
 
@@ -141,7 +141,7 @@ describe Uia::Element do
 
     context 'invalid' do
       When(:bad_locator) { element.find(bad_locator: 123) }
-      Then { bad_locator.should have_failed BadLocator, "{:bad_locator=>123} is not a valid locator" }
+      Then { expect(bad_locator).to have_failed BadLocator, "{:bad_locator=>123} is not a valid locator" }
     end
 
     context 'limiting scope' do

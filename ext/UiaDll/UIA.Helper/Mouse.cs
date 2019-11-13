@@ -11,13 +11,7 @@ namespace UIA.Helper
         [DllImport("user32.dll")]
         static extern void mouse_event(uint flags, uint x, uint y, uint data, int extraInfo);
 
-        [Flags]
-        public enum MouseEvent
-        {
-            Leftdown = 0x00000002,
-            Leftup = 0x00000004,
-        }
-
+        private const uint MOUSEEVENTLF_MOVE = 0x1;
         private const uint MOUSEEVENTLF_LEFTDOWN = 0x2;
         private const uint MOUSEEVENTLF_LEFTUP = 0x4;
 
@@ -25,6 +19,9 @@ namespace UIA.Helper
         {
             Cursor.Position = new System.Drawing.Point(startX, startY);
             Down();
+
+            Move((uint)((startX + endX) / 2), (uint)((startY + endY) / 2));
+
             Cursor.Position = new System.Drawing.Point(endX, endY);
             Up();
         }
@@ -46,7 +43,7 @@ namespace UIA.Helper
 
             var point = GetPoint();
 
-            Cursor.Position = new System.Drawing.Point((int) point.X, (int) point.Y);
+            Cursor.Position = new System.Drawing.Point((int)point.X, (int)point.Y);
             Down();
             Up();
         }
@@ -59,6 +56,11 @@ namespace UIA.Helper
         private static void Down()
         {
             mouse_event(MOUSEEVENTLF_LEFTDOWN, 0, 0, 0, 0);
+        }
+
+        private static void Move(uint x, uint y)
+        {
+            mouse_event(MOUSEEVENTLF_MOVE, x, y, 0, 0);
         }
 
         private static Point Center(AutomationElement element)

@@ -1,4 +1,8 @@
-===	Version 0.6	/ 2014-11014
+===	Version 0.7	/ 2019-01-22
+*	Changes
+		*	Drag events now send an intermediate MouseMove event
+
+===	Version 0.6	/ 2014-11-14
 *	Changes
 		*	Loosened the ffi dependency to ~> 1.9.4
 

@@ -31,13 +31,13 @@ describe Uia do
 
       context 'can search descendants' do
         Given(:element_with_no_handle) { Uia.find_element(id: 'MainFormWindow').find(name: 'Parent Two') }
-        Then { element_with_no_handle.click.should be_true }
+        Then { expect(element_with_no_handle.click).to be true }
       end
     end
 
     context 'by window handle' do
       Then { expect(Uia.find_element(handle: main_window.handle)).to be_instance_of(Element) }
-      Then { expect { Uia.find_element(handle: 0x0) }.to raise_error }
+      Then { expect { Uia.find_element(handle: 0x0) }.to raise_error(RuntimeError, /hwnd cannot be IntPtr.Zero or null/) }
     end
 
     context 'by title' do
@@ -48,7 +48,7 @@ describe Uia do
 
     context 'invalid locators' do
       When(:bad_input) { Uia.find_element(bad: 123) }
-      Then { bad_input.should have_failed(Uia::BadLocator, '{:bad=>123} is not a valid locator') }
+      Then { expect(bad_input).to have_failed(Uia::BadLocator, '{:bad=>123} is not a valid locator') }
     end
   end
 end
