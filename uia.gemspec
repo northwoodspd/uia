@@ -25,12 +25,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'ffi', '~> 1.11.2'
+  spec.add_runtime_dependency 'ffi', '~> 1.14'
   spec.add_runtime_dependency 'require_all', '~> 3.0'
 
   spec.add_development_dependency 'bundler', '>= 1.3'
-  spec.add_development_dependency 'rake', '~> 10.5'
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.9'
   spec.add_development_dependency 'rspec-given', '~> 3.8'
-  spec.add_development_dependency 'childprocess', '~> 3.0'
+  spec.add_development_dependency 'childprocess', '~> 4.0'
 end
