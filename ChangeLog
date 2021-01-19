@@ -1,40 +1,40 @@
-===	Version 0.8	/ 2021-01-19
-*	Changes
-		*	Bumped gem dependencies
-		*   Removed albacore
+=== Version 0.8 / 2021-01-19
+*    Changes
+    *    Bumped gem dependencies
+    *    Removed albacore
 
-===	Version 0.7	/ 2019-01-22
-*	Changes
-		*	Drag events now send an intermediate MouseMove event
+=== Version 0.7 / 2019-01-22
+*    Changes
+    *    Drag events now send an intermediate MouseMove event
 
-===	Version 0.6	/ 2014-11-14
-*	Changes
-		*	Loosened the ffi dependency to ~> 1.9.4
+=== Version 0.6 / 2014-11-14
+*    Changes
+    *    Loosened the ffi dependency to ~> 1.9.4
 
-===	Version 0.5	/ 2014-05-26
-*	Bug Fixes
-		*	fixed issue #5 where finding by runtime_id was not working on Windows 8
-		machines
+=== Version 0.5 / 2014-05-26
+*    Bug Fixes
+    *    fixed issue #5 where finding by runtime_id was not working on Windows 8
+    machines
 
-===	Version 0.4.4	/	2014-05-23
-*	Enhancements
-		*		modified how it uses the runtime_id to locate an element to use the
-		first found handle section, rather than the last
+=== Version 0.4.4 / 2014-05-23
+*    Enhancements
+    *    modified how it uses the runtime_id to locate an element to use the
+    first found handle section, rather than the last
 
-===	Version 0.4.3	/	2014-05-23
-*	Enhancements
-		*		improved the speed at which you can locate an element by runtime_id
+=== Version 0.4.3 / 2014-05-23
+*    Enhancements
+    *    improved the speed at which you can locate an element by runtime_id
 
-===	Version 0.4.2 / 2014-05-21
-*	Enhancements
-		*		Exceptions on the .NET side of things now include stack trace
-		information
-		*		Better errors when elements that are expected to exist are no longer
-		there
+=== Version 0.4.2 / 2014-05-21
+*    Enhancements
+    *    Exceptions on the .NET side of things now include stack trace
+    information
+    *    Better errors when elements that are expected to exist are no longer
+    there
 
-*	Bug Fixes
-		*		Fixes a potential memory leak if an ElementNotAvailableException
-		occurs when grabbing elements
+*    Bug Fixes
+    *    Fixes a potential memory leak if an ElementNotAvailableException
+    occurs when grabbing elements
 
 === Version 0.4.1 / 2014-05-14
 *   Enhancements
@@ -88,84 +88,84 @@
     *   changed #click to be clickable point only
     *   added #click_center to try to click in the bounding_rectangle
 
-===	Version 0.0.9 / 2014-02-06
-*	Enhancements
-	*	Element#focused? and Element#focus
-	*	Element#bounding_rectangle
-	*	Selection#selected_items for multi-select
-	*	#focus will try multiple times to focus an element before it gives up
-	*	#click will attempt to use the bounding_rectangle if there is no
-	"clickable point"
+===    Version 0.0.9 / 2014-02-06
+*    Enhancements
+    *    Element#focused? and Element#focus
+    *    Element#bounding_rectangle
+    *    Selection#selected_items for multi-select
+    *    #focus will try multiple times to focus an element before it gives up
+    *    #click will attempt to use the bounding_rectangle if there is no
+    "clickable point"
 
 === Version 0.0.8 / 2013-12-02
-*	Enhancements
-	*	Uia#find_element and Element#find can locate by :title
-	*	Element#send_keys
-	*	Window#close
-	*	TextPattern support to get / set the text
+*    Enhancements
+    *    Uia#find_element and Element#find can locate by :title
+    *    Element#send_keys
+    *    Window#close
+    *    TextPattern support to get / set the text
 
-*	Bug Fixes
-	*	Fix issue with selecting cells in a table
+*    Bug Fixes
+    *    Fix issue with selecting cells in a table
 
 === Version 0.0.7.3 / 2013-11-02
-*	Enhancements
-	*	Element#visible?
-	*	added support for RangeValuePattern
+*    Enhancements
+    *    Element#visible?
+    *    added support for RangeValuePattern
 
 === Version 0.0.7.2 / 2013-11-02
-*	Enhancements
-	*	Element#find can specify the scope of the search
+*    Enhancements
+    *    Element#find can specify the scope of the search
 
 === Version 0.0.7.1 / 2013-11-01
-*	Bug Fixes
-	*	Fixes issue with ComboBox controls for Selection#selection_items
+*    Bug Fixes
+    *    Fixes issue with ComboBox controls for Selection#selection_items
 
 === Version 0.0.7 / 2013-11-01
-*	Enhancements
-	*	added a base implementation for the Window pattern
-	*	added support for WindowPattern, TablePattern and TableItemPattern
-	*	Element#as raises UnsupportedPattern if the element does not implement it
-	*	added an Element#select method to filter descendants by:
-		-	pattern
-		-	name 
-		-	id
+*    Enhancements
+    *    added a base implementation for the Window pattern
+    *    added support for WindowPattern, TablePattern and TableItemPattern
+    *    Element#as raises UnsupportedPattern if the element does not implement it
+    *    added an Element#select method to filter descendants by:
+        -    pattern
+        -    name 
+        -    id
 
-*	Bug Fixes
-	*	modified ffi calls that return Element arrays to be individually GC'd.
-	This prevents FFI::ManagedStruct from being taken out from underneath you
+*    Bug Fixes
+    *    modified ffi calls that return Element arrays to be individually GC'd.
+    This prevents FFI::ManagedStruct from being taken out from underneath you
 
 === Version 0.0.6.1 / 2013-10-30
 * Bug Fixes
-	*	Fixed issue when finding root children by RegEx initially
-	*	all Find methods consistently return Element classes
+    *    Fixed issue when finding root children by RegEx initially
+    *    all Find methods consistently return Element classes
 
 === Version 0.0.6 / 2013-10-22
-*	Enhancements
-	* Have implemented the following patterns:
-		*	ExpandCollapse
-		*	Invoke
-		*	Selection
-		*	SelectionItem
-		*	Toggle
-		*	Value
-	*	Element can find their descendants by :id or :name
-	*	Can search for top-level elements with Regex
-	*	Elements can be refreshed
-	*	Moved Uia methods to be class-level (i.e. Uia.find_element rather than
-	including Uia)
+*    Enhancements
+    * Have implemented the following patterns:
+        *    ExpandCollapse
+        *    Invoke
+        *    Selection
+        *    SelectionItem
+        *    Toggle
+        *    Value
+    *    Element can find their descendants by :id or :name
+    *    Can search for top-level elements with Regex
+    *    Elements can be refreshed
+    *    Moved Uia methods to be class-level (i.e. Uia.find_element rather than
+    including Uia)
 
-===	Version 0.0.5.1 / 2013-10-16
-*	Enhancements
-	*	reduced the size of the gem package by excluding gmock and gtest
+=== Version 0.0.5.1 / 2013-10-16
+*    Enhancements
+    *    reduced the size of the gem package by excluding gmock and gtest
 
-===	Version 0.0.5 / 2013-10-16
+=== Version 0.0.5 / 2013-10-16
 
-*	Enhancements
-	*	Pushed #find_element into the Uia module
-	*	Can locate elements by :id, :handle, :runtime_pid and :pid
-	*	Element now knows about :id,:control_type, :patterns, :handle and :runtime_id
-	*	Elements know about their :children and :descendants
+*    Enhancements
+    *    Pushed #find_element into the Uia module
+    *    Can locate elements by :id, :handle, :runtime_pid and :pid
+    *    Element now knows about :id,:control_type, :patterns, :handle and :runtime_id
+    *    Elements know about their :children and :descendants
 
-===	Version 0.0.4 / 2013-10-11
+=== Version 0.0.4 / 2013-10-11
 Initial release with very limited support for finding an element and
 displaying various properties.
