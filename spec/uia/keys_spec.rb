@@ -25,6 +25,6 @@ describe Uia::Keys do
 
   context 'invalid' do
     When(:bad_keys) { encode('something', :bad_key) }
-    Then { expect(bad_keys).to have_failed InvalidKey, "#{:bad_key} is not a valid key" }
+    Then { bad_keys == Failure(InvalidKey, "#{:bad_key} is not a valid key") }
   end
 end

@@ -76,7 +76,7 @@ describe Uia::Element do
 
       context '#as' do
         When(:cast) { element.as :toggle }
-        Then { expect(cast).to have_failed UnsupportedPattern, "Pattern toggle not found in [:window, :transform]" }
+        Then { cast == Failure(UnsupportedPattern, "Pattern toggle not found in [:window, :transform]") }
       end
     end
 
@@ -141,7 +141,7 @@ describe Uia::Element do
 
     context 'invalid' do
       When(:bad_locator) { element.find(bad_locator: 123) }
-      Then { expect(bad_locator).to have_failed BadLocator, "{:bad_locator=>123} is not a valid locator" }
+      Then { bad_locator == Failure(BadLocator, "{:bad_locator=>123} is not a valid locator") }
     end
 
     context 'limiting scope' do

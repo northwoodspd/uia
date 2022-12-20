@@ -48,7 +48,7 @@ describe Uia do
 
     context 'invalid locators' do
       When(:bad_input) { Uia.find_element(bad: 123) }
-      Then { expect(bad_input).to have_failed(Uia::BadLocator, '{:bad=>123} is not a valid locator') }
+      Then { bad_input == Failure(Uia::BadLocator, '{:bad=>123} is not a valid locator') }
     end
   end
 end
