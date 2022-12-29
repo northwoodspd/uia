@@ -16,9 +16,15 @@ extern "C" {
 
   __declspec(dllexport) int Table_Headers(ElementInformationPtr element, ElementInformation** headers, char* errorInfo, const int errorInfoLength) {
     try {
-      auto headerElements = ElementFrom(element)->As<TablePattern^>(TablePattern::Pattern)->Current.GetColumnHeaders();
-      *headers = ElementInformation::From(Element::From(headerElements));
-      return headerElements->Length;
+      auto headerParent = ElementFrom(element)->Find(TreeScope::Children, gcnew PropertyCondition(AutomationElement::ControlTypeProperty, ControlType::Header));
+      if (headerParent->Length > 0)
+      {
+          auto headerElements = headerParent[0]->Children;
+          *headers = ElementInformation::From(headerElements);
+          return headerElements->Length;
+      }
+      *headers = nullptr;
+      return 0;
     } catch(Exception^ e) {
       StringHelper::CopyToUnmanagedString(e, errorInfo, errorInfoLength);
       return 0;
