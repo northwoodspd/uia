@@ -26,6 +26,16 @@ describe Uia::Patterns::Selection do
         When { tree_view.selection_items.first.as(:expand_collapse).expand }
         Then { tree_view.selection_items.map(&:name) == ['Parent One', 'Child 1', 'Child 2', 'Parent Two'] }
       end
+
+      context 'can select tree view items' do
+        Given(:tree_view) { main.find(id: 'treeView').as :selection }
+        When do
+          tree_view.selection_items[0].as(:expand_collapse).expand
+          tree_view.selection_items[2].as(:expand_collapse).expand
+          tree_view.selection_items[3].select
+        end
+        Then { tree_view.selected_items.map(&:name) == ['Grandchild 1']}
+      end
     end
 
     context '#selected_items' do
