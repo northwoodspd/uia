@@ -18,7 +18,7 @@ extern "C" {
     try {
       int selectedItemCount = 0;
 
-      auto selectedElements = ElementFrom(element)->Find(TreeScope::Children, gcnew PropertyCondition(AutomationElement::ControlTypeProperty, ControlType::ListItem));
+      auto selectedElements = ElementFrom(element)->Find(TreeScope::Descendants, gcnew PropertyCondition(AutomationElement::ControlTypeProperty, ControlType::ListItem));
       if (selectedElements->Length == 0)
       {
         selectedElements = ElementFrom(element)->Find(TreeScope::Descendants, gcnew PropertyCondition(AutomationElement::ControlTypeProperty, ControlType::TreeItem));

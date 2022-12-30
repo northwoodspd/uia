@@ -14,6 +14,11 @@ describe Uia::Patterns::Selection do
       Then { expect(select_list).to_not be_selection_required }
     end
 
+    context 'can select by index' do
+      When { combo_box.selection_items[4].select }
+      Then { combo_box.selected_items.map(&:name) == ['Passion Fruit'] }
+    end
+
     context '#selection_items' do
       let(:respond_to_selections) { lambda { |e| e.respond_to? :add_to_selection } }
 
