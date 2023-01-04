@@ -144,7 +144,10 @@ module Uia
     # TextPattern methods
     attach_function :Text_GetText, [:pointer, :pointer, :int, :pointer, :int], :int
 
+    # ComboBox methods
     elements_from :combo_box_items, :ComboBox_GetItems, [:pointer]
+    attach_throwable_function :combo_box_set_item_by_value, :ComboBox_SetItemByValue, [:pointer, :pointer], :void
+    attach_throwable_function :combo_box_set_item_by_index, :ComboBox_SetItemByIndex, [:pointer, :int], :void
 
     def self.get_text(element)
       length = can_throw(:Text_GetText, element, nil, 0) + 1
