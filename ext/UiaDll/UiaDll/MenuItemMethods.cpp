@@ -41,14 +41,30 @@ extern "C" {
 
   Element^ MenuItemPath(ElementInformationPtr element, list<const char*>& items) {
     auto current = ElementFrom(element);
+    bool foundAtleastOneItem = false;
 
     for(auto item = items.begin(); item != items.end(); ++item) {
       auto name = gcnew String(*item);
 
       current = current->MenuItem(name);
-      if( nullptr == current) {
+
+      if (nullptr == current && !foundAtleastOneItem)
+      {
+        auto firstItem = ElementFrom(element)->FirstMenuItem()->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern);
+        if (firstItem->Current.ExpandCollapseState == ExpandCollapseState::Collapsed)
+        {
+            firstItem->Expand();
+        }
+
+        current = ElementFrom(element)->MenuItem(name);
+      }
+
+      if (nullptr == current)
+      {
         throw gcnew MenuItemNotFound(String::Format("the menu item \"{0}\" was not found", name));
       }
+
+      foundAtleastOneItem = true;
 
       if( *item != items.back() ) {
         current->As<InvokePattern^>(InvokePattern::Pattern)->Invoke();
