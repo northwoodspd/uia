@@ -144,6 +144,8 @@ module Uia
     # TextPattern methods
     attach_function :Text_GetText, [:pointer, :pointer, :int, :pointer, :int], :int
 
+    elements_from :combo_box_items, :ComboBox_GetItems, [:pointer]
+
     def self.get_text(element)
       length = can_throw(:Text_GetText, element, nil, 0) + 1
       p = FFI::MemoryPointer.new :pointer, length

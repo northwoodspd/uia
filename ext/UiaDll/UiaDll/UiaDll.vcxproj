@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="ComboBoxMethods.cpp" />
     <ClCompile Include="ConditionMethods.cpp" />
     <ClCompile Include="DynamicAssemblyResolver.cpp" />
     <ClCompile Include="ElementMethods.cpp" />
