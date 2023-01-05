@@ -30,8 +30,9 @@ describe Uia do
       Then { expect(Uia.find_element(runtime_id: main_window.runtime_id)).to be_instance_of(Element) }
 
       context 'can search descendants' do
-        Given(:element_with_no_handle) { Uia.find_element(id: 'MainFormWindow').find(name: 'Parent Two') }
-        Then { expect(element_with_no_handle.click).to be true }
+        Given(:element_with_no_handle) { Uia.find_element(id: 'MainFormWindow').find(name: 'Parent Two').as(:selection_item) }
+        When { element_with_no_handle.select }
+        Then { expect(element_with_no_handle.selected?).to be true }
       end
     end
 
