@@ -39,6 +39,24 @@ extern "C" {
     }
   }
 
+  void OpenMenuToCreateChildControls(ElementInformationPtr element)
+  {
+    auto firstItem = ElementFrom(element)->FirstMenuItem();
+    if (nullptr != firstItem)
+    {
+      try 
+      {
+        auto asExpand = firstItem->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern);
+        if (asExpand->Current.ExpandCollapseState == ExpandCollapseState::Collapsed)
+        {
+          asExpand->Expand();
+        }
+      }
+      catch (Exception^)
+      {}
+    }
+  }
+
   Element^ MenuItemPath(ElementInformationPtr element, list<const char*>& items) {
     auto current = ElementFrom(element);
     bool foundAtleastOneItem = false;
@@ -50,11 +68,7 @@ extern "C" {
 
       if (nullptr == current && !foundAtleastOneItem)
       {
-        auto firstItem = ElementFrom(element)->FirstMenuItem()->As<ExpandCollapsePattern^>(ExpandCollapsePattern::Pattern);
-        if (firstItem->Current.ExpandCollapseState == ExpandCollapseState::Collapsed)
-        {
-            firstItem->Expand();
-        }
+        OpenMenuToCreateChildControls(element);
 
         current = ElementFrom(element)->MenuItem(name);
       }
