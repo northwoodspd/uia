@@ -179,6 +179,11 @@ namespace UIA.Helper
             return FindFirst(TreeScope.Subtree, new AndCondition(name.NameCondition(), ControlType.MenuItem.Condition()));
         }
 
+        public Element FirstMenuItem()
+        {
+            return FindFirst(TreeScope.Subtree, new AndCondition(Condition.TrueCondition, ControlType.MenuItem.Condition()));
+        }
+
         public static Element ByRuntimeId(int[] runtimeId)
         {
             var condition = new PropertyCondition(AutomationElement.RuntimeIdProperty, runtimeId);

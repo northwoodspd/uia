@@ -76,7 +76,7 @@ describe Uia::Element do
 
       context '#as' do
         When(:cast) { element.as :toggle }
-        Then { expect(cast).to have_failed UnsupportedPattern, "Pattern toggle not found in [:window, :transform]" }
+        Then { cast == Failure(UnsupportedPattern, "Pattern toggle not found in [:window, :transform]") }
       end
     end
 
@@ -133,7 +133,7 @@ describe Uia::Element do
 
     context 'combinations' do
       Then { element.find(control_type: :list, name: 'linkLabel1').id == 'FruitListBox' }
-      Then { element.find(control_type: :button, name: 'Forward', scope: :children) == nil }
+      Then { element.find(control_type: :button, name: 'Forward', scope: :element) == nil }
       Then { element.find(pattern: :invoke, name: 'About').id == 'aboutButton' }
       Then { element.find(control_type: :custom, id: 'automatableMonthCalendar1').name == 'linkLabel1' }
       Then { element.find(value: 'linkLabel1', id: 'automatableMonthCalendar1').control_type == :custom }
@@ -141,7 +141,7 @@ describe Uia::Element do
 
     context 'invalid' do
       When(:bad_locator) { element.find(bad_locator: 123) }
-      Then { expect(bad_locator).to have_failed BadLocator, "{:bad_locator=>123} is not a valid locator" }
+      Then { bad_locator == Failure(BadLocator, "{:bad_locator=>123} is not a valid locator") }
     end
 
     context 'limiting scope' do
@@ -164,7 +164,7 @@ describe Uia::Element do
     end
 
     context 'pattern' do
-      Then { element.filter(pattern: :value).count == 4 }
+      Then { element.filter(pattern: :value).count == 6 }
     end
 
     context 'combinations' do
@@ -172,11 +172,11 @@ describe Uia::Element do
     end
 
     context 'multiple' do
-      When(:radio_or_value) { element.filter(control_type: [:radio_button, :text]) }
-      Then { expect(radio_or_value.count).to eq(8) }
+      When(:radio_or_text) { element.filter(control_type: [:radio_button, :text]) }
+      Then { expect(radio_or_text.count).to eq(10) }
 
-      When(:value_or_invoke) { element.filter(pattern: [:value, :text]) }
-      Then { expect(value_or_invoke.count).to eq(5) }
+      When(:value_or_text) { element.filter(pattern: [:value, :text]) }
+      Then { expect(value_or_text.count).to eq(7) }
     end
   end
 
@@ -192,7 +192,7 @@ describe Uia::Element do
   end
 
   context '#children' do
-    Then { element.children.count == 27 }
+    Then { element.children.count == 30 }
     Then { element.children.all? { |c| c.instance_of? Uia::Element } }
   end
 

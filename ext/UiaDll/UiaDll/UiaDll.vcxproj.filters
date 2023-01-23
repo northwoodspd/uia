@@ -104,5 +104,8 @@
     <ClCompile Include="MenuItemMethods.cpp">
       <Filter>Source Files\ControlTypes</Filter>
     </ClCompile>
+    <ClCompile Include="ComboBoxMethods.cpp">
+      <Filter>Source Files\ControlTypes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
